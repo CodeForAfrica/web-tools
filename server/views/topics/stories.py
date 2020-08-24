@@ -12,8 +12,7 @@ import server.views.apicache as base_apicache
 from server import app, cliff
 from server.auth import user_mediacloud_key, user_mediacloud_client
 from server.cache import cache
-from server.util.request import api_error_handler, filters_from_args
-from server.views.topics import concatenate_query_for_solr, _parse_collection_ids, _parse_media_ids
+from server.util.request import api_error_handler
 from server.views.topics import stories_args_from_request, concatenate_query_for_solr, _parse_collection_ids, _parse_media_ids
 
 logger = logging.getLogger(__name__)
