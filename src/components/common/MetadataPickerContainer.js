@@ -41,8 +41,6 @@ const MetadataPickerContainer = (props) => {
     };
   }
 
-  console.log(label);
-
   return (
     <div className={`metadata-picker metadata-picker-${name}`}>
       <>
