@@ -38,7 +38,7 @@ const NavToolbar = (props) => {
                 className="app-logo"
                 alt={formatMessage(messages.suiteName)}
                 src={assetUrl('/static/img/logo.png')}
-                height={40}
+                height={60}
               />
             </a>
           
