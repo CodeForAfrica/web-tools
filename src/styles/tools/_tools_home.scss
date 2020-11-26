@@ -1,6 +1,7 @@
 .tools-home {
+  
   h1 {
-    text-align: center;
+    text-align: left;
     font-size: 56px;
     margin-bottom: 40px;
   }
@@ -17,7 +18,7 @@
   }
   p {
     &.intro {
-      text-align: center;
+      text-align: left;
       font-size: 28px;
       margin: 0px;
       padding: 0px;
@@ -28,6 +29,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    height: 100%;
 
     .app-button {
       margin-left: 8px;
@@ -37,5 +39,7 @@
   .row {
     padding: 5rem 0;
   }
-
+.tools-hero{
+  text-align: left;
+}
 }

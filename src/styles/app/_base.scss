@@ -105,9 +105,15 @@ footer {
   border-top: 1px solid $material-grey300;
   .primary-footer{
     padding-bottom: 30px;
+    span{
+      display: block;
+    padding-top:16px;
+    padding-bottom: 16px;
+
+    }
   }
   .secondary-footer{
-    background-color: black;
+    background-color: #022069;
     padding-top: 30px;
     padding-bottom: 30px;
     .secondary-footer-col{
@@ -175,6 +181,6 @@ code {
   padding-left: 1rem;
 }
 .contained-btn{
-  background-color: $black !important;
+  background-color: #f00 !important;
   color: white !important;
 }
