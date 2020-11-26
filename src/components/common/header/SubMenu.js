@@ -1,14 +1,13 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import Popover from '@material-ui/core/Popover';
-import {  injectIntl } from 'react-intl';
+import { injectIntl } from 'react-intl';
 import TopicsAppMenu from './TopicsAppMenu';
 import ExplorerAppMenu from './ExplorerAppMenu';
 import AppButton from '../AppButton';
 import SourcesAppMenu from './SourcesAppMenu';
 import { defaultMenuOriginProps } from '../../util/uiUtil';
 import messages from '../../../resources/messages';
-
 
 class SubMenu extends React.Component {
   state = {
@@ -29,17 +28,17 @@ class SubMenu extends React.Component {
   };
 
   render() {
-  const { formatMessage } = this.props.intl;
+    const { formatMessage } = this.props.intl;
     const { title, label } = this.props;
     return (
       <div className="menu">
-           <AppButton
-                  variant="text"
-                  href='#'
-                  title={title}
-                  label={label}
-                  onClick={this.handleToggle} 
-                />
+        <AppButton
+          variant="text"
+          href="#"
+          title={title}
+          label={label}
+          onClick={this.handleToggle}
+        />
         <Popover
           open={Boolean(this.state.anchorEl)}
           anchorEl={this.state.anchorEl}
@@ -57,11 +56,11 @@ class SubMenu extends React.Component {
               <SourcesAppMenu />
             </li>
             <li>
-            <AppButton
-                  variant="text"
-                  target="new"
-                  label={formatMessage(messages.mediaDataToolName)}
-                />
+              <AppButton
+                variant="text"
+                target="new"
+                label={formatMessage(messages.mediaDataToolName)}
+              />
             </li>
           </ul>
         </Popover>
@@ -74,10 +73,12 @@ SubMenu.propTypes = {
   // from parent
   title: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
-  intl: PropTypes.shape({}).isRequired
+  intl: PropTypes.shape({
+    formatMessage: PropTypes.func,
+  }).isRequired,
 };
 
 export default
-  injectIntl(
-    SubMenu
-  );
+injectIntl(
+  SubMenu
+);
