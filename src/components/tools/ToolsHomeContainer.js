@@ -7,6 +7,7 @@ import messages from '../../resources/messages';
 import { urlToExplorer, urlToTopicMapper, urlToSourceManager } from '../../lib/urlUtil';
 import ToolDescription from './ToolDescription';
 import Faq from './faq/ToolsFaq';
+
 import SystemStatsContainer from '../common/statbar/SystemStatsContainer';
 import LoginForm from '../user/LoginForm';
 import DataCard from '../common/DataCard';
@@ -15,10 +16,8 @@ import PageTitle from '../common/PageTitle';
 import AppButton from '../.../../common/AppButton';
 
 const localMessages = {
-  title: { id: 'tools.home.title', defaultMessage: 'What is Media Cloud' },
-  intro: { id: 'tools.home.intro', defaultMessage: 'Mediacloud is an open-source content analysis tool that automates the collection and classification of online news content and other data sources in African media ecosystems' },
-  civicTitle: { id: 'tools.civic.title', defaultMessage: 'What is CivicSignal?' },
-  civicIntro: { id: 'tools.civic.intro', defaultMessage: 'CivicSignal produces research and analyses of Africa’s media ecosystem and emerging civic technology sector, addressing issues that impact democracies and  civil society.' },
+  title: { id: 'tools.civic.title', defaultMessage: 'Understanding Africa\'s' },
+  subtitle: { id: 'tools.civic.subtitle', defaultMessage: 'Digital Democracies' },
   loginTitle: { id: 'tools.home.login.title', defaultMessage: 'Login or Signup Now' },
 };
 
@@ -44,25 +43,15 @@ const ToolsHomeContainer = (props) => {
     <div className="tools-home about-page">
       <PageTitle />
       <Grid>
-        <Row>
-        <Col lg={6}>
-            <h1><FormattedMessage {...localMessages.civicTitle} /></h1>
-            <p className="intro"><FormattedMessage {...localMessages.civicIntro} /></p>
-            <div className="cta-container">
-            <AppButton className="contained-btn" variant="contained" label="Call to Action">
-              <FormattedMessage {...messages.learnMoreButton} />
-            </AppButton>
-            </div>
+        <Row className="tools-hero">
+        <Col  lg={12}>
+            <h1><FormattedMessage {...localMessages.title} /> <br/> <FormattedMessage {...localMessages.subtitle} /></h1>
+            <p className="intro">        
+            We give you <b>actionable insights</b> to help you navigate Africa’s <b>media ecosystem </b>and emerging <b>civic technology</b> sector. Our insights are based on analysis by human experts, using machine learning tools and ‘big data’ resources.
+            </p>
+           
           </Col>
-          <Col lg={6}>
-            <h1><FormattedMessage {...localMessages.title} /></h1>
-            <p className="intro"><FormattedMessage {...localMessages.intro} /></p>
-            <div className="cta-container">
-            <AppButton label="Call to Action">
-              <FormattedMessage {...messages.learnMoreButton} />
-            </AppButton>
-            </div>
-          </Col>
+       
         </Row>
         <Row>
           <Col lg={6}>

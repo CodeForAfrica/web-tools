@@ -12,10 +12,7 @@ import Permissioned from '../Permissioned';
 import { PERMISSION_ADMIN } from '../../../lib/auth';
 import { getAppName, APP_TOOLS } from '../../../config';
 
-<<<<<<< HEAD
 const BLOG_URL = 'https://mediacloud.org/news/';
-=======
->>>>>>> 544a01aaf... redesign navigation layout
 const SUPPORT_URL = 'https://mediacloud.org/support/';
 
 const localMessages = {
