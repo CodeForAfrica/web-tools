@@ -15,18 +15,18 @@
   }
 
   &.tool-explorer {
-    background-color: #023e8a;
+    background-color: $explorer-primary;
   }
 
   &.tool-topics {
-    background-color: #0a77b6;
+    background-color: $topics-primary;
   }
 
   &.tool-sources {
     background-color: $sources-primary;
   }
   &.media-data{
-    background-color: #48cae4;
+    background-color: $media-primary;
   }
 
 }
