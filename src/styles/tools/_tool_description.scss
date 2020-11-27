@@ -4,6 +4,7 @@
   text-align: center;
   color: $white;
   padding: 25px;
+  margin: .5rem;
   cursor: pointer;
 
   p {
@@ -14,15 +15,18 @@
   }
 
   &.tool-explorer {
-    background-color: $explorer-primary;
+    background-color: #023e8a;
   }
 
   &.tool-topics {
-    background-color: $topics-primary;
+    background-color: #0a77b6;
   }
 
   &.tool-sources {
     background-color: $sources-primary;
+  }
+  &.media-data{
+    background-color: #48cae4;
   }
 
 }

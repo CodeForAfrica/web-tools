@@ -5,17 +5,35 @@ const messages = {
 
   blogToolName: { id: 'app.blog.name', defaultMessage: 'Blog' },
   blogToolDescription: { id: 'app.blog.description', defaultMessage: 'Read updates on our research, projects, and ideas from us and our partners' },
+  menuToolName: { id: 'app.menu.name', defaultMessage: 'Menu' },
+  menuToolDescription: { id: 'app.menu.description', defaultMessage: 'Website Menu' },
   sourcesToolName: { id: 'app.sources.name', defaultMessage: 'Source Manager' },
-  sourcesToolDescription: { id: 'app.sources.description', defaultMessage: 'Check the breadth of our global coverage by browsing the media sources and collections in our database, and suggesting more to add.' },
+  sourcesToolDescription: { id: 'app.sources.description', defaultMessage: 'View our print, broadcast and digital news collections. See what media sources we have and suggest additional sources about your research topic.' },
   topicsToolName: { id: 'app.topics.name', defaultMessage: 'Topic Mapper' },
-  topicsToolDescription: { id: 'app.topics.description', defaultMessage: 'Dive deeply into coverage of an issue by collecting more stories, analyzing influence, and slicing and dicing the stories to discover narratives.' },
+  topicsToolDescription: { id: 'app.topics.description', defaultMessage: 'Build a Topic for a deeper dive into your issue. We will pull in additional data and media sources, and show you everything from Explorer plus data about media ecosystems, social media shares, and influence networks.' },
   toolsToolName: { id: 'app.tools.name', defaultMessage: 'Tools' },
   toolsToolDescription: { id: 'app.tools.description', defaultMessage: 'Support for MediaCloud, including FAQs, tools and how to use them' },
   explorerToolName: { id: 'app.explorer.name', defaultMessage: 'Explorer' },
-  explorerToolDescription: { id: 'app.explorer.description', defaultMessage: 'Get a quick overview of how your topic of interest is covered by digital news media by exploring attention, language, and entities.' },
+  explorerToolDescription: { id: 'app.explorer.description', defaultMessage: 'Use Explorer to create an instant analysis of how digital news media covers your topic of interest. You can see attention to the issue, the language used, and the people and places mentioned. ' },
+  mediaDataToolName: { id: 'app.explorer.name', defaultMessage: 'Media Data' },
+  mediaDataToolDescription: { id: 'app.explorer.description', defaultMessage: 'MediaData is Code for Africa’s research department, producing data and analyses of the African media ecosystem.' },
+  learnMoreButton: { id: 'app.learn.button', defaultMessage: 'Learn More' },
+  launchButton: { id: 'app.launch.button', defaultMessage: 'Launch' },
   readGuide: { id: 'app.readGuide', defaultMessage: 'Visit Our Support Page' },
 
-  c4cmName: { id: 'c4cm.name', defaultMessage: 'MIT Center for Civic Media' },
+  cfa: { id: 'cfa.name', defaultMessage: 'Code for Africa', url: "https://www.facebook.com/CodeForAfrica" },
+  innovateAfrica: { id: 'innovateAfrica.name', defaultMessage: 'innovateAFRICA.fund', url: "http://innovateafrica.fund/" },
+  impactAfrica: { id: 'impactAfrica.name', defaultMessage: 'impactAFRICA.fund', url: "http://impactafrica.fund/" },
+  openAfrica: { id: 'openAfrica.name', defaultMessage: 'open.AFRICA', url: "http://open.africa/" },
+  commonsAfrica: { id: 'commonsAfrica.name', defaultMessage: 'commons.AFRICA', url: "https://commons.africa/" },
+  sensorsAfrica: { id: 'sensorsAfrica.name', defaultMessage: 'sensors.AFRICA', url: "http://sensors.africa/" },
+  sourceAfrica: { id: 'sourceAfrica.name', defaultMessage: 'source.AFRICA', url: "https://sourceafrica.net/" },
+  goToVote: { id: 'goToVote.name', defaultMessage: 'GotToVote', url: "http://gottovote.cc/" },
+  afriLeaks: { id: 'afriLeaks.name', defaultMessage: 'afriLEAKS', url: "afriLEAKS" },
+  pesaCheck: { id: 'pesaCheck.name', defaultMessage: 'PesaCheck', url: "https://pesacheck.org" },
+  africanDrone: { id: 'africanDRONE.name', defaultMessage: 'africanDRONE', url: "http://africandrone.net/" },
+  ancir: { id: 'ancir.name', defaultMessage: 'africanDRONE', url: "http://investigativecenters.org/" },
+  c4cmName: { id: 'c4cm.name', defaultMessage: 'African Network of Centres for Investigative Reporting' },
   berkmanName: { id: 'berkman.name', defaultMessage: 'Berkman Klein Center for Internet and Society at Harvard University' },
   userLogin: { id: 'user.login', defaultMessage: 'Login' },
   userLogout: { id: 'user.logout', defaultMessage: 'Logout' },
@@ -100,7 +118,8 @@ const messages = {
   language: { id: 'common.language', defaultMessage: 'Language' },
   unknown: { id: 'common.Unknown', defaultMessage: 'Unknown' },
 
-  notEnoughCoverage: { id: 'common.themes.notEnoughCoverage',
+  notEnoughCoverage: {
+    id: 'common.themes.notEnoughCoverage',
     defaultMessage: '<b>Not enough data to show.</b><br /><i>Only {pct} of your stories have been processed for themes, people, organizations and geographic places.  We don\'t want to show you data that isn\'t representative, so we won\'t show partial results here. This percentage might be low because we only process English stories for this data, and your query might be in other languages. It also could be that your query is using older stories that were collected before we added this processing.</i>',
   },
 
@@ -108,7 +127,8 @@ const messages = {
   endDate: { id: 'common.endDate', defaultMessage: 'End Date' },
 
   topWords: { id: 'topWords', defaultMessage: 'Top Words' },
-  wordcloudHelpText: { id: 'wordcloud.help.text',
+  wordcloudHelpText: {
+    id: 'wordcloud.help.text',
     defaultMessage: '<p>This is an ordered word cloud. The words that show up more often appear bigger, and show up first in the list.  This is based on a sample of the stories, not all of them. We have validated that the sample size is representative of the entire set of results.</p><p>You can download a CSV file of word counts (from a larger sample of stories). You can also download CSV files listing the bigrams (two-word phrases) or trigrams (three-word phrases) used most often.</p><p>Use the view options to render a more standard, unordered, word cloud.</p><p>We count words based on their stem, but show you the most commonly used stem within the sample.  That means if you see a word like "education" as the top word, that includes any variations of the "educ" stem (ie. educated, education, etc).We have removed common english stop-words (ie. "if", "the", etc.), but you might see words in other languages that we don\'t have stop-word lists for.</p><p>',
   },
 
@@ -150,14 +170,17 @@ const messages = {
   storyCustomDate: { id: 'story.customDate', defaultMessage: 'Custom Date?' },
   storyUndateable: { id: 'story.undateable', defaultMessage: 'Undateable?' },
   storiesTableHelpTitle: { id: 'stories.help.title', defaultMessage: 'About Stories' },
-  storiesTableHelpText: { id: 'stories.help.text',
+  storiesTableHelpText: {
+    id: 'stories.help.text',
     defaultMessage: '<p>This table has one row for each Story.  The column currently being used to sort the results has a little down arrow next to it.  Click one of the green column headers to change how it is sorted.  Here is a summary of the columns:</p><ul><li>Title: the title of the story; click to see details about this story</li><li>Media Source: the name of the Media Source; click to see details about this source\'s content within this Topic</li><li>Publish Date: our best guess of the date and time this content was published</li><li>Media Inlinks: how many unique other Media Sources have links to this content in the Topic</li><li>Outlinks: the number of links in this story to other stories</li><li>Facebook Shares: the number of times this story was shared on Facebook</li></ul><p>Click the download button in the top right to download a CSV of the full list of stories</p>',
   },
   pubDateTableHelpTitle: { id: 'stories.help.publicationdate.title', defaultMessage: 'How We Guess Story Publication Dates' },
-  pubDateTableHelpText: { id: 'stories.help.publicationdate.text',
+  pubDateTableHelpText: {
+    id: 'stories.help.publicationdate.text',
     defaultMessage: '<p>Story dates sometimes come from structured sources that are easy to find (like an RSS feed), but other times we have discover and guess dates from unstructured HTML. Note that we assume timezones don\'t exist and just save whatever date we find into our database. Our advice - don\'t use it at any higher granularity than a day.</p><p>Guessing the date of publication for an arbitrary webpage is actually pretty hard. We guess dates from a variety of methods, using <a href="https://github.com/mitmedialab/date_guesser">our custom built open source Date Guesser library</a>. A few things worth noting:<br /><ul><li>If we find a date, but are unsure if the date is reliable or not, it shows up in italics with a question mark after it. This could be situations like content that is embedded that has a date.</li><li>Some content is deemed undateable, like Wikipedia entries or webpages that don\'t look like news articles. We mark those as "Undateable".</li><li>If we are confident about the date, it shows up in normal text.</li><li>If we couldn\'t find a date we mark the story date as "Unknown"</li><li>Sometimes we fallback to using the date of the first story that linked to it.</li></ul>You can click on a story to learn more about how we guessed the date it was published.</p>',
   },
-  heatMapHelpText: { id: 'heatmap.help.text',
+  heatMapHelpText: {
+    id: 'heatmap.help.text',
     defaultMessage: '<p>The country map shows you an intensity of how often countries are the main focus of stories. This uses our <a href="https://cliff.mediacloud.org" target="_top">CLIFF-CLAVIN</a> geolocation engine to determine which countries each story is about (based on the places mentioned). The darker the color, the more a country was focused on. Note that this is using a sampling of the stories, not all of them. If you download a CSV of the results, the counts you see are also based on this sampling.</p><p>We have been tagging all english language stories with the places they mention since June 1, 2016.</p>',
   },
   supportOptions: { id: 'app.supportOptions', defaultMessage: 'Need help? Join our <a href="https://groups.io/g/mediacloud">discussion group</a> or fill out the  <a href="https://mediacloud.org/support-form">support form</a>.' },
@@ -247,11 +270,13 @@ const messages = {
   currentlyDownloadingCsv: { id: 'download.csv.downloading', defaultMessage: 'Your CSV is downloading.' },
   learnMoreAboutColumnsCsv: { id: 'download.csv.learnMore', defaultMessage: 'Learn more about the columns' },
   doesNotIncludeUndateable: { id: 'attentionChart.help.text.noUndateable', defaultMessage: '<p>This chart does not include stories that we have marked as "undateable".</p>' },
-  attentionChartHelpText: { id: 'attentionChart.help.text',
+  attentionChartHelpText: {
+    id: 'attentionChart.help.text',
     defaultMessage: '<p>The vertical axis shows the number of stories that are about the topic in the stories we have collected.</p><p>Roll over the line chart to see the stories per day in each timespan shown on the graph.</p><p>Click the download button in the top right to download the raw counts in a CSV spreadsheet.  Click the three lines in the top right of the chart to export the chart as an image file.</p>',
   },
 
-  wordTreeHelpText: { id: 'wordTree.help.text',
+  wordTreeHelpText: {
+    id: 'wordTree.help.text',
     defaultMessage: '<p>This "word tree" visualization lets you explore the use of this word in context.  Revealing the words it is used with can be far more revealing than the simple word cloud presented.  The word is at the center, with the words that are most often used just before it on the left, and the words used most often just after on the right.</p><p>Notes:</p><ul><li>This is based on a random sample of 1000 sentence fragments, which we haven\'t exhaustively tested to see if is a representative sample (but seems to work well).</li><li>This only includes the 5 words before and after the use of the keyword you are looking at (due to copywrite sensitivities).</li><li>This uses the term, not the stem.</li></ul><p>Those caveat noted, it can still be useful to get a sense of <b>how</b> this word is being used.</p>',
   },
 
@@ -269,7 +294,8 @@ const messages = {
   nytThemeHelpDetails: { id: 'nytTheme.help.deatils', defaultMessage: '<p>We run all our english stories through set of trained models to predict what themes they focus on.  To build these models we took the approach of transfer learning - starting with the <a href="https://code.google.com/archive/p/word2vec/" target="_blank">Google News word2vec</a> models and then adapting them to produce based on the <a href="https://catalog.ldc.upenn.edu/ldc2008t19" target="_blank">New York Times annotated corpus</a>.  We score each story against <a href="https://mediacloud.org/support/theme-list" target="_blank">the list of the 600 most used descriptors</a> from the NYT corpus.  Any descriptors that score above 0.2 probability are counted as themes this story focuses on.</p>' },
 
   mediaTypeHelpTitle: { id: 'mediaType.help.title', defaultMessage: 'About Media Type' },
-  mediaTypeHelpContent: { id: 'mediaType.help.content', defaultMessage: `
+  mediaTypeHelpContent: {
+    id: 'mediaType.help.content', defaultMessage: `
       <p>Each media source can be assigned a "media type".  This indicates what kind of a source it is, and can be helpful for comparative analysis between types of sources.</p>
       <p><b>Print Native</b>: This source is primarly a print publication. Use this for newspapers and magazines. Examples: New York Times, The Economist.</p>
       <p><b>Digital Native</b>: This source is internet based. Use this for news sources that began on the internet first, organizational websites, and blogs. Examples: CDC, Vox, Scroll.in.</p>
@@ -279,7 +305,8 @@ const messages = {
     `,
   },
 
-  entityHelpDetails: { id: 'explorer.entities.help.text',
+  entityHelpDetails: {
+    id: 'explorer.entities.help.text',
     defaultMessage: '<p>We identify people using <a href="https://nlp.stanford.edu/software/CRF-NER.shtml">Stanford\'s Named Entity Recognizer</a>. Every story is passed through out <a href="http://cliff.mediacloud.org" target="_top">CLIFF-CLAVIN engine</a> to extract all the entities.  Each story is then tagged with the people it mentions, the organizations it mentions, and the countries and states it is about. These results are are based on a sample of up to 5,000 stories.</p>',
   },
   rename: { id: 'explorer.dialog.rename', defaultMessage: 'Rename' },
