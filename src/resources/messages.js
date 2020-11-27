@@ -1,4 +1,3 @@
-
 const messages = {
 
   suiteName: { id: 'suite.name', defaultMessage: 'Media Cloud' },
@@ -21,18 +20,18 @@ const messages = {
   launchButton: { id: 'app.launch.button', defaultMessage: 'Launch' },
   readGuide: { id: 'app.readGuide', defaultMessage: 'Visit Our Support Page' },
 
-  cfa: { id: 'cfa.name', defaultMessage: 'Code for Africa', url: "https://www.facebook.com/CodeForAfrica" },
-  innovateAfrica: { id: 'innovateAfrica.name', defaultMessage: 'innovateAFRICA.fund', url: "http://innovateafrica.fund/" },
-  impactAfrica: { id: 'impactAfrica.name', defaultMessage: 'impactAFRICA.fund', url: "http://impactafrica.fund/" },
-  openAfrica: { id: 'openAfrica.name', defaultMessage: 'open.AFRICA', url: "http://open.africa/" },
-  commonsAfrica: { id: 'commonsAfrica.name', defaultMessage: 'commons.AFRICA', url: "https://commons.africa/" },
-  sensorsAfrica: { id: 'sensorsAfrica.name', defaultMessage: 'sensors.AFRICA', url: "http://sensors.africa/" },
-  sourceAfrica: { id: 'sourceAfrica.name', defaultMessage: 'source.AFRICA', url: "https://sourceafrica.net/" },
-  goToVote: { id: 'goToVote.name', defaultMessage: 'GotToVote', url: "http://gottovote.cc/" },
-  afriLeaks: { id: 'afriLeaks.name', defaultMessage: 'afriLEAKS', url: "afriLEAKS" },
-  pesaCheck: { id: 'pesaCheck.name', defaultMessage: 'PesaCheck', url: "https://pesacheck.org" },
-  africanDrone: { id: 'africanDRONE.name', defaultMessage: 'africanDRONE', url: "http://africandrone.net/" },
-  ancir: { id: 'ancir.name', defaultMessage: 'africanDRONE', url: "http://investigativecenters.org/" },
+  cfa: { id: 'cfa.name', defaultMessage: 'Code for Africa', url: 'https://www.facebook.com/CodeForAfrica' },
+  innovateAfrica: { id: 'innovateAfrica.name', defaultMessage: 'innovateAFRICA.fund', url: 'http://innovateafrica.fund/' },
+  impactAfrica: { id: 'impactAfrica.name', defaultMessage: 'impactAFRICA.fund', url: 'http://impactafrica.fund/' },
+  openAfrica: { id: 'openAfrica.name', defaultMessage: 'open.AFRICA', url: 'http://open.africa/' },
+  commonsAfrica: { id: 'commonsAfrica.name', defaultMessage: 'commons.AFRICA', url: 'https://commons.africa/' },
+  sensorsAfrica: { id: 'sensorsAfrica.name', defaultMessage: 'sensors.AFRICA', url: 'http://sensors.africa/' },
+  sourceAfrica: { id: 'sourceAfrica.name', defaultMessage: 'source.AFRICA', url: 'https://sourceafrica.net/' },
+  goToVote: { id: 'goToVote.name', defaultMessage: 'GotToVote', url: 'http://gottovote.cc/' },
+  afriLeaks: { id: 'afriLeaks.name', defaultMessage: 'afriLEAKS', url: 'afriLEAKS' },
+  pesaCheck: { id: 'pesaCheck.name', defaultMessage: 'PesaCheck', url: 'https://pesacheck.org' },
+  africanDrone: { id: 'africanDRONE.name', defaultMessage: 'africanDRONE', url: 'http://africandrone.net/' },
+  ancir: { id: 'ancir.name', defaultMessage: 'africanDRONE', url: 'http://investigativecenters.org/' },
   c4cmName: { id: 'c4cm.name', defaultMessage: 'African Network of Centres for Investigative Reporting' },
   berkmanName: { id: 'berkman.name', defaultMessage: 'Berkman Klein Center for Internet and Society at Harvard University' },
   userLogin: { id: 'user.login', defaultMessage: 'Login' },
@@ -59,7 +58,6 @@ const messages = {
   toicSkipSolrQueryProp: { id: 'topic.prop.public', defaultMessage: 'Skip SOLR Query' },
   searchByRedditChannel: { id: 'topic.prop.reddit.channel', defaultMessage: 'Search By Subreddit (comma separated list)' },
   searchByTwitterChannel: { id: 'topic.prop.twitter.source', defaultMessage: 'Search By Twitter Source' },
-
 
   entityName: { id: 'entity.title.default', defaultMessage: 'Entity' },
   entityPerson: { id: 'entity.title.person', defaultMessage: 'Person' },
@@ -159,7 +157,6 @@ const messages = {
   managePlatforms: { id: 'platform.manage', defaultMessage: 'Manage Platforms' },
   platformSource: { id: 'platform.source', defaultMessage: 'Source' },
   incompletePlatform: { id: 'platform.incompletePlatform', defaultMessage: 'You need to set up a platform for your topic!' },
-
 
   story: { id: 'story', defaultMessage: 'Story' },
   storyPlural: { id: 'stories', defaultMessage: 'Stories' },
