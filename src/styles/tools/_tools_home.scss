@@ -2,18 +2,19 @@
   
   h1 {
     text-align: left;
-    font-size: 56px;
+    font-size: 30px;
     margin-bottom: 40px;
+    @media screen and (min-width:768px){
+      font-size: 56px;
+    }
   }
 
   h2 {
-    font-size: 20px;
+    font-size: 28px;
     margin: 0px;
     padding: 0px;
     margin-bottom: 25px;
-    @media screen and (min-width:768px){
-      font-size: 28px;
-    }
+  
   }
   .tools-card {
     padding-top: 4rem;
