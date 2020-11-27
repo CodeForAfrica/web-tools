@@ -4,7 +4,7 @@ import { Grid, Row, Col } from 'react-flexbox-grid/lib';
 import { injectIntl } from 'react-intl';
 import messages from '../../../resources/messages';
 import UserMenuContainer from './UserMenuContainer';
-import SubMenu from './Submenu';
+import SubMenu from './SubMenu';
 import AdminAppMenu from './AdminAppMenu';
 import { assetUrl } from '../../../lib/assetUtil';
 import AppButton from '../AppButton';
