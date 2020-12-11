@@ -127,75 +127,34 @@ class AppContainer extends React.Component {
               <Col lg={8}>
                 <p>
                   <span>
+                    CivicSignal is the research and analysis programme of{" "}
                     <a href={messages.cfa.url}>
-                      <FormattedMessage {...messages.cfa} />{" "}
-                    </a>
-                     (CfA) is the continent’s largest network of indigenous
-                    African <b>civic technology</b> and investigative 
-                    <b>data journalism</b> laboratories that build 
-                    <b>digital democracy</b> solutions that are intended to give
-                    citizens unfettered access to <b>actionable information</b>
-                     that empowers them to make <b>informed decisions</b> and
-                    that strengthen <b>civic engagement</b> for improved public
-                    governance and accountability.
+                      <FormattedMessage {...messages.cfa} /> 
+                    </a>,{" "}
+                    the continent’s largest network of indigenous African
+                    civic technology and investigative data journalism
+                    laboratories.
                   </span>
                   <span>
-                    CfA’s staff in 18 African countries serve as local 
-                    <b>ecosystem catalysts</b>, seed-funding pioneering ideas
-                    through our {" "}
-                    <a href={messages.innovateAfrica.url}>
-                      <FormattedMessage {...messages.innovateAfrica} />
-                    </a>
-                    , as well curating infrastructure such as the continent’s
-                    largest open data portal, {" "}
-                    <a href={messages.openAfrica.url}>
-                      <FormattedMessage {...messages.openAfrica} />
-                    </a>
-                    , plus Africa’s largest open source civic software portal, {" "}
-                    <a href={messages.commonsAfrica.url}>
-                      <FormattedMessage {...messages.commonsAfrica} />
-                    </a>
-                    , and the continent’s largest repository of investigative
-                    document-based evidence, 
-                    <a href={messages.sourceAfrica.url}>
-                      <FormattedMessage {...messages.sourceAfrica} />
-                    </a>
-                    , along with smaller resources such the 
-                    <a href={messages.goToVote.url}>
-                      <FormattedMessage {...messages.goToVote} />
-                    </a>
-                     election toolkit or 
-                    <a href={messages.afriLeaks.url}>
-                      <FormattedMessage {...messages.afriLeaks} />
-                    </a>
-                     encrypted whistleblower portal.
+                    CivicSignal’s data analysis is powered by MIT’s{" "}
+                    <b>Media Cloud </b>platform, and research partners include
+                    the <b> Reuters Institute for Journalism </b> and the{" "}
+                    <b>Global Disinformation Index</b> .
                   </span>
                   <span>
-                    CfA’s labs also incubate or accelerate a series of
-                    trail-blazing initiatives, including the {" "}
-                    <a href={messages.pesaCheck.url}>
-                      <FormattedMessage {...messages.pesaCheck} />
-                    </a>
-                     fact-checking initiative (which is now in 12 countries),
-                    the continental {" "}
-                    <a href={messages.africanDrone.url}>
-                      <FormattedMessage {...messages.africanDrone} />
-                    </a>
-                     civic drone network, the
-                    <a href={messages.sensorsAfrica.url}>
-                      <FormattedMessage {...messages.sensorsAfrica} /> 
-                    </a>
-                    citizen science movement, and the 
-                    <a href={messages.ancir.url}>
-                      <FormattedMessage {...messages.ancir} />
-                    </a>
-                     (ANCIR) that spearheads forensic journalism across the
-                    continent.
+                    <a href={messages.join.url}>
+                      <FormattedMessage {...messages.join} />{" "}
+                    </a>{" "}
                   </span>
                   <span>
-                    CfA is a <b>non-profit organisation</b>, registered as a
-                    public benefit organisation in Kenya, Nigeria and South
-                    Africa.
+                    Read Code for Africa’s
+                    <a href={messages.privacyPolicy.url}>
+                      <FormattedMessage {...messages.privacyPolicy} />{" "}
+                    </a>{" "}
+                    and
+                    <a href={messages.terms.url}>
+                      <FormattedMessage {...messages.terms} />{" "}
+                    </a>
                   </span>
                 </p>
               </Col>
@@ -204,7 +163,6 @@ class AppContainer extends React.Component {
           <div className="secondary-footer">
             <Grid>
               <Row className="secondary-footer-row">
-                
                 <Col className="secondary-footer-col footer-social-col" lg={12}>
                   <a href="#">
                     <Twitter className="footer-social"></Twitter>
