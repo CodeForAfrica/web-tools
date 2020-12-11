@@ -147,11 +147,11 @@ class AppContainer extends React.Component {
                     </a>{" "}
                   </span>
                   <span>
-                    Read Code for Africa’s
+                    Read Code for Africa’s {" "}
                     <a href={messages.privacyPolicy.url}>
                       <FormattedMessage {...messages.privacyPolicy} />{" "}
                     </a>{" "}
-                    and
+                    and {" "}
                     <a href={messages.terms.url}>
                       <FormattedMessage {...messages.terms} />{" "}
                     </a>
