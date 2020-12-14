@@ -14,6 +14,8 @@
     "topics-release": "NODE_ENV=production MC_APP_NAME=topics webpack --config config/webpack.config.js",
     "tools-dev": "MC_APP_NAME=tools webpack-dev-server --config config/webpack.config.js",
     "tools-release": "NODE_ENV=production MC_APP_NAME=tools webpack --config config/webpack.config.js",
+    "media-dev": "MC_APP_NAME=media webpack-dev-server --config config/webpack.config.js",
+    "media-release": "NODE_ENV=production MC_APP_NAME=media webpack --config config/webpack.config.js",
     "requirements-check": "node scripts/check-version.js",
     "postinstall": "npm run requirements-check"
   },

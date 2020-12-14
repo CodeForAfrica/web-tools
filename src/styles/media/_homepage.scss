@@ -1,0 +1,56 @@
+@import '../constants';
+
+.homepage {
+
+  .search-section {
+    margin: 1px auto;
+    padding: 40px;
+  }
+  
+  .search-form {
+    margin: 15px 0px 60px 0px;
+    text-align: center;
+    .search-icon {
+      display: inline-block;
+    }
+    .explorer-home-search-field {
+      width: 410px !important;
+      margin-right: 30px;
+    }
+    .icon-button {
+      margin-top: 20px;
+    }
+  }
+
+  .explorer-home-search-field {
+    margin-top: 10px;
+    input {
+      font-size: 24px !important;
+      line-height: 30px !important;
+    }
+  }
+
+  .masthead {
+    background-color: $media-primary;
+  }
+  h1 {
+    text-align: left;
+    font-size: 30px;
+    margin-bottom: 40px;
+    @media screen and (min-width:768px){
+      font-size: 56px;
+    }
+  }
+  p {
+    &.intro {
+      text-align: left;
+      font-size: 28px;
+      margin: 0px;
+      padding: 0px;
+      margin-bottom: 40px;
+    }
+  }
+  .row {
+    padding: 2rem 0;
+  }
+}
