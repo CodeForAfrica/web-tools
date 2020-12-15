@@ -1,6 +1,32 @@
-
 .homepage {
-  p ,span{
+  #mc_embed_signup {
+    background: #fff;
+    clear: left;
+    font: 14px Helvetica, Arial, sans-serif;
+    input {
+      .email {
+        background: none;
+        border: none;
+        border-bottom: 1px solid;
+        border-radius: 0;
+        margin: 1rem 0;
+        width: 100%;
+      }
+    }
+    form {
+      padding: 0;
+    }
+    .button {
+      background: none;
+      outline: none;
+      background-repeat: no-repeat;
+      background-size: 40px 40px;
+      border: none;
+      height: 55;
+    }
+  }
+  p,
+  span {
     font-size: 20px;
     line-height: 30px;
   }
