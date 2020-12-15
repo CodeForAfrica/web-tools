@@ -49,11 +49,14 @@ class AppContainer extends React.Component {
     if (nextProps.feedback.message !== feedback.message) {
       this.setState({ open: true });
     }
+    window.scrollTo(0,0);
+
   }
 
   handleClose = () => {
     this.setState({ open: false });
   };
+
 
   render() {
     const { children, feedback, name } = this.props;
