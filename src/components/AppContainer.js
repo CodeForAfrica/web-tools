@@ -21,6 +21,7 @@ import {
   LinkedIn,
   GitHub,
 } from "@material-ui/icons";
+import NewsLetterForm from "./tools/newsletter/NewsLetterForm";
 
 const localMessages = {
   privacyPolicy: {
@@ -147,7 +148,8 @@ class AppContainer extends React.Component {
                   <span>
                     <a href={messages.join.url}>
                       <FormattedMessage {...messages.join} />{" "}
-                    </a>{" "}
+                    </a><br/>
+                    <NewsLetterForm></NewsLetterForm>
                   </span>
                   <span>
                     Read Code for Africa’s {" "}
