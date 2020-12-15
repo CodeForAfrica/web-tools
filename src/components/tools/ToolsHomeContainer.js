@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Grid, Row, Col } from 'react-flexbox-grid/lib';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import messages from '../../resources/messages';
-import { urlToExplorer, urlToTopicMapper, urlToSourceManager } from '../../lib/urlUtil';
+import { urlToExplorer, urlToTopicMapper, urlToSourceManager, urlToMediaData } from '../../lib/urlUtil';
 import ToolDescription from './ToolDescription';
 import Faq from './faq/ToolsFaq';
 
@@ -90,7 +90,7 @@ const ToolsHomeContainer = (props) => {
               className="media-data tools-card"
               description={messages.mediaDataToolDescription}
               screenshotUrl={assetUrl('/static/img/preview-sources.png')}
-              url={urlToSourceManager('home')}
+              url={urlToMediaData('media')}
               buttonLabel={messages.learnMoreButton}
             />
           </Col>
