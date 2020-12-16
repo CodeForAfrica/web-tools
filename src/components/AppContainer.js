@@ -146,10 +146,10 @@ class AppContainer extends React.Component {
                     <b>Global Disinformation Index</b> .
                   </span>
                   <span>
-                    <a href={messages.join.url}>
+                    <a target="_blank"  rel="noopener noreferrer" href={messages.join.url}>
                       <FormattedMessage {...messages.join} />{" "}
                     </a><br/>
-                    <NewsLetterForm></NewsLetterForm>
+                    {/* <NewsLetterForm></NewsLetterForm> */}
                   </span>
                   <span>
                     Read Code for Africa’s {" "}

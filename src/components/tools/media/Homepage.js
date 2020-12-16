@@ -4,7 +4,6 @@ import { injectIntl, FormattedMessage } from "react-intl";
 import { connect } from "react-redux";
 import { Grid, Row, Col } from "react-flexbox-grid/lib";
 import ResourceList from "./ResourceList";
-import NewsLetterForm from "../newsletter/NewsLetterForm";
 
 const localMessages = {
   title: { id: "media.intro.title", defaultMessage: "Media Data" },
@@ -27,7 +26,6 @@ const Homepage = () => (
   <div className="homepage">
     <Grid>
       <Row className="media-hero">
-        <NewsLetterForm />
         <Col lg={1} />
         <Col lg={12}>
           <h1>

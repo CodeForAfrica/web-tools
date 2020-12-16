@@ -34,7 +34,7 @@ const messages = {
   ancir: { id: 'ancir.name', defaultMessage: 'africanDRONE', url: 'http://investigativecenters.org/' },
   privacyPolicy: { id: 'privacyPolicy.name', defaultMessage: 'Privacy Policy', url: 'https://civicsignal.africa/#/privacy' },
   terms: { id: 'terms.name', defaultMessage: 'Terms of Service', url: 'https://civicsignal.africa/#/terms' },
-  join: { id: 'join.name', defaultMessage: 'Join Our Community', url: 'https://civicsignal.africa/#/join)'},
+  join: { id: 'join.name', defaultMessage: 'Join Our Community', url: 'https://codeforafrica.us6.list-manage.com/subscribe/post?u=65e5825507b3cec760f272e79&id=286e6e3985'},
   c4cmName: { id: 'c4cm.name', defaultMessage: 'African Network of Centres for Investigative Reporting' },
   berkmanName: { id: 'berkman.name', defaultMessage: 'Berkman Klein Center for Internet and Society at Harvard University' },
   userLogin: { id: 'user.login', defaultMessage: 'Login' },                    
