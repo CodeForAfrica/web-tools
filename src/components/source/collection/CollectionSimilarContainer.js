@@ -47,7 +47,7 @@ const mapStateToProps = state => ({
   fetchStatus: state.sources.collections.selected.collectionSimilar.fetchStatus,
   similarCollections: state.sources.collections.selected.collectionSimilar.list,
   user: state.user,
-  collectionSets: state.system.staticTags.tagSets.collectionSets,
+  collectionSets: state.system.staticTags.tagSets?.collectionSets,
 });
 
 const fetchAsyncData = (dispatch, { collectionId }) => dispatch(fetchSimilarCollections(collectionId));

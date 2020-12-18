@@ -192,7 +192,7 @@ SourceDetailsContainer.propTypes = {
 const mapStateToProps = (state, ownProps) => ({
   sourceId: parseInt(ownProps.params.sourceId, 10),
   source: state.sources.sources.selected.sourceDetails,
-  collectionSets: state.system.staticTags.tagSets.collectionSets,
+  collectionSets: state.system.staticTags.tagSets?.collectionSets,
 });
 
 export default

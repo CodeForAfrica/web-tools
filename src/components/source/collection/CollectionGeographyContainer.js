@@ -72,7 +72,7 @@ CollectionGeographyContainer.propTypes = {
 const mapStateToProps = state => ({
   fetchStatus: state.platforms.tags.fetchStatus,
   geolist: state.platforms.tags.results.collection ? state.platforms.tags.results.collection.results : [],
-  cliffPlacesSet: state.system.staticTags.tagSets.cliffPlacesSet,
+  cliffPlacesSet: state.system.staticTags.tagSets?.cliffPlacesSet,
 });
 
 const fetchAsyncData = (dispatch, { collectionId, cliffPlacesSet }) => dispatch(fetchPlatformTags({

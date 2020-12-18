@@ -60,7 +60,7 @@ const mapStateToProps = state => ({
   fetchStatus: state.sources.collections.geo.fetchStatus,
   user: state.user,
   collectionsByCountry: state.sources.collections.geo.list,
-  collectionSets: state.system.staticTags.tagSets.collectionSets,
+  collectionSets: state.system.staticTags.tagSets?.collectionSets,
 });
 
 const fetchAsyncData = dispatch => dispatch(fetchGeoCollectionsByCountry());
