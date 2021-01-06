@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import Snackbar from '@material-ui/core/Snackbar';
 import intl from 'intl';  // eslint-disable-line
 import intlEn from 'intl/locale-data/jsonp/en.js';  // eslint-disable-line
-import { Row } from 'react-flexbox-grid/lib';
+import { Grid, Row, Col } from "react-flexbox-grid/lib";
 import NavToolbar from './common/header/NavToolbar';
 import ErrorBoundary from './common/ErrorBoundary';
 import messages from '../resources/messages';
@@ -16,7 +16,13 @@ import { assetUrl } from '../lib/assetUtil';
 import AppNoticesContainer from './common/header/AppNoticesContainer';
 import { fetchStaticTags } from '../actions/systemActions';
 import withAsyncData from './common/hocs/AsyncDataContainer';
-
+import {
+  Twitter,
+  Facebook,
+  Instagram,
+  LinkedIn,
+  GitHub,
+} from "@material-ui/icons";
 const localMessages = {
   privacyPolicy: { id: 'app.privacyPolicy', defaultMessage: 'Read our privacy policy.' },
   maintenance: { id: 'app.maintenance', defaultMessage: 'Sorry, we have taken our system down right now for maintenance' },
@@ -200,12 +206,6 @@ const fetchAsyncData = (dispatch) => {
   dispatch(fetchStaticTags());
 };
 
-export default
-// hot(
-injectIntl(
-  connect(mapStateToProps)(
-    withAsyncData(fetchAsyncData)(
-      AppContainer
-    )
-  )
-);
+export default // hot(
+injectIntl(connect(mapStateToProps)(AppContainer));
+
