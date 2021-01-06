@@ -83,7 +83,7 @@ Homepage.propTypes = {
 const mapStateToProps = state => ({
   isLoggedIn: state.user.isLoggedIn,
   storyCount: state.system.stats.stats.total_stories,
-  defaultCollectionTag: state.system.staticTags.tags.defaultCollectionTag,
+  defaultCollectionTag: state.system.staticTags.tags?.defaultCollectionTag,
 });
 
 const mapDispatchToProps = dispatch => ({

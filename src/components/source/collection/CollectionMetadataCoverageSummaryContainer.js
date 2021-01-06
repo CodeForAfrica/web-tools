@@ -135,7 +135,7 @@ CollectionMetadataCoverageSummaryContainer.propTypes = {
 const mapStateToProps = state => ({
   fetchStatus: state.sources.collections.selected.collectionSourceList.fetchStatus,
   sources: state.sources.collections.selected.collectionSourceList.sources,
-  mediaMetadataSetsByName: state.system.staticTags.tagSets.mediaMetadataSetsByName,
+  mediaMetadataSetsByName: state.system.staticTags.tagSets?.mediaMetadataSetsByName,
 });
 
 const mapDispatchToProps = dispatch => ({

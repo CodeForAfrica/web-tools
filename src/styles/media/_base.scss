@@ -1,0 +1,25 @@
+@import '../constants';
+
+.app-media {
+
+  .app-icon-filled-star > svg {
+    fill: $media-primary;
+  }
+
+  #content { 
+    padding-bottom: 0px; /* so the results background color connects all the way to the footer */
+  }
+
+  #nav-toolbar {
+    background-color: $media-darker;
+    li.explorer {
+      border-bottom: 2px solid white;
+    }
+  }
+
+}
+
+/* important for this to outside of app-container for modals and such */
+a {
+  color: $explorer-primary;
+}

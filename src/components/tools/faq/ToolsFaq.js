@@ -26,7 +26,7 @@ const localMessages = {
   q10: { id: 'faq.q10', defaultMessage: 'Can I add sources to the database?' },
   a10: { id: 'faq.a10', defaultMessage: 'If a source or a set of sources is not already part of our database, you can suggest its addition through the Sources tool, and we will carefully consider your suggestion. Our first inclination is to say yes to suggestions.' },
   q11: { id: 'faq.q11', defaultMessage: 'How can I get more help?' },
-  a11: { id: 'faq.a11', defaultMessage: 'Join our <a href="http://groups.io/g/mediacloud">mailing list</a> or send us an email to <a href="mailto:support@mediacloud.org">support@mediacloud.org</a>.' },
+  a11: { id: 'faq.a11', defaultMessage: 'Join our <a href="http://groups.io/g/mediacloud">mailing list</a> e Study of Journalism, Oxford University. (The Reuters “Women in News” Report launches January 2021.)<br/>  <a href="http://reutersinstitute.politics.ox.ac.uk/sites/default/files/2020-06/DNR_2020_FINAL.pdf">mailing list</a> <a href=“http://reutersinstitute.politics.ox.ac.uk/sites/default/files/2020-06/DNR_2020_FINAL.pdf”>Download the full DNR 2020 report</a>or send us an email to <a href="mailto:support@mediacloud.org">support@mediacloud.org</a>.' },
 };
 
 const NUM_ITEMS = 11;

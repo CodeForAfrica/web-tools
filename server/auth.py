@@ -21,7 +21,6 @@ ROLE_TM_READ_ONLY = 'tm-readonly'           # Topic mapper; excludes media and s
 # load the config helper
 config = get_default_config()
 
-
 # User class
 class User(flask_login.UserMixin):
 

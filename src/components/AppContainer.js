@@ -1,7 +1,7 @@
-import PropTypes from 'prop-types';
-import React from 'react';
-import { FormattedMessage, FormattedHTMLMessage, injectIntl } from 'react-intl';
-import { connect } from 'react-redux';
+import PropTypes from "prop-types";
+import React from "react";
+import { FormattedMessage, FormattedHTMLMessage, injectIntl } from "react-intl";
+import { connect } from "react-redux";
 // import { hot } from 'react-hot-loader/root';
 import Snackbar from '@material-ui/core/Snackbar';
 import intl from 'intl';  // eslint-disable-line
@@ -32,11 +32,14 @@ class AppContainer extends React.Component {
     if (nextProps.feedback.message !== feedback.message) {
       this.setState({ open: true });
     }
+    window.scrollTo(0,0);
+
   }
 
   handleClose = () => {
     this.setState({ open: false });
   };
+
 
   render() {
     const { children, feedback, name } = this.props;
@@ -46,11 +49,17 @@ class AppContainer extends React.Component {
         <div className="maintenance">
           <Row center="lg">
             <ErrorNotice>
-              <br /><br />
+              <br />
+              <br />
               <FormattedMessage {...localMessages.maintenance} />
-              <br /><br />
-              <img alt="under-constrction" src={assetUrl('/static/img/under-construction.gif')} />
-              <br /><br />
+              <br />
+              <br />
+              <img
+                alt="under-constrction"
+                src={assetUrl("/static/img/under-construction.gif")}
+              />
+              <br />
+              <br />
             </ErrorNotice>
           </Row>
         </div>
@@ -77,32 +86,88 @@ class AppContainer extends React.Component {
           </div>
         </ErrorBoundary>
         <footer>
-          <p>
-            <small>
-              {'Created by the '}
-              <a href="https://civic.mit.edu/">
-                <FormattedMessage {...messages.c4cmName} />
-              </a>
-              {' and the '}
-              <a href="https://cyber.law.harvard.edu">
-                <FormattedMessage {...messages.berkmanName} />
-              </a>.
-              <br />
-              <FormattedHTMLMessage {...messages.supportOptions} />
-              <br />
-              <a href="https://mediacloud.org/privacy-policy"><FormattedHTMLMessage {...localMessages.privacyPolicy} /></a>
-              <br />
-              v{getVersion()}
-            </small>
-          </p>
+          <Grid className="primary-footer">
+            <Row>
+              <Col lg={8}>
+                <a href={messages.cfa.url}>
+                  <img
+                    className="app-logo"
+                    alt=""
+                    src={assetUrl("/static/img/cfa.svg")}
+                    height={80}
+                  />
+                </a>
+              </Col>
+            </Row>
+            <Row>
+              <Col lg={8}>
+                <p>
+                  <span>
+                    CivicSignal is the research and analysis programme of{" "}
+                    <a href={messages.cfa.url}>
+                      <FormattedMessage {...messages.cfa} /> 
+                    </a>,{" "}
+                    the continent’s largest network of indigenous African
+                    civic technology and investigative data journalism
+                    laboratories.
+                  </span>
+                  <span>
+                    CivicSignal’s data analysis is powered by MIT’s{" "}
+                    <b>Media Cloud </b>platform, and research partners include
+                    the <b> Reuters Institute for Journalism </b> and the{" "}
+                    <b>Global Disinformation Index</b> .
+                  </span>
+                  <span>
+                    <a target="_blank"  rel="noopener noreferrer" href={messages.join.url}>
+                      <FormattedMessage {...messages.join} />{" "}
+                    </a><br/>
+                    {/* <NewsLetterForm></NewsLetterForm> */}
+                  </span>
+                  <span>
+                    Read Code for Africa’s {" "}
+                    <a href={messages.privacyPolicy.url}>
+                      <FormattedMessage {...messages.privacyPolicy} />{" "}
+                    </a>{" "}
+                    and {" "}
+                    <a href={messages.terms.url}>
+                      <FormattedMessage {...messages.terms} />{" "}
+                    </a>
+                  </span>
+                </p>
+              </Col>
+            </Row>
+          </Grid>
+          <div className="secondary-footer">
+            <Grid>
+              <Row className="secondary-footer-row">
+                <Col className="secondary-footer-col footer-social-col" lg={12}>
+                  <a href="#">
+                    <Twitter className="footer-social"></Twitter>
+                  </a>
+                  <a href="#">
+                    <Instagram className="footer-social"></Instagram>
+                  </a>
+                  <a href="#">
+                    <Facebook className="footer-social"></Facebook>{" "}
+                  </a>
+                  <a href="#">
+                    <LinkedIn className="footer-social"></LinkedIn>{" "}
+                  </a>
+                  <a href="#">
+                    <GitHub className="footer-social"></GitHub>
+                  </a>
+                </Col>
+              </Row>
+            </Grid>
+          </div>
         </footer>
         <Snackbar
-          className={feedback.classes ? feedback.classes : 'info_notice'}
+          className={feedback.classes ? feedback.classes : "info_notice"}
           open={this.state.open}
           onClose={this.handleClose}
           message={feedback.message}
           action={feedback.action}
-          anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+          anchorOrigin={{ vertical: "top", horizontal: "center" }}
           autoHideDuration={5000}
         />
       </div>
@@ -127,8 +192,7 @@ AppContainer.contextTypes = {
   router: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = state => ({
-  fetchStatus: state.system.staticTags.fetchStatus,
+const mapStateToProps = (state) => ({
   feedback: state.app.feedback,
 });
 

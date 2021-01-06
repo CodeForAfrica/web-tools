@@ -66,7 +66,7 @@ export const mapStateToProps = state => ({
   fetchStatus: [state.sources.collections.favorited.fetchStatus, state.sources.sources.favorited.fetchStatus],
   favoritedSources: state.sources.sources.favorited.list,
   favoritedCollections: state.sources.collections.favorited.list,
-  collectionSets: state.system.staticTags.tagSets.collectionSets,
+  collectionSets: state.system.staticTags.tagSets?.collectionSets,
 });
 
 export const fetchAsyncData = (dispatch) => {

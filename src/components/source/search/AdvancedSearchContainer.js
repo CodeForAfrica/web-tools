@@ -97,7 +97,7 @@ AdvancedSearchContainer.propTypes = {
 
 const mapStateToProps = (state, ownProps) => ({
   urlQueryString: ownProps.location.query.search,
-  mediaMetadataSetsByName: state.system.staticTags.tagSets.mediaMetadataSetsByName,
+  mediaMetadataSetsByName: state.system.staticTags.tagSets?.mediaMetadataSetsByName,
 });
 
 export default

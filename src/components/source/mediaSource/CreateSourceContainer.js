@@ -50,7 +50,7 @@ CreateSourceContainer.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  mediaMetadataSetsByName: state.system.staticTags.tagSets.mediaMetadataSetsByName,
+  mediaMetadataSetsByName: state.system.staticTags.tagSets?.mediaMetadataSetsByName,
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({

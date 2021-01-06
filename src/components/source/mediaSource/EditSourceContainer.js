@@ -76,8 +76,8 @@ const mapStateToProps = (state, ownProps) => ({
   fetchStatus: state.sources.sources.selected.sourceDetails.fetchStatus,
   source: state.sources.sources.selected.sourceDetails,
   user: state.user,
-  collectionSets: state.system.staticTags.tagSets.collectionSets,
-  mediaMetadataSetsByName: state.system.staticTags.tagSets.mediaMetadataSetsByName,
+  collectionSets: state.system.staticTags.tagSets?.collectionSets,
+  mediaMetadataSetsByName: state.system.staticTags.tagSets?.mediaMetadataSetsByName,
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({

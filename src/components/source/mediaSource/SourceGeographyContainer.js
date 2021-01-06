@@ -74,7 +74,7 @@ SourceGeographyContainer.propTypes = {
 const mapStateToProps = state => ({
   fetchStatus: state.platforms.tags.fetchStatus,
   geolist: state.platforms.tags.results.mediaSource ? state.platforms.tags.results.mediaSource.results : [],
-  cliffPlacesSet: state.system.staticTags.tagSets.cliffPlacesSet,
+  cliffPlacesSet: state.system.staticTags.tagSets?.cliffPlacesSet,
 });
 
 const fetchAsyncData = (dispatch, { source, cliffPlacesSet }) => dispatch(fetchPlatformTags({
