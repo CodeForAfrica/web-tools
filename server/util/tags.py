@@ -254,10 +254,6 @@ class TagDiscoverer:
 
 # load the config helper
 config = get_default_config()
-<<<<<<< HEAD
-
-=======
->>>>>>> feature-tag-id-agnostic
 
 def processed_for_themes_query_clause():
     """
