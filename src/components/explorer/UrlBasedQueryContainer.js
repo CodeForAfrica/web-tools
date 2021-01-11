@@ -198,7 +198,7 @@ function composeUrlBasedQueryContainer() {
     const mapStateToProps = state => ({
       queries: state.explorer.queries.queries,
       lastSearchTime: state.explorer.lastSearchTime.time,
-      mediaMetadataSetsByName: state.system.staticTags.tagSets.mediaMetadataSetsByName,
+      mediaMetadataSetsByName: state.system.staticTags.tagSets?.mediaMetadataSetsByName,
     });
 
     // push any updates (including selected) into queries in state, will trigger async load in sub sections
