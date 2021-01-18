@@ -4,8 +4,7 @@ import { FormattedMessage, injectIntl } from 'react-intl';
 import AppButton from '../common/AppButton';
 
 const ToolDescription = (props) => {
-  const { name, description, buttonLabel, screenshotUrl, url, className } = props;
-  const { formatMessage } = props.intl;
+  const { name, description, buttonLabel, url, className } = props;
   return (
     <a href={url}>
       <div className={`tool-description ${className}`}>
@@ -28,6 +27,7 @@ ToolDescription.propTypes = {
   screenshotUrl: PropTypes.string.isRequired,
   className: PropTypes.string.isRequired,
   url: PropTypes.string.isRequired,
+  buttonLabel: PropTypes.string.isRequired,
 };
 
 export default injectIntl(ToolDescription);

@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { injectIntl, FormattedMessage, FormattedHTMLMessage } from 'react-intl';
+import { injectIntl, FormattedHTMLMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { Grid, Row, Col } from 'react-flexbox-grid/lib';
 
@@ -28,10 +28,10 @@ Homepage.propTypes = {
   // from state
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = () => ({
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = () => ({
 
 });
 

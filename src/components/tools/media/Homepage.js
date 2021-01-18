@@ -49,9 +49,9 @@ Homepage.propTypes = {
   // from state
 };
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = () => ({});
 
-const mapDispatchToProps = (dispatch) => ({});
+const mapDispatchToProps = () => ({});
 
 export default injectIntl(
   connect(mapStateToProps, mapDispatchToProps)(Homepage)
