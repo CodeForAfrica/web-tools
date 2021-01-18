@@ -1,10 +1,11 @@
-
 const messages = {
 
   suiteName: { id: 'suite.name', defaultMessage: 'Media Cloud' },
 
   blogToolName: { id: 'app.blog.name', defaultMessage: 'Blog' },
   blogToolDescription: { id: 'app.blog.description', defaultMessage: 'Read updates on our research, projects, and ideas from us and our partners' },
+  menuToolName: { id: 'app.menu.name', defaultMessage: 'Menu' },
+  menuToolDescription: { id: 'app.menu.description', defaultMessage: 'Website Menu' },
   sourcesToolName: { id: 'app.sources.name', defaultMessage: 'Source Manager' },
   sourcesToolDescription: { id: 'app.sources.description', defaultMessage: 'Check the breadth of our global coverage by browsing the media sources and collections in our database, and suggesting more to add.' },
   topicsToolName: { id: 'app.topics.name', defaultMessage: 'Topic Mapper' },
@@ -13,8 +14,27 @@ const messages = {
   toolsToolDescription: { id: 'app.tools.description', defaultMessage: 'Support for MediaCloud, including FAQs, tools and how to use them' },
   explorerToolName: { id: 'app.explorer.name', defaultMessage: 'Explorer' },
   explorerToolDescription: { id: 'app.explorer.description', defaultMessage: 'Get a quick overview of how your topic of interest is covered by digital news media by exploring attention, language, and entities.' },
+  mediaDataToolName: { id: 'app.explorer.name', defaultMessage: 'Media Data' },
+  mediaDataToolDescription: { id: 'app.explorer.description', defaultMessage: 'MediaData is Code for Africa’s research department, producing data and analyses of the African media ecosystem.' },
+  learnMoreButton: { id: 'app.learn.button', defaultMessage: 'Learn More' },
+  launchButton: { id: 'app.launch.button', defaultMessage: 'Launch' },
   readGuide: { id: 'app.readGuide', defaultMessage: 'Visit Our Support Page' },
 
+  cfa: { id: 'cfa.name', defaultMessage: 'Code for Africa', url: 'https://www.facebook.com/CodeForAfrica' },
+  innovateAfrica: { id: 'innovateAfrica.name', defaultMessage: 'innovateAFRICA.fund', url: 'http://innovateafrica.fund/' },
+  impactAfrica: { id: 'impactAfrica.name', defaultMessage: 'impactAFRICA.fund', url: 'http://impactafrica.fund/' },
+  openAfrica: { id: 'openAfrica.name', defaultMessage: 'open.AFRICA', url: 'http://open.africa/' },
+  commonsAfrica: { id: 'commonsAfrica.name', defaultMessage: 'commons.AFRICA', url: 'https://commons.africa/' },
+  sensorsAfrica: { id: 'sensorsAfrica.name', defaultMessage: 'sensors.AFRICA', url: 'http://sensors.africa/' },
+  sourceAfrica: { id: 'sourceAfrica.name', defaultMessage: 'source.AFRICA', url: 'https://sourceafrica.net/' },
+  goToVote: { id: 'goToVote.name', defaultMessage: 'GotToVote', url: 'http://gottovote.cc/' },
+  afriLeaks: { id: 'afriLeaks.name', defaultMessage: 'afriLEAKS', url: 'afriLEAKS' },
+  pesaCheck: { id: 'pesaCheck.name', defaultMessage: 'PesaCheck', url: 'https://pesacheck.org' },
+  africanDrone: { id: 'africanDRONE.name', defaultMessage: 'africanDRONE', url: 'http://africandrone.net/' },
+  ancir: { id: 'ancir.name', defaultMessage: 'africanDRONE', url: 'http://investigativecenters.org/' },
+  privacyPolicy: { id: 'privacyPolicy.name', defaultMessage: 'Privacy Policy', url: 'https://civicsignal.africa/#/privacy' },
+  terms: { id: 'terms.name', defaultMessage: 'Terms of Service', url: 'https://civicsignal.africa/#/terms' },
+  join: { id: 'join.name', defaultMessage: 'Join Our Community', url: 'https://codeforafrica.us6.list-manage.com/subscribe/post?u=65e5825507b3cec760f272e79&id=286e6e3985' },
   c4cmName: { id: 'c4cm.name', defaultMessage: 'MIT Center for Civic Media' },
   berkmanName: { id: 'berkman.name', defaultMessage: 'Berkman Klein Center for Internet and Society at Harvard University' },
   userLogin: { id: 'user.login', defaultMessage: 'Login' },
@@ -41,7 +61,6 @@ const messages = {
   toicSkipSolrQueryProp: { id: 'topic.prop.public', defaultMessage: 'Skip SOLR Query' },
   searchByRedditChannel: { id: 'topic.prop.reddit.channel', defaultMessage: 'Search By Subreddit (comma separated list)' },
   searchByTwitterChannel: { id: 'topic.prop.twitter.source', defaultMessage: 'Search By Twitter Source' },
-
 
   entityName: { id: 'entity.title.default', defaultMessage: 'Entity' },
   entityPerson: { id: 'entity.title.person', defaultMessage: 'Person' },
@@ -139,7 +158,6 @@ const messages = {
   managePlatforms: { id: 'platform.manage', defaultMessage: 'Manage Platforms' },
   platformSource: { id: 'platform.source', defaultMessage: 'Source' },
   incompletePlatform: { id: 'platform.incompletePlatform', defaultMessage: 'You need to set up a platform for your topic!' },
-
 
   story: { id: 'story', defaultMessage: 'Story' },
   storyPlural: { id: 'stories', defaultMessage: 'Stories' },

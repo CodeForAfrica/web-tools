@@ -1,16 +1,18 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { FormattedMessage, injectIntl } from 'react-intl';
+import AppButton from '../common/AppButton';
 
 const ToolDescription = (props) => {
-  const { name, description, screenshotUrl, url, className } = props;
-  const { formatMessage } = props.intl;
+  const { name, description, buttonLabel, url, className } = props;
   return (
     <a href={url}>
       <div className={`tool-description ${className}`}>
         <h2><FormattedMessage {...name} /></h2>
         <p><FormattedMessage {...description} /></p>
-        <img src={screenshotUrl} alt={formatMessage(name)} width="100%" />
+        <AppButton className="white" label="Call to Action">
+          <FormattedMessage {...buttonLabel} />
+        </AppButton>
       </div>
     </a>
   );
@@ -25,6 +27,7 @@ ToolDescription.propTypes = {
   screenshotUrl: PropTypes.string.isRequired,
   className: PropTypes.string.isRequired,
   url: PropTypes.string.isRequired,
+  buttonLabel: PropTypes.string.isRequired,
 };
 
 export default injectIntl(ToolDescription);

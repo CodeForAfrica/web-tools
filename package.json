@@ -15,6 +15,7 @@
     "tools-dev": "MC_APP_NAME=tools webpack-dev-server --config config/webpack.config.js",
     "tools-release": "NODE_ENV=production MC_APP_NAME=tools webpack --config config/webpack.config.js",
     "requirements-check": "node scripts/check-version.js",
+    "release-all":"yarn tools-release && yarn explorer-release && yarn topics-release && yarn sources-release",
     "postinstall": "npm run requirements-check",
     "lint": "npx eslint src/",
     "lint_fix": "eslint --fix --ext .js --ext .jsx ./src/"
