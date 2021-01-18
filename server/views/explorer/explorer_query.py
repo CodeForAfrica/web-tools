@@ -44,8 +44,9 @@ def api_explorer_collections_by_ids():
         collection_list = []
         for tags_id in collection_ids:
             info = base_apicache.collection(tags_id)
-            info['id'] = int(tags_id)
-            collection_list.append(info)
+            if info:
+                info['id'] = int(tags_id)
+                collection_list.append(info)
     return jsonify({"results": collection_list})
 
 
