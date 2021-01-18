@@ -47,6 +47,10 @@ export function urlToTools(param) {
   return `https://tools.civicsignal.africa/#/${param}`;
 }
 
+export function urlToMediaData(param) {
+  return `https://civicsignal.africa/#/${param}`;
+}
+
 export function urlToExplorerQuery(name, keywords, sourceIds, collectionIds, startDate, endDate) {
   let sources = sourceIds || [];
   let collections = collectionIds || [];
