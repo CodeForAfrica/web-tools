@@ -7,7 +7,6 @@ import messages from '../../resources/messages';
 import { urlToExplorer, urlToTopicMapper, urlToSourceManager, urlToMediaData } from '../../lib/urlUtil';
 import ToolDescription from './ToolDescription';
 import Faq from './faq/ToolsFaq';
-import SystemStatsContainer from '../common/statbar/SystemStatsContainer';
 import LoginForm from '../user/LoginForm';
 import DataCard from '../common/DataCard';
 import { assetUrl } from '../../lib/assetUtil';
