@@ -18,24 +18,24 @@ const localMessages = {
 
 const ExplorerMarketingFeatureList = () => (
   <div className="resources-feature-list">
+          <ResourceFeatureItem
+      titleMsg={localMessages.gdiMediaMarketRiskTitle}
+      contentMsg={localMessages.gdiMediaMarketDescription}
+      imageName="GDI-2020-SA-report.jpg"
+      imageOnLeft
+    />
     <ResourceFeatureItem
       titleMsg={localMessages.globalCollectionsTitle}
       contentMsg={localMessages.globalCollectionsDescription}
       imageName="reuters.png"
       imageOnLeft
-      
     />
     <ResourceFeatureItem
       titleMsg={localMessages.attentionTitle}
       contentMsg={localMessages.attentionDescription}
       imageName="risk-assesment.png"
     />
-      <ResourceFeatureItem
-      titleMsg={localMessages.gdiMediaMarketRiskTitle}
-      contentMsg={localMessages.gdiMediaMarketDescription}
-      imageName="GDI-2020-SA-report.jpg"
-      imageOnLeft
-    />
+
   </div>
 );
 
