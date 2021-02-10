@@ -27,7 +27,7 @@ ToolDescription.propTypes = {
   screenshotUrl: PropTypes.string.isRequired,
   className: PropTypes.string.isRequired,
   url: PropTypes.string.isRequired,
-  buttonLabel: PropTypes.string.isRequired,
+  buttonLabel: PropTypes.object.isRequired,
 };
 
 export default injectIntl(ToolDescription);
