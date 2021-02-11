@@ -11,7 +11,6 @@ import { fetchTopThemes } from '../../../actions/explorerActions';
 import { postToDownloadUrl, downloadExplorerSvg, COVERAGE_REQUIRED } from '../../../lib/explorerUtil';
 import messages from '../../../resources/messages';
 import withQueryResults from './QueryResultsSelector';
-import { TAG_SET_NYT_THEMES } from '../../../lib/tagUtil';
 import { mapD3Top10Colors } from '../../../lib/colorUtil';
 import BubbleRowChart from '../../vis/BubbleRowChart';
 

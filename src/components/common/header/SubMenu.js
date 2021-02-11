@@ -8,7 +8,7 @@ import AppButton from '../AppButton';
 import SourcesAppMenu from './SourcesAppMenu';
 import { defaultMenuOriginProps } from '../../util/uiUtil';
 import messages from '../../../resources/messages';
-import {urlToMediaData } from '../../../lib/urlUtil';
+import { urlToMediaData } from '../../../lib/urlUtil';
 
 
 class SubMenu extends React.Component {
