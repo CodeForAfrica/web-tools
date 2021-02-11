@@ -22,13 +22,13 @@ const ExplorerMarketingFeatureList = () => (
       titleMsg={localMessages.gdiMediaMarketRiskTitle}
       contentMsg={localMessages.gdiMediaMarketDescription}
       imageName="GDI-2020-SA-report.jpg"
-      imageOnLeft
     />
     <ResourceFeatureItem
       titleMsg={localMessages.globalCollectionsTitle}
       contentMsg={localMessages.globalCollectionsDescription}
       imageName="reuters.png"
       imageOnLeft
+
     />
     <ResourceFeatureItem
       titleMsg={localMessages.attentionTitle}
