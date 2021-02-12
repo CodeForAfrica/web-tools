@@ -1,15 +1,27 @@
 {
   "_comment": "This file lists useful tag-sets. You should edit it to change the ids to match your system.",
   "defaultCollection": {
-    "tagsId": 3938,
+    "tagsId": 35543,
     "_comment": "This collection id (ie. `tags_id`) is used in various places as the default collection for searches"
   },
   "featuredCollections": {
     "_comment": "The list shown in the UI of featured collections",
     "entries": [
       {
-        "tags": [ 3938, 1202, 1324 ],
-        "_comment": "nigeria"
+        "tags": [ 35543],
+        "_comment": "Kenya"
+      },
+      {
+        "tags":[51022],
+        "_comment": "Nigeria"
+      },
+      {
+        "tags": [10049],
+        "_comment": "Central African Republic"
+      },
+      {
+        "tags": [1],
+        "_comment": "South Sudan"
       }
     ]
   }
