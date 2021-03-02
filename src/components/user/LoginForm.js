@@ -62,9 +62,9 @@ const LoginForm = (props) => {
       </Row>
       <Row>
         <Col lg={12}>
-          <Link to="/user/signup">
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLScxKq4TIghRchc86PXoJ6CZ_NA79YHVx0MmbMvD4w8iMG80gA/viewform">
             <AppButton label={formatMessage(localMessages.signUpNow)} />
-          </Link>
+          </a>
         </Col>
       </Row>
       <Row>
