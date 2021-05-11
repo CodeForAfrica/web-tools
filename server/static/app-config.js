@@ -1,2 +1,2 @@
 
-document.appConfig.captchaSiteKey = '6Le8zhgUAAAAANfXdzoR0EFXNcjZnVTRhIh6JVnG';
+document.appConfig.captchaSiteKey = '6Lf2XNEaAAAAAGz3dSb4O1G9X5I10uAj9LWmsUTA';
