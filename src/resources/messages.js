@@ -280,6 +280,7 @@ const messages = {
   crawledFeedsStat: { id: 'crawledFeeds', defaultMessage: 'Active Crawled Feeds' },
   dailyStoriesStat: { id: 'dailyStories', defaultMessage: 'Stories Added Daily' },
   dailyDownloadsStat: { id: 'dailyDownloads', defaultMessage: 'Daily Downloads' },
+  totalCollectionsStat: { id: 'totalCollectionsStat', defaultMessage: 'Total Collections' },
 
   entityHelpTitle: { id: 'geo.help.title', defaultMessage: 'About Our Entity Detection' },
   entityHelpContent: { id: 'geo.help.content', defaultMessage: 'We automatically detect the people, organizations, and places in articles using our <a href="https://cliff.mediacloud.org/" target="_top">CLIFF-CLAVIN engine</a>. This tags each story with the people and organizations that it mentions.  We do additional processing and disambiguation to tag stories with the country and state that our custom heuristic algorithm thinks they are about (ie. not each country/state mentioned).' },
