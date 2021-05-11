@@ -13,10 +13,12 @@ from server import app, auth, mc, user_db
 from server.auth import user_mediacloud_client, user_name, user_is_admin
 from server.util.request import api_error_handler, form_fields_required, arguments_required, json_error_response
 from server.views.topics.topiclist import topics_user_can_access
+from server.util.config import get_default_config
 
 logger = logging.getLogger(__name__)
 
-AUTH_MANAGEMENT_DOMAIN = 'https://tools.mediacloud.org'  # because it is too hard to tell which site you are on
+config = get_default_config()
+AUTH_MANAGEMENT_DOMAIN = config.get("AUTH_MANAGEMENT_DOMAIN") # because it is too hard to tell which site you are on
 ACTIVATION_URL = AUTH_MANAGEMENT_DOMAIN + "/api/user/activate/confirm"
 PASSWORD_RESET_URL = AUTH_MANAGEMENT_DOMAIN + "/api/user/reset-password-request-receive"
 
