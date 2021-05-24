@@ -16,7 +16,7 @@ const SystemStatsContainer = props => (
         { message: messages.totalStoriesStat, data: humanReadableNumber(props.stats.total_stories, 3, props.intl.formatNumber) },
         { message: messages.crawledMediaStat, data: humanReadableNumber(props.stats.active_crawled_media, 2, props.intl.formatNumber) },
         { message: messages.dailyStoriesStat, data: humanReadableNumber(props.stats.daily_stories, 3, props.intl.formatNumber) },
-        { message: messages.totalCollectionsStat, data: humanReadableNumber(9, 3, props.intl.formatNumber) },
+        { message: messages.totalCollectionsStat, data: humanReadableNumber(14, 3, props.intl.formatNumber) },
       ]}
     />
   </div>
