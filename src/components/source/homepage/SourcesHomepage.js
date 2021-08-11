@@ -20,7 +20,7 @@ import SystemStatsContainer from '../../common/statbar/SystemStatsContainer';
 
 const localMessages = {
   title: { id: 'sources.intro.title', defaultMessage: 'Explore our Sources and Collections' },
-  intro: { id: 'explorer.intro.title', defaultMessage: 'Investigate Global News with Media Cloud' },
+  intro: { id: 'explorer.intro.title', defaultMessage: 'Investigate Global News with MediaCloud' },
   about: { id: 'explorer.intro.subtitle', defaultMessage: 'We add sources and create collections from media ecosystems around the world. In order to identify the right sources, we use a combination of automated search and discovery, identified lists of influential sources, and expert input from journalists and media practitioners. You can also ' },
   suggestLink: { id: 'sources.intro.suggestLink', defaultMessage: 'suggest a source.' },
   browseCountry: { id: 'sources.into.browse.mediacloud', defaultMessage: 'Browse Country Collections' },

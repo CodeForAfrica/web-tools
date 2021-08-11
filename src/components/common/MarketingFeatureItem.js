@@ -13,11 +13,18 @@ const MarketingFeatureItem = (props) => {
       <FormattedHTMLMessage {...contentMsg} />
     </Col>
   );
-  const imgContent = (
-    <Col lg={4} xs={12}>
-      <img src={assetUrl(`/static/img/marketing/${imageName}`)} alt={formatMessage(titleMsg)} width={410} />
-    </Col>
-  );
+  let imgContent;
+  if (imageName) {
+    imgContent = (
+      <Col lg={4} xs={12}>
+        <img src={assetUrl(`/static/img/marketing/${imageName}`)} alt={formatMessage(titleMsg)} width={410} />
+      </Col>
+    );
+  } else {
+    imgContent = (
+      <Col lg={4} xs={12} />
+    );
+  }
   let content;
   if (imageOnLeft) {
     content = (

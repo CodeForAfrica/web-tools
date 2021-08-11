@@ -18,7 +18,7 @@ import TopicQuickSearchContainer from '../search/TopicQuickSearchContainer';
 const localMessages = {
   homeTitle: { id: 'home.title', defaultMessage: 'Home' },
   title: { id: 'home.intro', defaultMessage: 'Create a Topic to Dive In Deep' },
-  about: { id: 'home.intro', defaultMessage: '<p>Use Topic Mapper to dive in deeper on an issue you are investigating.  Once you\'ve used <a href="https://explorer.mediacloud.org">the Explorer</a> to narrow in on a query, media sources, and time period you want to investigate, then you can create a Topic to collect more stories, analyze influence, and slice and dice the content.  This lets you research the media conversation about your topic with more rigor.</p>' },
+  about: { id: 'home.intro', defaultMessage: '<p>Use Topic Mapper to dive in deeper on an issue you are investigating.  Once you\'ve used <a href="https://explorer.civicsignal.africa">the Explorer</a> to narrow in on a query, media sources, and time period you want to investigate, then you can create a Topic to collect more stories, analyze influence, and slice and dice the content.  This lets you research the media conversation about your topic with more rigour.</p>' },
   loginTitle: { id: 'sources.intro.login.title', defaultMessage: 'Have an Account? Login Now' },
 };
 

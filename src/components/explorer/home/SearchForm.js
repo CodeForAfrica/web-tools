@@ -13,7 +13,7 @@ const localMessages = {
   mainTitle: { id: 'explorer.search.title', defaultMessage: 'Enter Keyword' },
   addButton: { id: 'explorer.search', defaultMessage: 'Search' },
   searchHint: { id: 'explorer.intro.searchHint', defaultMessage: 'Try searching for the names of people, places, or events' },
-  search: { id: 'explorer.intro.search', defaultMessage: 'Search the Media Cloud database of over {storyCount} stories.' },
+  search: { id: 'explorer.intro.search', defaultMessage: 'Search the CivicSignal MediaCloud database of over {storyCount} stories.' },
 };
 
 const SearchForm = (props) => {

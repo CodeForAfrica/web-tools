@@ -4,13 +4,13 @@ import MarketingFeatureItem from '../../common/MarketingFeatureItem';
 const localMessages = {
 
   globalCollectionsTitle: { id: 'marketing.globalCollections.title', defaultMessage: 'Global Coverage' },
-  globalCollectionsDescription: { id: 'marketing.globalCollections.description', defaultMessage: '<p>Media Cloud includes a database of sources from around the world.. We have collections covering top media sources in over 100 countries, and add more all the time. Media Cloud also lets you search by language, including various levels of support for English, Spanish, Arabic, Japanese, and other languages. Use the Source Manager to explore our collections.</p>' },
+  globalCollectionsDescription: { id: 'marketing.globalCollections.description', defaultMessage: '<p>CivicSignal MediaCloud includes a database of media sources from over 21 African countries, and growing. We have included various levels of support for English, French and Arabic. Use the Source Manager to explore our collections.</p>' },
 
   liveSourcesTitle: { id: 'marketing.liveSources.title', defaultMessage: 'Updating Data from Sources' },
-  liveSourcesDescription: { id: 'marketing.liveSources.description', defaultMessage: '<p>Media Cloud imports stories from many of our sources daily (via their RSS feeds).  Stories are processed to split them into sentences and words, discover countries they discuss, and extract people and places they mention. You can download all of this metadata for any story.</p>' },
+  liveSourcesDescription: { id: 'marketing.liveSources.description', defaultMessage: '<p>MediaCloud imports stories from many of our sources daily (via their RSS feeds). Stories are processed into sentences and words, to discover countries they discuss, and extract people and places they mention. You can download all of this metadata for any story.</p>' },
 
   metadataTitle: { id: 'marketing.metadata.title', defaultMessage: 'Rich Information About Sources' },
-  metadataDescription: { id: 'marketing.metadata.description', defaultMessage: '<p>Media Cloud supports grouping media sources by information about them. Sources can be categorized by the country and state of publication, what type of media source they are, the language they most often write in, or the country they write about most.</p>' },
+  metadataDescription: { id: 'marketing.metadata.description', defaultMessage: '<p>MediaCloud supports grouping media sources by information about them. Sources can be categorised by the country and state of publication, type, language, or the country they write about most.</p>' },
 
 };
 
@@ -25,7 +25,6 @@ const SourcesMarketingFeatureList = () => (
     <MarketingFeatureItem
       titleMsg={localMessages.liveSourcesTitle}
       contentMsg={localMessages.liveSourcesDescription}
-      imageName="live-sources-2x.png"
     />
     <MarketingFeatureItem
       titleMsg={localMessages.metadataTitle}
