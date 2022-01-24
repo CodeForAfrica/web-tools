@@ -11,7 +11,7 @@ import AnalyticsSelectionForm from './AnalyticsSelectionForm';
 import AnalyticsResultsContainer from './AnalyticsResultsContainer';
 
 const localMessages = {
-  title: { id: 'analytics.dashboard.title', defaultMessage: 'Analyics Dashboard' },
+  title: { id: 'analytics.dashboard.title', defaultMessage: 'Analytics Dashboard' },
 };
 
 const AnalyticsDashboard = props => (
