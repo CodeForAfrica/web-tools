@@ -65,7 +65,7 @@ class TagSetDiscoverer:
                 self._nyt_themes_set = self._discover_by_name(tag_sets, 'nyt_labels')
                 self._nyt_themes_versions_set = self._discover_by_name(tag_sets, 'nyt_labels_version')
                 self._cliff_versions_set = self._discover_by_name(tag_sets, 'geocoder_version')
-                self._cliff_places_set = self._discover_by_name(tag_sets, 'mc-geocoder@media.mit.edu')
+                self._cliff_places_set = self._discover_by_name(tag_sets, 'cliff_geonames')
                 self._cliff_people_set = self._discover_by_name(tag_sets, 'cliff_people')
                 self._cliff_orgs_set = self._discover_by_name(tag_sets, 'cliff_organizations')
                 self._media_pub_country_set = self._discover_by_name(tag_sets, 'pub_country')
