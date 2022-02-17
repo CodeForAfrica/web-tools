@@ -376,7 +376,7 @@ def media_with_tag(tags_id, cached=False):
         if len(media) > 0:
             max_media_id = media[len(media) - 1]['media_id']
         more_media = len(media) == 100
-    return sorted(all_media, key=lambda t: t['name'].lower())
+    return sorted(all_media, key=lambda t: t['num_stories_90'], reverse=True)
 
 
 @cache.cache_on_arguments()
