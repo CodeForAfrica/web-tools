@@ -324,7 +324,7 @@ def update_metadata_for_sources(source_list):
         TagSetDiscoverer().media_subject_country_set: 'subject_country',
         TagSetDiscoverer().media_type_set: 'media_type',
     }
-    for tags_id in TagSetDiscoverer().media_metadata_sets:
+    for tags_id in TagSetDiscoverer().media_metadata_sets():
         col_name = tag_sets_id_2_name_lookup[tags_id]
         tag_codes = tags_in_tag_set(TOOL_API_KEY, tags_id)
         for source in source_list:
