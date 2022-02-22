@@ -145,6 +145,14 @@ def user_admin_mediacloud_client(user_mc_key=None):
     mc_key_to_use = user_mc_key
     if mc_key_to_use is None:
         mc_key_to_use = user_mediacloud_key()
+    # These tag_sets have been hardcoded in the mediacloud package and thus we have to override them
+    # Since we are using different tag_sets
+    mediacloud.api.TAG_SET_PUBLICATION_COUNTRY = config.get('TAG_SET_PUBLICATION_COUNTRY', 15)
+    mediacloud.api.TAG_SET_PUBLICATION_STATE = config.get('TAG_SET_PUBLICATION_STATE', 5)
+    mediacloud.api.TAG_SET_PRIMARY_LANGUAGE = config.get('TAG_SET_PRIMARY_LANGUAGE', 6)
+    mediacloud.api.TAG_SET_COUNTRY_OF_FOCUS = config.get('TAG_SET_COUNTRY_OF_FOCUS', 7)
+    mediacloud.api.TAG_SET_MEDIA_TYPE = config.get('TAG_SET_MEDIA_TYPE', 8)
+
     user_mc = mediacloud.api.AdminMediaCloud(mc_key_to_use)
     try:
         user_mc.V2_API_URL = config.get('MEDIA_CLOUD_API_URL')
@@ -159,6 +167,14 @@ def user_mediacloud_client(user_mc_key=None):
     mc_key_to_use = user_mc_key
     if mc_key_to_use is None:
         mc_key_to_use = user_mediacloud_key()
+    # These tag_sets have been hardcoded in the mediacloud package and thus we have to override them
+    # Since we are using different tag_sets
+    mediacloud.api.TAG_SET_PUBLICATION_COUNTRY = config.get('TAG_SET_PUBLICATION_COUNTRY', 15)
+    mediacloud.api.TAG_SET_PUBLICATION_STATE = config.get('TAG_SET_PUBLICATION_STATE', 5)
+    mediacloud.api.TAG_SET_PRIMARY_LANGUAGE = config.get('TAG_SET_PRIMARY_LANGUAGE', 6)
+    mediacloud.api.TAG_SET_COUNTRY_OF_FOCUS = config.get('TAG_SET_COUNTRY_OF_FOCUS', 7)
+    mediacloud.api.TAG_SET_MEDIA_TYPE = config.get('TAG_SET_MEDIA_TYPE', 8)
+
     user_mc = mediacloud.api.MediaCloud(mc_key_to_use)
     try:
         user_mc.V2_API_URL = config.get('MEDIA_CLOUD_API_URL')

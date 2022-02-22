@@ -65,6 +65,14 @@ except ConfigException as e:
 # Connect to MediaCloud
 TOOL_API_KEY = config.get('MEDIA_CLOUD_API_KEY')
 
+# These tag_sets have been hardcoded in the mediacloud package and thus we have to override them
+# Since we are using different tag_sets
+mediacloud.api.TAG_SET_PUBLICATION_COUNTRY = config.get('TAG_SET_PUBLICATION_COUNTRY', 15)
+mediacloud.api.TAG_SET_PUBLICATION_STATE = config.get('TAG_SET_PUBLICATION_STATE', 5)
+mediacloud.api.TAG_SET_PRIMARY_LANGUAGE = config.get('TAG_SET_PRIMARY_LANGUAGE', 6)
+mediacloud.api.TAG_SET_COUNTRY_OF_FOCUS = config.get('TAG_SET_COUNTRY_OF_FOCUS', 7)
+mediacloud.api.TAG_SET_MEDIA_TYPE = config.get('TAG_SET_MEDIA_TYPE', 8)
+
 mc = mediacloud.api.AdminMediaCloud(TOOL_API_KEY)
 try:
     mc.V2_API_URL = config.get('MEDIA_CLOUD_API_URL')
