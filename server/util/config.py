@@ -43,11 +43,13 @@ class EnvOrFileBasedConfig():
         self.file_path = absolute_filepath
         self.variables = _variables_from_file(self.file_path)  # a dict from VARIABLE_NAME to value
 
-    def get(self, key):
+    def get(self, key, default=None):
         variable_name = key.upper()
         try:
             return os.environ[variable_name]
         except KeyError:
+            if default:
+                return default
             try:
                 return self.variables[variable_name]
             except KeyError:
