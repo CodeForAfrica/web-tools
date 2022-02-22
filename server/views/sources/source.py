@@ -146,7 +146,7 @@ def _valid_metadata():
     valid_metadata = [
         {'form_key': 'publicationCountry', 'tag_sets_id': TagSetDiscoverer().media_pub_country_set},
         {'form_key': 'publicationState', 'tag_sets_id': TagSetDiscoverer().media_pub_state_set},
-        {'form_key': 'primaryLanguageg', 'tag_sets_id': TagSetDiscoverer().media_primary_language_set},
+        {'form_key': 'primaryLanguage', 'tag_sets_id': TagSetDiscoverer().media_primary_language_set},
         {'form_key': 'countryOfFocus', 'tag_sets_id': TagSetDiscoverer().media_subject_country_set},
         {'form_key': 'mediaType', 'tag_sets_id': TagSetDiscoverer().media_type_set},
     ]
@@ -166,14 +166,6 @@ def source_create():
     monitored = request.form['monitored'] if 'monitored' in request.form else None
     # parse out any tag to add (ie. collections and metadata)
     tag_ids_to_add = tag_ids_from_collections_param()
-    valid_metadata = [
-        {'form_key': 'publicationCountry', 'tag_sets_id': TAG_SETS_ID_PUBLICATION_COUNTRY},
-        {'form_key': 'publicationState', 'tag_sets_id': TAG_SETS_ID_PUBLICATION_STATE},
-        {'form_key': 'primaryLanguage', 'tag_sets_id': TAG_SETS_ID_PRIMARY_LANGUAGE},
-        {'form_key': 'countryOfFocus', 'tag_sets_id': TAG_SETS_ID_COUNTRY_OF_FOCUS},
-        {'form_key': 'mediaType', 'tag_sets_id': TAG_SETS_ID_MEDIA_TYPE}
-
-    ]
     source_to_create = {
         'name': name if (name != 'null' and len(name) > 0) else url,
         'url': url,
