@@ -230,6 +230,9 @@ def source_update(media_id):
         user_mc.tagMedia(tags=tags)
     # now update the metadata too
     for metadata_item in _valid_metadata():
+        if metadata_item['form_key'] in ['primaryLanguage', 'countryOfFocus']:
+            # these fields aren't manually set in the UI, so we don't need to update them
+            continue
         metadata_tag_id = request.form[metadata_item['form_key']] if metadata_item['form_key'] in request.form else None # this is optional
         existing_tag_ids = [t for t in source['media_source_tags'] if is_metadata_tag_set(t['tag_sets_id'])]
         # form field check
