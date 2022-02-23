@@ -19,7 +19,7 @@ const SourceMetadataStatBar = (props) => {
             { message: messages.pubCountry, data: source.metadata.pub_country ? source.metadata.pub_country.label : '?' },
             { message: messages.pubState, data: source.metadata.pub_state ? source.metadata.pub_state.label : '?' },
             { message: messages.primaryLanguage,
-              data: source.language ? source.metadata.language.label : '?',
+              data: source.metadata.language ? source.metadata.language.label : '?',
               helpTitleMsg: messages.primaryLanguage,
               helpContentMsg: messages.languageHelpContent,
             },

@@ -43,7 +43,7 @@ class EnvOrFileBasedConfig():
         self.file_path = absolute_filepath
         self.variables = _variables_from_file(self.file_path)  # a dict from VARIABLE_NAME to value
 
-    def get(self, key):
+    def get(self, key, default=None):
         variable_name = key.upper()
         try:
             return os.environ[variable_name]
@@ -51,6 +51,8 @@ class EnvOrFileBasedConfig():
             try:
                 return self.variables[variable_name]
             except KeyError:
+                if default:
+                    return default
                 error_details = "Config variable '{}' not declared in env-var nor in {}".format(variable_name, self.file_path)
                 logger.warning(error_details)
                 raise ConfigException(error_details)
