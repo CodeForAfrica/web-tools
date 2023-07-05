@@ -38,39 +38,6 @@ const localMessages = {
 const ExplorerMarketingFeatureList = () => (
   <div className="resources-feature-list">
     <ResourceFeatureItem
-      titleMsg={localMessages.saElectionsTitle}
-      contentMsg={localMessages.saElectionsDescription}
-      imageName="A-race-to-the-bottom-_-SA-Elections-2021-_Disinfo-Project-1.jpg"
-    />
-    <ResourceFeatureItem
-      titleMsg={localMessages.onlineNewsMarketKenya}
-      contentMsg={localMessages.onlineNewsMarketKenyaDescription}
-      imageName="Kenya-Disinformation-Risk-Assessment-Report-Online-1.jpg"
-      imageOnLeft
-    />
-    <ResourceFeatureItem
-      titleMsg={localMessages.digitallNewsReportSaAndNigeria}
-      contentMsg={localMessages.digitalNewsReportSaAndNigeriaDescription}
-      imageName="Digital_News_Report_2021_FINAL.png"
-    />
-    <ResourceFeatureItem
-      titleMsg={localMessages.gdiMediaMarketRiskTitle}
-      contentMsg={localMessages.gdiMediaMarketDescription}
-      imageName="GDI-2020-SA-report.jpg"
-      imageOnLeft
-    />
-    <ResourceFeatureItem
-      titleMsg={localMessages.globalCollectionsTitle}
-      contentMsg={localMessages.globalCollectionsDescription}
-      imageName="reuters.png"
-    />
-    <ResourceFeatureItem
-      titleMsg={localMessages.attentionTitle}
-      contentMsg={localMessages.attentionDescription}
-      imageName="risk-assesment.png"
-      imageOnLeft
-    />
-    <ResourceFeatureItem
       titleMsg={localMessages.transparencyNewsroomTitleKE}
       contentMsg={localMessages.transparencyNewsroomDescriptionKE}
       imageName="CfA_ADDO_Report_Kenya.png"
@@ -86,7 +53,39 @@ const ExplorerMarketingFeatureList = () => (
       contentMsg={localMessages.transparencyNewsroomDescriptionZMB}
       imageName="CFA_ADDO_Report_Zambia.png"
     />
-
+    <ResourceFeatureItem
+      titleMsg={localMessages.saElectionsTitle}
+      contentMsg={localMessages.saElectionsDescription}
+      imageName="A-race-to-the-bottom-_-SA-Elections-2021-_Disinfo-Project-1.jpg"
+      imageOnLeft
+    />
+    <ResourceFeatureItem
+      titleMsg={localMessages.onlineNewsMarketKenya}
+      contentMsg={localMessages.onlineNewsMarketKenyaDescription}
+      imageName="Kenya-Disinformation-Risk-Assessment-Report-Online-1.jpg"
+    />
+    <ResourceFeatureItem
+      titleMsg={localMessages.digitallNewsReportSaAndNigeria}
+      contentMsg={localMessages.digitalNewsReportSaAndNigeriaDescription}
+      imageName="Digital_News_Report_2021_FINAL.png"
+      imageOnLeft
+    />
+    <ResourceFeatureItem
+      titleMsg={localMessages.gdiMediaMarketRiskTitle}
+      contentMsg={localMessages.gdiMediaMarketDescription}
+      imageName="GDI-2020-SA-report.jpg"
+    />
+    <ResourceFeatureItem
+      titleMsg={localMessages.globalCollectionsTitle}
+      contentMsg={localMessages.globalCollectionsDescription}
+      imageName="reuters.png"
+      imageOnLeft
+    />
+    <ResourceFeatureItem
+      titleMsg={localMessages.attentionTitle}
+      contentMsg={localMessages.attentionDescription}
+      imageName="risk-assesment.png"
+    />
   </div>
 );
 
