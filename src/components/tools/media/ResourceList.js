@@ -22,45 +22,70 @@ const localMessages = {
 
   gdiMediaMarketRiskTitle: { id: 'marketing.attention.title', defaultMessage: 'GDI Media Market Risk Assessment: South Africa 2020' },
   gdiMediaMarketDescription: { id: 'marketing.attention.description', defaultMessage: `<p>The Global Disinformation Index and Code for Africa has produced the annual overview of disinformation risk ratings for some of the most visited media sites in South Africa. <br/> <a href="${assetUrl('/static/docs/South Africa Risk Ratings Report.pdf')}" target = "_blank">Download the report</a> </p>` },
+
+  transparencyNewsroomTitleKE: { id: 'transparency.news.report', defaultMessage: 'Transparency and trust newsroom policies: Kenya' },
+  transparencyNewsroomDescriptionKE: { id: 'transparency.news.report.description', defaultMessage: `<p>To assess media susceptibility to capture, Code for Africa surveyed the top news media organisations in Kenya, South Africa and Zambia for transparent and accessible editorial policies. Only two out of the 41 newsrooms sampled in Kenya had their editorial guidelines published on their websites <a href="${assetUrl('/static/docs/CfA _Transparency and trust_ newsroom policies_ Kenya Report.pdf')}" target = "_blank">Download the report</a></p>` },
+
+  transparencyNewsroomTitleSA: { id: 'transparency.news.report', defaultMessage: 'Transparency and trust newsroom policies: South Africa' },
+  transparencyNewsroomDescriptionSA: { id: 'transparency.news.report.description', defaultMessage: `<p>To assess media susceptibility to capture, Code for Africa surveyed the top news media organisations in Kenya, South Africa and Zambia for transparent and accessible editorial policies. The report reveals significant gaps in the availability and audience accessibility of newsroom policies <a href="${assetUrl('/static/docs/CfA _Transparency and trust_ newsroom policies_ SA Report.pdf')}" target = "_blank">Download the report</a></p>` },
+
+  transparencyNewsroomTitleZMB: { id: 'transparency.news.report', defaultMessage: 'Transparency and trust newsroom policies: Zambia' },
+  transparencyNewsroomDescriptionZMB: { id: 'transparency.news.report.description', defaultMessage: `<p>To assess media susceptibility to capture, Code for Africa surveyed the top news media organisations in Kenya, South Africa and Zambia for transparent and accessible editorial policies. Based on findings from 50 of the top news sites in Zambia, the study found only 19 could be easily contacted for corrections <a href="${assetUrl('/static/docs/CfA _Transparency and trust_ newsroom policies_ Zambia Report.pdf')}" target = "_blank">Download the report</a></p>` },
+
 };
 
 
 const ExplorerMarketingFeatureList = () => (
   <div className="resources-feature-list">
     <ResourceFeatureItem
+      titleMsg={localMessages.transparencyNewsroomTitleKE}
+      contentMsg={localMessages.transparencyNewsroomDescriptionKE}
+      imageName="CfA_ADDO_Report_Kenya.png"
+    />
+    <ResourceFeatureItem
+      titleMsg={localMessages.transparencyNewsroomTitleSA}
+      contentMsg={localMessages.transparencyNewsroomDescriptionSA}
+      imageName="CFA_ADDO_Report_SA.png"
+      imageOnLeft
+    />
+    <ResourceFeatureItem
+      titleMsg={localMessages.transparencyNewsroomTitleZMB}
+      contentMsg={localMessages.transparencyNewsroomDescriptionZMB}
+      imageName="CFA_ADDO_Report_Zambia.png"
+    />
+    <ResourceFeatureItem
       titleMsg={localMessages.saElectionsTitle}
       contentMsg={localMessages.saElectionsDescription}
       imageName="A-race-to-the-bottom-_-SA-Elections-2021-_Disinfo-Project-1.jpg"
+      imageOnLeft
     />
     <ResourceFeatureItem
       titleMsg={localMessages.onlineNewsMarketKenya}
       contentMsg={localMessages.onlineNewsMarketKenyaDescription}
       imageName="Kenya-Disinformation-Risk-Assessment-Report-Online-1.jpg"
-      imageOnLeft
     />
     <ResourceFeatureItem
       titleMsg={localMessages.digitallNewsReportSaAndNigeria}
       contentMsg={localMessages.digitalNewsReportSaAndNigeriaDescription}
       imageName="Digital_News_Report_2021_FINAL.png"
+      imageOnLeft
     />
     <ResourceFeatureItem
       titleMsg={localMessages.gdiMediaMarketRiskTitle}
       contentMsg={localMessages.gdiMediaMarketDescription}
       imageName="GDI-2020-SA-report.jpg"
-      imageOnLeft
     />
     <ResourceFeatureItem
       titleMsg={localMessages.globalCollectionsTitle}
       contentMsg={localMessages.globalCollectionsDescription}
       imageName="reuters.png"
+      imageOnLeft
     />
     <ResourceFeatureItem
       titleMsg={localMessages.attentionTitle}
       contentMsg={localMessages.attentionDescription}
       imageName="risk-assesment.png"
-      imageOnLeft
     />
-
   </div>
 );
 
