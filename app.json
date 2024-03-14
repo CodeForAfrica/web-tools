@@ -1,6 +1,7 @@
 {
   "name": "MediaCloud-Web-Tools",
   "description": "A suite of web-based research support tools for the Media Cloud system",
+  "stack": "heroku-20",
   "scripts": {
     "dokku": {
       "predepploy": "./scripts/release-tasks.sh"
