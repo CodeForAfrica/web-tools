@@ -32,8 +32,8 @@ const localMessages = {
   transparencyNewsroomTitleZMB: { id: 'transparency.news.report', defaultMessage: 'Transparency and trust newsroom policies: Zambia' },
   transparencyNewsroomDescriptionZMB: { id: 'transparency.news.report.description', defaultMessage: `<p>To assess media susceptibility to capture, Code for Africa surveyed the top news media organisations in Kenya, South Africa and Zambia for transparent and accessible editorial policies. Based on findings from 50 of the top news sites in Zambia, the study found only 19 could be easily contacted for corrections <a href="${assetUrl('/static/docs/CfA _Transparency and trust_ newsroom policies_ Zambia Report.pdf')}" target = "_blank">Download the report</a></p>` },
 
-  mediaCaptureTitle: {id: 'mediacapture.report', defaultMessage: 'Media Capture: How foreign states infiltrate African media'},
-  mediaCaptureDescription: {id: 'mediacapture.report.description', defaultMessage: `<p>The Media Capture report examines the covert tactics, techniques and procedures used by foreign states and influence-peddlers to undermine media independence in Africa. The research gives media managers and journalists a better understanding of how newsrooms are used as tools in the spread of propaganda, and offers suggestions for how media defenders might improve their resilience against capture.<a href="${assetUrl('/static/docs/CfA_ADDO_Media_Capture_Report.pdf')}" target = "_blank">Download the report</a></p>`},
+  mediaCaptureTitle: { id: 'mediacapture.report', defaultMessage: 'Media Capture: How foreign states infiltrate African media' },
+  mediaCaptureDescription: { id: 'mediacapture.report.description', defaultMessage: `<p>The Media Capture report examines the covert tactics, techniques and procedures used by foreign states and influence-peddlers to undermine media independence in Africa. The research gives media managers and journalists a better understanding of how newsrooms are used as tools in the spread of propaganda, and offers suggestions for how media defenders might improve their resilience against capture.<a href="${assetUrl('/static/docs/CfA_ADDO_Media_Capture_Report.pdf')}" target = "_blank">Download the report</a></p>` },
 
 };
 
@@ -41,8 +41,8 @@ const localMessages = {
 const ExplorerMarketingFeatureList = () => (
   <div className="resources-feature-list">
     <ResourceFeatureItem
-      titleMsg={localMessages.transparencyNewsroomTitleKE}
-      contentMsg={localMessages.transparencyNewsroomDescriptionKE}
+      titleMsg={localMessages.mediaCaptureTitle}
+      contentMsg={localMessages.mediaCaptureDescription}
       imageName="CfA_ADDO_Media_Capture.png"
     />
     <ResourceFeatureItem
