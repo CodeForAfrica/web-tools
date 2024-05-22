@@ -26,7 +26,7 @@ const localMessages = {
   q10: { id: 'faq.q10', defaultMessage: 'Can I add sources to the database?' },
   a10: { id: 'faq.a10', defaultMessage: 'If a source or a set of sources is not already part of our database, you can suggest its addition through the Sources tool, and we will carefully consider your suggestion. Our first inclination is to say yes to suggestions.' },
   q11: { id: 'faq.q11', defaultMessage: 'How can I get more help?' },
-  a11: { id: 'faq.a11', defaultMessage: 'Join our <a href="http://groups.io/g/mediacloud">mailing list</a> or send us an email to <a href="mailto:support@mediacloud.org">support@mediacloud.org</a>.' },
+  a11: { id: 'faq.a11', defaultMessage: 'Join our <a href="https://docs.google.com/forms/d/e/1FAIpQLSdkfLU2yi2S1_7D27Z0I1TumkWy5brlam809Od9cc6CnXGA-A/viewform">Slack</a> or send us an email to <a href="mailto:civicsignal@codeforafrica.org ">civicsignal@codeforafrica.org</a>.' },
 };
 
 const NUM_ITEMS = 11;

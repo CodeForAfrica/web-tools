@@ -12,7 +12,7 @@ import Permissioned from '../Permissioned';
 import { PERMISSION_ADMIN } from '../../../lib/auth';
 import { getAppName, APP_TOOLS } from '../../../config';
 
-const SUPPORT_URL = 'https://mediacloud.org/support/';
+const SUPPORT_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSdkfLU2yi2S1_7D27Z0I1TumkWy5brlam809Od9cc6CnXGA-A/viewform';
 
 const localMessages = {
   goHome: { id: 'nav.home', defaultMessage: 'Home' },

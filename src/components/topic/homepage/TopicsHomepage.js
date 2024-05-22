@@ -82,7 +82,7 @@ const TopicsHomepage = (props) => {
       <Masthead
         nameMsg={messages.topicsToolName}
         descriptionMsg={messages.topicsToolDescription}
-        link="https://mediacloud.org/tools/"
+        link="https://docs.google.com/forms/d/e/1FAIpQLSdkfLU2yi2S1_7D27Z0I1TumkWy5brlam809Od9cc6CnXGA-A/viewform"
       />
       {content}
     </div>
