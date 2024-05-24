@@ -54,7 +54,7 @@ const SourcesHomepage = (props) => {
       <Masthead
         nameMsg={messages.sourcesToolName}
         descriptionMsg={messages.sourcesToolDescription}
-        link="https://docs.google.com/forms/d/e/1FAIpQLSdkfLU2yi2S1_7D27Z0I1TumkWy5brlam809Od9cc6CnXGA-A/viewform"
+        link={process.env.SUPPORT_URL}
       />
       <Permissioned onlyRole={PERMISSION_LOGGED_IN}>
         <SourceControlBar showSearch>
