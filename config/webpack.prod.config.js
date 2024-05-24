@@ -1,4 +1,5 @@
 /* eslint import/no-extraneous-dependencies: 0 */
+const Dotenv = require('dotenv-webpack');
 const path = require('path');
 const merge = require('webpack-merge');
 // const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
@@ -25,6 +26,11 @@ function prodConfigGenerator(basedir, toolName) {
           ignorePaths: [/.*\.DS_Store/], // need to manually ignore the .DS_Store files generated on OSX
         },
       ),
+
+      new Dotenv({
+        path: path.resolve(__dirname, '../.env'), // Path to .env file (this is the default)
+        safe: true, // load .env.example (defaults to "false" which does not use dotenv-safe)
+      }),
     ],
   };
 }
