@@ -22,7 +22,12 @@ const baseConfig = {
     new MomentLocalesPlugin(),
     // provide much cleaner feedback while building on the command line
     new WebpackBar(),
-    new webpack.DefinePlugin({ MC_VERSION: JSON.stringify(require(path.resolve(basedir, 'package.json')).version) }),
+    new webpack.DefinePlugin({
+      MC_VERSION: JSON.stringify(require(path.resolve(basedir, 'package.json')).version),
+      'process.env.SENTRY_DSN': JSON.stringify(process.env.SENTRY_DSN),
+      'process.env.SUPPORT_URL': JSON.stringify(process.env.SUPPORT_URL),
+      'process.env.INQUIRY_EMAIL': JSON.stringify(process.env.INQUIRY_EMAIL)
+    }),
   ],
   stats: 'minimal',
   module: {

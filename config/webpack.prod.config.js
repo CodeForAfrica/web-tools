@@ -1,6 +1,6 @@
 /* eslint import/no-extraneous-dependencies: 0 */
-const Dotenv = require('dotenv-webpack');
 const path = require('path');
+const webpack = require('webpack');
 const merge = require('webpack-merge');
 // const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
@@ -26,11 +26,14 @@ function prodConfigGenerator(basedir, toolName) {
           ignorePaths: [/.*\.DS_Store/], // need to manually ignore the .DS_Store files generated on OSX
         },
       ),
-
-      new Dotenv({
-        path: path.resolve(__dirname, '../.env'), // Path to .env file (this is the default)
-        safe: true, // load .env.example (defaults to "false" which does not use dotenv-safe)
+      new webpack.DefinePlugin({
+        'process.env': {
+          'SENTRY_DNS': JSON.stringify(process.env.SENTRY_DSN),
+          'SUPPORT_URL': JSON.stringify(process.env.SUPPORT_URL),
+          'INQUIRY_EMAIL': JSON.stringify(process.env.INQUIRY_EMAIL)
+        },
       }),
+
     ],
   };
 }
