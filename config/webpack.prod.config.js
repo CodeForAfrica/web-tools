@@ -25,8 +25,6 @@ function prodConfigGenerator(basedir, toolName) {
           ignorePaths: [/.*\.DS_Store/], // need to manually ignore the .DS_Store files generated on OSX
         },
       ),
-
-
     ],
   };
 }

@@ -5,6 +5,7 @@ import FaqItem from '../../common/FaqItem';
 
 /*eslint-disable */
 const INQUIRY_EMAIL = process.env.INQUIRY_EMAIL;
+const SUPPORT_URL = process.env.SUPPORT_URL;
 /* eslint-enable */
 
 const localMessages = {
@@ -30,7 +31,7 @@ const localMessages = {
   q10: { id: 'faq.q10', defaultMessage: 'Can I add sources to the database?' },
   a10: { id: 'faq.a10', defaultMessage: 'If a source or a set of sources is not already part of our database, you can suggest its addition through the Sources tool, and we will carefully consider your suggestion. Our first inclination is to say yes to suggestions.' },
   q11: { id: 'faq.q11', defaultMessage: 'How can I get more help?' },
-  a11: { id: 'faq.a11', defaultMessage: `Join our <a href="${process.env.SUPPORT_URL}">Slack community</a> or send us an email to <a href=mailto:${INQUIRY_EMAIL}>${INQUIRY_EMAIL}</a>.` },
+  a11: { id: 'faq.a11', defaultMessage: `Join our <a href="${SUPPORT_URL}">Slack community</a> or send us an email to <a href=mailto:${INQUIRY_EMAIL}>${INQUIRY_EMAIL}</a>.` },
 };
 
 const NUM_ITEMS = 11;
