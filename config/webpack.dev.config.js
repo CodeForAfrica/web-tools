@@ -1,6 +1,5 @@
 /* eslint import/no-extraneous-dependencies: 0 */
 const path = require('path');
-const webpack = require('webpack');
 const merge = require('webpack-merge');
 const ManifestRevisionPlugin = require('manifest-revision-webpack-plugin');
 // const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
@@ -34,13 +33,7 @@ const devConfig = {
         ignorePaths: [/.*\.DS_Store/], // need to manually ignore the .DS_Store files generated on OSX
       },
     ),
-    new webpack.DefinePlugin({
-      'process.env': {
-        'SENTRY_DSN': JSON.stringify(process.env.SENTRY_DSN),
-        'SUPPORT_URL': JSON.stringify(process.env.SUPPORT_URL),
-        'INQUIRY_EMAIL': JSON.stringify(process.env.INQUIRY_EMAIL)
-      }
-    }),
+
     // add an intermediate caching step to speed up builds (except the first one)
     // new HardSourceWebpackPlugin(),
   ],

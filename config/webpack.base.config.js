@@ -24,9 +24,12 @@ const baseConfig = {
     new WebpackBar(),
     new webpack.DefinePlugin({
       MC_VERSION: JSON.stringify(require(path.resolve(basedir, 'package.json')).version),
-      'process.env.SENTRY_DSN': JSON.stringify(process.env.SENTRY_DSN),
-      'process.env.SUPPORT_URL': JSON.stringify(process.env.SUPPORT_URL),
-      'process.env.INQUIRY_EMAIL': JSON.stringify(process.env.INQUIRY_EMAIL)
+      'process.env': {
+        'SENTRY_DSN': JSON.stringify(process.env.SENTRY_DSN),
+        'SENTRY_ENVIRONMENT': JSON.stringify(process.env.NODE_ENV || 'development'),
+        'SUPPORT_URL': JSON.stringify(process.env.SUPPORT_URL),
+        'INQUIRY_EMAIL': JSON.stringify(process.env.INQUIRY_EMAIL),
+      },
     }),
   ],
   stats: 'minimal',
