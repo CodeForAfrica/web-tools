@@ -19,3 +19,6 @@ deco==0.5.2
 Flask-Executor==0.9.3
 newspaper3k==0.2.8
 gevent==20.5.0
+Jinja2==3.0.3
+itsdangerous==2.0.1
+werkzeug==2.0.2
