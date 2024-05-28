@@ -20,7 +20,6 @@ const APP_DOM_ELEMENT_ID = 'app';
 const DEFAULT_LOCALE = 'en';
 const SENTRY_DSN_CONNECT = process.env.SENTRY_DSN;
 
-
 function reallyInitializeApp(routes) {
   const store = getStore(getAppName());
 

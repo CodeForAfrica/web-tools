@@ -30,7 +30,7 @@ const Homepage = ({ isLoggedIn, onKeywordSearch, storyCount, defaultCollectionTa
     <Masthead
       nameMsg={messages.explorerToolName}
       descriptionMsg={messages.explorerToolDescription}
-      link="https://mediacloud.org/tools/"
+      link={process.env.SUPPORT_URL}
     />
     <Permissioned onlyRole={PERMISSION_LOGGED_IN}>
       <div className="search-section">

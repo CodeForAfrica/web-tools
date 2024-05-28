@@ -54,7 +54,7 @@ const SourcesHomepage = (props) => {
       <Masthead
         nameMsg={messages.sourcesToolName}
         descriptionMsg={messages.sourcesToolDescription}
-        link="https://mediacloud.org/tools/"
+        link={process.env.SUPPORT_URL}
       />
       <Permissioned onlyRole={PERMISSION_LOGGED_IN}>
         <SourceControlBar showSearch>
