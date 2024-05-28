@@ -33,14 +33,15 @@ const devConfig = {
         ignorePaths: [/.*\.DS_Store/], // need to manually ignore the .DS_Store files generated on OSX
       },
     ),
+
     // add an intermediate caching step to speed up builds (except the first one)
     // new HardSourceWebpackPlugin(),
   ],
   devServer: {
-    port: devServerPort,   // the server manifest config relies on this port
-    contentBase: buildDir,  // we build the JS to static files, so server them up as Flask expects them
+    port: devServerPort, // the server manifest config relies on this port
+    contentBase: buildDir, // we build the JS to static files, so server them up as Flask expects them
   },
-  watch: true,  // ← important: webpack and the server will continue to run in watch mode
+  watch: true, // ← important: webpack and the server will continue to run in watch mode
 };
 
 module.exports = merge.smart(baseConfig, devConfig);

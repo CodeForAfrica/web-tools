@@ -12,7 +12,9 @@ import Permissioned from '../Permissioned';
 import { PERMISSION_ADMIN } from '../../../lib/auth';
 import { getAppName, APP_TOOLS } from '../../../config';
 
-const SUPPORT_URL = 'https://mediacloud.org/support/';
+/*eslint-disable */
+const SUPPORT_URL = process.env.SUPPORT_URL;
+/* eslint-enable */
 
 const localMessages = {
   goHome: { id: 'nav.home', defaultMessage: 'Home' },
