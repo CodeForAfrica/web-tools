@@ -21,7 +21,7 @@ import TabSelector from '../../common/TabSelector';
 
 const localMessages = {
   pageTitle: { id: 'source.feeds.pageTitle', defaultMessage: 'Feeds' },
-  title: { id: 'source.feeds.title', defaultMessage: '{name} | Source Feeds | Media Cloud' },
+  title: { id: 'source.feeds.title', defaultMessage: '{name} | Source Feeds | Civic Signal' },
   sourceFeedsTitle: { id: 'source.details.feeds.title', defaultMessage: '{name}: Feeds' },
   add: { id: 'source.details.feeds.add', defaultMessage: 'Add A Feed' },
   activeLabel: { id: 'source.details.feed.active', defaultMessage: 'Active' },
