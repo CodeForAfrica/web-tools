@@ -1,7 +1,7 @@
 
 const messages = {
 
-  suiteName: { id: 'suite.name', defaultMessage: 'Civic Signal' },
+  suiteName: { id: 'suite.name', defaultMessage: 'Civic Signal ' },
 
   blogToolName: { id: 'app.blog.name', defaultMessage: 'Blog' },
   blogToolDescription: { id: 'app.blog.description', defaultMessage: 'Read updates on our research, projects, and ideas from us and our partners' },
