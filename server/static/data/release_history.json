@@ -1,6 +1,38 @@
 {
   "releases": [
     {
+      "date": "2024-05-30",
+      "version": "v3.19.6",
+      "notes":[
+        {
+          "apps": ["topics","sources","explorer","tools"],
+          "type": "Fix",
+          "note": "Updated favicon and title from Media Cloud to civicSignal"
+        },
+        {
+          "apps": ["topics","sources","explorer","tools"],
+          "type": "New",
+          "note": "Added Google Analytics tracking"
+        }
+      ]
+    },
+    {
+      "date": "2024-05-28",
+      "version": "v3.19.5",
+      "notes": [
+        {
+          "apps":["topics","sources","explorer"],
+          "type": "Fix",
+          "note": "Update support URLs to Slack community page"
+        },
+        {
+          "apps": ["tools"],
+          "type": "Fix",
+          "note": "Update support email to civicsignal@codeforafrica.org"
+        }
+      ]
+    },
+    {
       "date": "2021-01-12",
       "version": "v3.19.0",
       "notes": [
