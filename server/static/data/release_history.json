@@ -1,6 +1,22 @@
 {
   "releases": [
     {
+      "date": "2024-05-30",
+      "version": "v3.19.6",
+      "notes":[
+        {
+          "apps": ["topics","sources","explorer","tools"],
+          "type": "Fix",
+          "note": "Updated favicon and title from Media Cloud to civicSignal"
+        },
+        {
+          "apps": ["topics","sources","explorer","tools"],
+          "type": "New",
+          "note": "Added Google Analytics tracking"
+        }
+      ]
+    },
+    {
       "date": "2024-05-28",
       "version": "v3.19.5",
       "notes": [
