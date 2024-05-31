@@ -20,7 +20,7 @@ import PageTitle from '../../common/PageTitle';
 
 const localMessages = {
   pageTitle: { id: 'source.feeds.pageTitle', defaultMessage: 'Feeds' },
-  title: { id: 'source.feeds.title', defaultMessage: '{name} | Source Feeds | Media Cloud' },
+  title: { id: 'source.feeds.title', defaultMessage: '{name} | Source Feeds | CivicSignal' },
   sourceFeedsTitle: { id: 'source.details.feeds.title', defaultMessage: '{name}: Feeds' },
   add: { id: 'source.deatils.feeds.add', defaultMessage: 'Add A Feed' },
 };
