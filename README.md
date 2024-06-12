@@ -46,8 +46,8 @@ Configuration
 Copy `config/app.config.template` to `config/app.config` and fill in the required info there.
 
 **NOTE**: `MEDIA_CLOUD_API_KEY` and `MEDIA_CLOUD_API_URL` are **required**. You can find your `MEDIA_CLOUD_API_KEY` on your profile page.
-Running the Apps
 
+Running the Apps
 ----------------
 
 You need to open two terminal windows and run one thing in each (so the hot-reloading can work):
