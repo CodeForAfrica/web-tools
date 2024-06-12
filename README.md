@@ -28,8 +28,8 @@ Node and npm:
 MongoDB:
 [Install MongoDb](https://docs.mongodb.com/manual/administration/install-community/):
 * `brew tap mongodb/brew`
-* `brew install mongodb-community@4.2`
-If you get a connection refused error, make sure you've started the server by running `brew services start mongodb-community@4.2`
+* `brew install mongodb-community@4.4`
+If you get a connection refused error, make sure you've started the server by running `brew services start mongodb-community@4.4`
 
 Redis:
 [Install Redis](http://redis.io/)  We develop on OS X and install via the [HomeBrew package manager](http://brew.sh): `brew install redis`
@@ -45,6 +45,7 @@ Configuration
 
 Copy `config/app.config.template` to `config/app.config` and fill in the required info there.
 
+**NOTE**: `MEDIA_CLOUD_API_KEY` and `MEDIA_CLOUD_API_URL` are **required**. You can find your `MEDIA_CLOUD_API_KEY` on your profile page.
 Running the Apps
 ----------------
 
