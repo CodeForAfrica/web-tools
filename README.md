@@ -45,16 +45,7 @@ Configuration
 
 Copy `config/app.config.template` to `config/app.config` and fill in the required info there.
 
-Set up these environmental variables in `config/app.config` file.
-```
-Service: API Key for accessing Media Cloud (get this on your profile page)
-
-MEDIA_CLOUD_API_KEY = YOUR_MEDIACLOUD_API_KEY_HERE
-
-Service: URL to mediacloud api (Media Cloud backend)
-
-MEDIA_CLOUD_API_URL = YOUR_MEDIACLOUD_API_URL
-```
+**NOTE**: `MEDIA_CLOUD_API_KEY` and `MEDIA_CLOUD_API_URL` are **required**. You can find your `MEDIA_CLOUD_API_KEY` on your profile page.
 Running the Apps
 ----------------
 
