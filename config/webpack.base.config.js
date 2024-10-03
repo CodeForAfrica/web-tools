@@ -23,25 +23,32 @@ const baseConfig = {
     // provide much cleaner feedback while building on the command line
     new WebpackBar(),
     new webpack.DefinePlugin({
-      MC_VERSION: JSON.stringify(require(path.resolve(basedir, 'package.json')).version),
+      MC_VERSION: JSON.stringify(
+        require(path.resolve(basedir, 'package.json')).version
+      ),
       'process.env': {
-        'SENTRY_DSN': JSON.stringify(process.env.SENTRY_DSN || ''),
-        'SENTRY_ENVIRONMENT': JSON.stringify(process.env.NODE_ENV || 'development'),
-        'SUPPORT_URL': JSON.stringify(process.env.SUPPORT_URL || ''),
-        'INQUIRY_EMAIL': JSON.stringify(process.env.INQUIRY_EMAIL || ''),
-     },
+        SENTRY_DSN: JSON.stringify(process.env.SENTRY_DSN || ''),
+        SENTRY_ENVIRONMENT: JSON.stringify(
+          process.env.NODE_ENV || 'development'
+        ),
+        SUPPORT_URL: JSON.stringify(process.env.SUPPORT_URL || ''),
+        INQUIRY_EMAIL: JSON.stringify(process.env.INQUIRY_EMAIL || ''),
+        PAYLOAD_API_URL: JSON.stringify(process.env.PAYLOAD_API_URL || 'http://google.com'),
+      },
     }),
   ],
   stats: 'minimal',
   module: {
     rules: [
-      { // run linting check on all the javascript code before trying to compile it
+      {
+        // run linting check on all the javascript code before trying to compile it
         enforce: 'pre',
         test: /\.(js|jsx)$/,
         exclude: /node_modules/, // we don't want to check the imported packages for formatting
         use: 'eslint-loader', // use eslint as the engine for checking linting
       },
-      { // compile all our javascript code
+      {
+        // compile all our javascript code
         test: /\.(js|jsx)$/,
         include: path.resolve(basedir, 'src'), // don't compile imported packages
         use: [
@@ -50,12 +57,14 @@ const baseConfig = {
           // don't put options here; otherwise they override what is in the .babelrc
         ],
       },
-      { // compile the scss for react-flexbox-grid by itself because it doesn't work wth MiniCssExtractPlugin for some reason
+      {
+        // compile the scss for react-flexbox-grid by itself because it doesn't work wth MiniCssExtractPlugin for some reason
         test: /\.css$/,
         include: /flexboxgrid/,
         loader: 'style-loader!css-loader',
       },
-      { // turn all our SCSS into regular CSS
+      {
+        // turn all our SCSS into regular CSS
         test: /\.(scss|css)$/,
         loaders: [
           MiniCssExtractPlugin.loader, // focus on the CSS, and stick it in an external file
