@@ -1,45 +1,45 @@
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import React from 'react';
-import { injectIntl, FormattedMessage } from 'react-intl';
+import { injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
-import { Grid, Row, Col } from 'react-flexbox-grid/lib';
 import ResourceList from './ResourceList';
+import getPageContent from '../../../lib/cmsApi/rest';
+import { parsePageContent, BlockRenderer } from '../../../lib/cmsUtils/blockRenderer';
+import { APP_TOOLS } from '../../../config';
 
-const localMessages = {
-  title: { id: 'media.intro.title', defaultMessage: 'Media Data' },
-  subtitle: {
-    id: 'media.intro.subtitle',
-    defaultMessage: 'What is Media Data?',
-  },
-  description: {
-    id: 'media.intro.description',
-    defaultMessage:
-      'MediaData uses a combination of machine learning data platforms and human research to bring you data, reports and analyses related to African media ecosystems',
-  },
-  loginTitle: {
-    id: 'media.intro.login.title',
-    defaultMessage: 'Have an Account? Login Now',
-  },
+
+const Homepage = () => {
+  const [pageData, setPageData] = useState({});
+
+  useEffect(() => {
+    const fetchContent = async () => {
+      try {
+        const content = await getPageContent(APP_TOOLS, 'media-data');
+        setPageData(parsePageContent(content));
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    fetchContent();
+  }, []);
+
+
+  return (
+    <div className="homepage">
+      {
+      pageData.blocks && pageData.blocks.map((block, index) => (
+        <div key={index} className="mb-6">
+          <BlockRenderer
+            block={block}
+          />
+        </div>
+    ))
+    }
+      <ResourceList />
+    </div>
+  );
 };
-
-const Homepage = () => (
-  <div className="homepage">
-    <Grid>
-      <Row className="media-hero">
-        <Col lg={1} />
-        <Col lg={12}>
-          <h1>
-            <FormattedMessage {...localMessages.subtitle} />
-          </h1>
-          <p className="intro">
-            <FormattedMessage {...localMessages.description} />
-          </p>
-        </Col>
-      </Row>
-    </Grid>
-    <ResourceList />
-  </div>
-);
 
 Homepage.propTypes = {
   intl: PropTypes.object.isRequired,
