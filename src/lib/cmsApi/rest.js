@@ -8,7 +8,6 @@ export function getPageContent(applicationName, pageName) {
   );
 }
 
-
 export function getCollections(collectionName) {
   return createApiPromise(
     `${BASE_URL}/${collectionName}`

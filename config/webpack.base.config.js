@@ -33,7 +33,7 @@ const baseConfig = {
         ),
         SUPPORT_URL: JSON.stringify(process.env.SUPPORT_URL || ''),
         INQUIRY_EMAIL: JSON.stringify(process.env.INQUIRY_EMAIL || ''),
-        PAYLOAD_API_URL: JSON.stringify(process.env.PAYLOAD_API_URL || 'http://google.com'),
+        PAYLOAD_API_URL: JSON.stringify(process.env.PAYLOAD_API_URL || ''),
       },
     }),
   ],

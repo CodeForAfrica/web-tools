@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import ResourceList from './ResourceList';
-import getPageContent from '../../../lib/cmsApi/rest';
+import { getPageContent } from '../../../lib/cmsApi/rest';
 import { parsePageContent, BlockRenderer } from '../../../lib/cmsUtils/blockRenderer';
 import { APP_TOOLS } from '../../../config';
 
