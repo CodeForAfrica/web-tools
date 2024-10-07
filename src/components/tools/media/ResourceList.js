@@ -13,25 +13,25 @@ const ExplorerMarketingFeatureList = ({ getCollections, resources }) => {
   return (
     <div className="resources-feature-list">
       {docs.length > 0 ? (
-        docs.map((resource) => (
+        docs.map((resource, index) => (
           <ResourceFeatureItem
             key={resource.id}
             hasRichText
             titleMsg={{ id: resource.id, defaultMessage: resource.title }}
             contentMsg={resource.description}
             imageName={resource.mediaDataImage?.src}
+            imageOnLeft={index % 2 !== 0}
           />
         ))
-      ) : (
-        <div>No resources available</div> // Optional loading or no data message
-      )}
+      )
+        : null}
     </div>
   );
 };
 
 ExplorerMarketingFeatureList.propTypes = {
   getCollections: PropTypes.func,
-  resources: PropTypes.array,
+  resources: PropTypes.any,
 };
 
 const mapStateToProps = (state) => ({
