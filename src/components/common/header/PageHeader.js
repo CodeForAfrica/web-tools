@@ -11,7 +11,7 @@ const PageHeader = ({ title, description }) => (
         <h1>{title}</h1>
         <RichText
           typographyProps={{
-            class: 'intro',
+            className: 'intro',
           }}
           elements={description}
         />
@@ -21,8 +21,8 @@ const PageHeader = ({ title, description }) => (
 );
 
 PageHeader.propTypes = {
-    title: PropTypes.object.isRequired,
-    description: PropTypes.object.isRequired,
+    title: PropTypes.string.isRequired,
+    description: PropTypes.array.isRequired,
 };
 
 export default PageHeader;

@@ -8,19 +8,17 @@ import { APP_TOOLS } from '../../../config';
 import { fetchPageContent } from '../../../actions/cmsActions';
 
 
-const Homepage = ({ pageReducer }) => {
-  const pageData = {};
-  /* const { route } = props;
-  console.log(route.path); */
-  useEffect(() => {
-    pageReducer(APP_TOOLS, 'media-data');
-  }, [pageReducer]);
+const Homepage = (props) => {
+  const { getPageContent, route, pageData } = props;
 
+  useEffect(() => {
+    getPageContent(APP_TOOLS, route?.path);
+  }, [getPageContent]);
 
   return (
     <div className="homepage">
       {
-      pageData.blocks && pageData.blocks.map((block, index) => (
+      pageData?.blocks && pageData?.blocks.map((block, index) => (
         <div key={index} className="mb-6">
           <BlockRenderer
             block={block}
@@ -39,15 +37,17 @@ Homepage.propTypes = {
   location: PropTypes.object.isRequired,
   params: PropTypes.object.isRequired, // params from router
   // from state
-  pageReducer: PropTypes.func,
+  pageData: PropTypes.object,
+  getPageContent: PropTypes.func,
+  route: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
- //  pages: state.cms.pageReducer.pages,
+  pageData: state.cms.content.pages['media-data'],
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    pageReducer: (appName, pageName) => { dispatch(fetchPageContent(appName, pageName)); },
+    getPageContent: (appName, pageName) => { dispatch(fetchPageContent(appName, pageName)); },
 });
 
 export default injectIntl(

@@ -2,9 +2,7 @@ import PropTypes from 'prop-types';
 import React, { Fragment } from 'react';
 import { Text } from 'slate';
 
-const DEFAULT_PROPS = {
-  html: false,
-};
+const DEFAULT_PROPS = {};
 
 const serialize = (children, props) => children?.map((node, i) => {
     if (Text.isText(node)) {
@@ -100,7 +98,7 @@ const RichText = React.forwardRef((props, ref) => {
 
 RichText.propTypes = {
   elements: PropTypes.array.isRequired,
-  variant: PropTypes.string.isRequired,
+  variant: PropTypes.string,
   typographyProps: PropTypes.object.isRequired,
 };
 

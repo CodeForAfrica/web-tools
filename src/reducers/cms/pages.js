@@ -2,7 +2,7 @@ import { FETCH_PAGE_CONTENT } from '../../actions/cmsActions';
 import { createAsyncReducer } from '../../lib/reduxHelpers';
 import { parsePageContent } from '../../lib/cmsUtils/blockRenderer';
 
-const pageContent = createAsyncReducer({
+const pages = createAsyncReducer({
   initialState: {
     pages: {},
   },
@@ -15,4 +15,4 @@ const pageContent = createAsyncReducer({
   }),
 });
 
-export default pageContent;
+export default pages;

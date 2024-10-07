@@ -23,6 +23,7 @@ const ExplorerMarketingFeatureList = () => {
       {
       resources && resources.map((resource) => (
         <ResourceFeatureItem
+          key={resource.id}
           hasRichText
           titleMsg={{ id: resource.id, defaultMessage: resource.title }}
           contentMsg={resource.description}

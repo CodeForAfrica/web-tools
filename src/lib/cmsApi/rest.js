@@ -10,7 +10,7 @@ export function fetchGlobals(applicationName) {
 
 export function fetchPageContent(applicationName, pageName) {
   return createApiPromise(
-    `${BASE_URL}/${applicationName}-pages`, { '[slug][equals]': pageName }
+    `${BASE_URL}/${applicationName}-pages`, { 'where[slug][equals]': pageName }
   );
 }
 
