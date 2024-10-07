@@ -10,7 +10,7 @@ import sources from './sources/sources';
 import system from './system/system';
 import story from './story/story';
 import platforms from './platforms/platforms';
-import cmsReducer from './cms/cmsReducers';
+import cms from './cms/cms';
 
 const LIMIT_REDUCERS = true; // so we enforce that apps don't accidently use another apps reducer
 
@@ -45,7 +45,7 @@ function getRootReducer(appName) {
     routing,
     story,
     platforms,
-    cmsReducer,
+    cms,
   };
 
   let reducers = { ...appReducers };

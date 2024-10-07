@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ResourceFeatureItem from '../../common/ResourceFeatureItem';
-import { getCollections } from '../../../lib/cmsApi/rest';
+import { fetchCollections } from '../../../lib/cmsApi/rest';
 
 const ExplorerMarketingFeatureList = () => {
   const [resources, setResources] = useState([]);
@@ -8,7 +8,7 @@ const ExplorerMarketingFeatureList = () => {
   useEffect(() => {
     const fetchContent = async () => {
       try {
-        const content = await getCollections('media-data');
+        const content = await fetchCollections('media-data');
         setResources(content?.docs);
       } catch (err) {
         console.error(err);

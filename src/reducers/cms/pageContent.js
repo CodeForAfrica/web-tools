@@ -1,20 +1,17 @@
 import { FETCH_PAGE_CONTENT } from '../../actions/cmsActions';
 import { createAsyncReducer } from '../../lib/reduxHelpers';
+import { parsePageContent } from '../../lib/cmsUtils/blockRenderer';
 
 const pageContent = createAsyncReducer({
   initialState: {
     pages: {},
   },
   action: FETCH_PAGE_CONTENT,
-  handleSuccess: (state, payload) => ({
-    ...state,
+  handleSuccess: (payload, state) => ({
     pages: {
       ...state.pages,
-      [payload.pageId]: {
-        content: payload.content,
-        lastUpdated: new Date().toISOString(),
-      },
-    },
+      'media-data': parsePageContent(payload),
+     },
   }),
 });
 

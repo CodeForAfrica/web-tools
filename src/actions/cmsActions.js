@@ -7,4 +7,4 @@ export const FETCH_COLLECTIONS = 'FETCH_COLLECTIONS';
 
 export const fetchPageContent = createAsyncAction(FETCH_PAGE_CONTENT, api.fetchPageContent);
 export const fetchGlobals = createAsyncAction(FETCH_GLOBALS, api.fetchGlobals);
-export const fetchCollectionSearch = createAsyncAction(FETCH_COLLECTIONS, api.fetchCollection);
+export const fetchCollection = createAsyncAction(FETCH_COLLECTIONS, api.fetchCollections);

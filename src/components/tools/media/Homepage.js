@@ -1,28 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import ResourceList from './ResourceList';
-import { getPageContent } from '../../../lib/cmsApi/rest';
-import { parsePageContent, BlockRenderer } from '../../../lib/cmsUtils/blockRenderer';
+import { BlockRenderer } from '../../../lib/cmsUtils/blockRenderer';
 import { APP_TOOLS } from '../../../config';
+import { fetchPageContent } from '../../../actions/cmsActions';
 
 
-const Homepage = () => {
-  const [pageData, setPageData] = useState({});
-
+const Homepage = ({ pageReducer }) => {
+  const pageData = {};
+  /* const { route } = props;
+  console.log(route.path); */
   useEffect(() => {
-    const fetchContent = async () => {
-      try {
-        const content = await getPageContent(APP_TOOLS, 'media-data');
-        setPageData(parsePageContent(content));
-      } catch (err) {
-        console.error(err);
-      }
-    };
-
-    fetchContent();
-  }, []);
+    pageReducer(APP_TOOLS, 'media-data');
+  }, [pageReducer]);
 
 
   return (
@@ -47,11 +39,16 @@ Homepage.propTypes = {
   location: PropTypes.object.isRequired,
   params: PropTypes.object.isRequired, // params from router
   // from state
+  pageReducer: PropTypes.func,
 };
 
-const mapStateToProps = () => ({});
+const mapStateToProps = (state) => ({
+ //  pages: state.cms.pageReducer.pages,
+});
 
-const mapDispatchToProps = () => ({});
+const mapDispatchToProps = (dispatch) => ({
+    pageReducer: (appName, pageName) => { dispatch(fetchPageContent(appName, pageName)); },
+});
 
 export default injectIntl(
   connect(mapStateToProps, mapDispatchToProps)(Homepage)
