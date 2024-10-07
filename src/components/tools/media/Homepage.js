@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
+import { injectIntl } from 'react-intl';
 import ResourceList from './ResourceList';
 import { BlockRenderer } from '../../../lib/cmsUtils/blockRenderer';
 import { APP_TOOLS } from '../../../config';
@@ -36,14 +36,14 @@ Homepage.propTypes = {
   // from context
   location: PropTypes.object.isRequired,
   params: PropTypes.object.isRequired, // params from router
+  route: PropTypes.object.isRequired,
+  getPageContent: PropTypes.func,
   // from state
   pageData: PropTypes.object,
-  getPageContent: PropTypes.func,
-  route: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  pageData: state.cms.content.pages['media-data'],
+  pageData: state.cms.pages.content.media,
 });
 
 const mapDispatchToProps = (dispatch) => ({

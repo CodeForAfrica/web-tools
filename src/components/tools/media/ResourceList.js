@@ -1,38 +1,45 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import ResourceFeatureItem from '../../common/ResourceFeatureItem';
-import { fetchCollections } from '../../../lib/cmsApi/rest';
+import { fetchCollection } from '../../../actions/cmsActions';
 
-const ExplorerMarketingFeatureList = () => {
-  const [resources, setResources] = useState([]);
-
+const ExplorerMarketingFeatureList = ({ getCollections, resources }) => {
   useEffect(() => {
-    const fetchContent = async () => {
-      try {
-        const content = await fetchCollections('media-data');
-        setResources(content?.docs);
-      } catch (err) {
-        console.error(err);
-      }
-    };
+    getCollections('media-data');
+  }, [getCollections]);
 
-    fetchContent();
-  }, []);
-
+  const docs = resources?.docs || []; // Fallback to an empty array if resources or docs are undefined
   return (
     <div className="resources-feature-list">
-      {
-      resources && resources.map((resource) => (
-        <ResourceFeatureItem
-          key={resource.id}
-          hasRichText
-          titleMsg={{ id: resource.id, defaultMessage: resource.title }}
-          contentMsg={resource.description}
-          imageName={resource.mediaDataImage?.src}
-        />
-    ))
-    }
+      {docs.length > 0 ? (
+        docs.map((resource) => (
+          <ResourceFeatureItem
+            key={resource.id}
+            hasRichText
+            titleMsg={{ id: resource.id, defaultMessage: resource.title }}
+            contentMsg={resource.description}
+            imageName={resource.mediaDataImage?.src}
+          />
+        ))
+      ) : (
+        <div>No resources available</div> // Optional loading or no data message
+      )}
     </div>
-);
+  );
 };
 
-export default ExplorerMarketingFeatureList;
+ExplorerMarketingFeatureList.propTypes = {
+  getCollections: PropTypes.func,
+  resources: PropTypes.array,
+};
+
+const mapStateToProps = (state) => ({
+  resources: state.cms.collections.content['media-data'] || {},
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  getCollections: (collectionName) => { dispatch(fetchCollection(collectionName)); },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ExplorerMarketingFeatureList);

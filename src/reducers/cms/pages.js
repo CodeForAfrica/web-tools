@@ -4,13 +4,13 @@ import { parsePageContent } from '../../lib/cmsUtils/blockRenderer';
 
 const pages = createAsyncReducer({
   initialState: {
-    pages: {},
+    content: {},
   },
   action: FETCH_PAGE_CONTENT,
-  handleSuccess: (payload, state) => ({
-    pages: {
-      ...state.pages,
-      'media-data': parsePageContent(payload),
+  handleSuccess: (payload, state, meta) => ({
+    content: {
+      ...state.content,
+      [meta.args[1]]: parsePageContent(payload),
      },
   }),
 });

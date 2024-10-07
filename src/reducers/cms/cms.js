@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
-import content from './pages';
+import pages from './pages';
+import collections from './collections';
 
-
-const cms = combineReducers({ content });
+const cms = combineReducers({ pages, collections });
 
 export default cms;
