@@ -99,7 +99,7 @@ const RichText = React.forwardRef((props, ref) => {
 RichText.propTypes = {
   elements: PropTypes.array.isRequired,
   variant: PropTypes.string,
-  typographyProps: PropTypes.object.isRequired,
+  typographyProps: PropTypes.object,
 };
 
 export default RichText;

@@ -64,7 +64,10 @@ ResourceFeatureItem.propTypes = {
   // form parent
   imageOnLeft: PropTypes.bool,
   titleMsg: PropTypes.object.isRequired,
-  contentMsg: PropTypes.object.isRequired,
+  contentMsg: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.array,
+  ]), // Sometimes we will pass an array form slate
   imageName: PropTypes.string,
   hasRichText: PropTypes.bool,
 };
