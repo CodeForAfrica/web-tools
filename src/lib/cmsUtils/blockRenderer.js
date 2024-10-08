@@ -1,9 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import PageHeader from '../../components/common/header/PageHeader';
+import ResourceListSelector from '../../components/common/ResourceListSelector';
 
 const blockRegistry = {
   'webtools-page-header': PageHeader,
+  'webtools-resource-list': ResourceListSelector,
 };
 
 
