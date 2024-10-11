@@ -1,6 +1,6 @@
 import { FETCH_PAGE_CONTENT } from '../../actions/cmsActions';
 import { createAsyncReducer } from '../../lib/reduxHelpers';
-import { parsePageContent } from '../../lib/cmsUtils/blockRenderer';
+import parsePageContent from '../../lib/cmsUtils/cmsParser';
 
 const pages = createAsyncReducer({
   initialState: {
