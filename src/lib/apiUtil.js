@@ -26,7 +26,7 @@ export function generateParamStr(params) {
  * encoded on it already, and this will return a promise to call it with the appropriate headers and
  * such.  It also parses the json response for you.
  */
-export function createApiPromise(url, params, httpMethod = 'get', headers = null) {
+export function createApiPromise(url, params, httpMethod = 'get', headers) {
   let fullUrl = url;
   if ((params !== undefined) && (params !== null)) {
     fullUrl = `${url}?${generateParamStr(params)}`;
