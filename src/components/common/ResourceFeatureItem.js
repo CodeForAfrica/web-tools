@@ -2,33 +2,20 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { injectIntl, FormattedMessage, FormattedHTMLMessage } from 'react-intl';
 import { Grid, Row, Col } from 'react-flexbox-grid/lib';
-import RichText from './RichText';
 import { assetUrl } from '../../lib/assetUtil';
 
 const ResourceFeatureItem = (props) => {
-  const { hasRichText = false, titleMsg, contentMsg, imageOnLeft, imageName } = props;
-
+  const { titleMsg, contentMsg, imageOnLeft, imageName, imageURL } = props;
   const { formatMessage } = props.intl;
-
   const textContent = (
     <Col className="resource-text" lg={8} xs={12}>
-      { hasRichText ? (
-        <>
-          <h2><FormattedMessage {...titleMsg} /></h2>
-          <RichText
-            elements={contentMsg}
-          />
-        </>
-        ) : (
-          <>  <h2><FormattedMessage {...titleMsg} /></h2>
-            <FormattedHTMLMessage {...contentMsg} />
-          </>
-        )}
+      <h2><FormattedMessage {...titleMsg} /></h2>
+      <FormattedHTMLMessage {...contentMsg} />
     </Col>
-    );
+  );
   const imgContent = (
     <Col lg={3} xs={12}>
-      { hasRichText ? <img src={imageName} alt={formatMessage(titleMsg)} height={410} /> : <img src={assetUrl(`/static/img/resources/${imageName}`)} alt={formatMessage(titleMsg)} height={410} />}
+      <img src={imageName ? assetUrl(`/static/img/resources/${imageName}`) : imageURL} alt={formatMessage(titleMsg)} height={410} />
     </Col>
   );
   let content;
@@ -60,16 +47,13 @@ const ResourceFeatureItem = (props) => {
 };
 
 ResourceFeatureItem.propTypes = {
-  intl: PropTypes.object,
+  intl: PropTypes.object.isRequired,
   // form parent
   imageOnLeft: PropTypes.bool,
   titleMsg: PropTypes.object.isRequired,
-  contentMsg: PropTypes.oneOfType([
-    PropTypes.object,
-    PropTypes.array,
-  ]), // Sometimes we will pass an array form slate
+  contentMsg: PropTypes.object.isRequired,
   imageName: PropTypes.string,
-  hasRichText: PropTypes.bool,
+  imageURL: PropTypes.string,
 };
 
 export default

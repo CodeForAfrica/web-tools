@@ -34,6 +34,7 @@ const baseConfig = {
         SUPPORT_URL: JSON.stringify(process.env.SUPPORT_URL || ''),
         INQUIRY_EMAIL: JSON.stringify(process.env.INQUIRY_EMAIL || ''),
         PAYLOAD_API_URL: JSON.stringify(process.env.PAYLOAD_API_URL || ''),
+        PAYLOAD_API_KEY: JSON.stringify(process.env.PAYLOAD_API_KEY || ''),
       },
     }),
   ],

@@ -6,7 +6,7 @@ import { injectIntl, FormattedMessage, FormattedHTMLMessage } from 'react-intl';
 import { APP_TOOLS } from '../../../config';
 import { fetchPageContent } from '../../../actions/cmsActions';
 import serializeSlateToHtml from '../../../lib/cmsUtils/slateToHTMLSerializer';
-
+import ResourceList from './ResourceList';
 
 const Homepage = (props) => {
   const { getPageContent, route, pageData } = props;
@@ -14,7 +14,6 @@ const Homepage = (props) => {
   useEffect(() => {
     getPageContent(APP_TOOLS, route?.path);
   }, [getPageContent, route?.path]);
-
 
   let localMessages;
   if (pageData && pageData?.blocks.hasOwnProperty('webtools-page-header')) {
@@ -51,6 +50,7 @@ const Homepage = (props) => {
             </Col>
           </Row>
         </Grid>
+        <ResourceList />
       </div>
     ) : null
   );

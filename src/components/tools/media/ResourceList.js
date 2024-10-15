@@ -3,39 +3,53 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import ResourceFeatureItem from '../../common/ResourceFeatureItem';
 import { fetchCollection } from '../../../actions/cmsActions';
+import serializeSlateToHtml from '../../../lib/cmsUtils/slateToHTMLSerializer';
 
-const ExplorerMarketingFeatureList = ({ getCollections, resources }) => {
+
+const ExplorerMarketingFeatureList = ({ getCollections, mediaData }) => {
   useEffect(() => {
     getCollections('media-data');
   }, [getCollections]);
 
-  const docs = resources?.docs || []; // Fallback to an empty array if resources or docs are undefined
+  let localMessages;
+
+  if (mediaData && mediaData?.docs) {
+    localMessages = mediaData.docs.map(resource => {
+      const mediaDataId = `${resource.title.replace(/\s+/g, '')}:${resource.id}`;
+      return {
+        id: mediaDataId,
+        title: { id: `${mediaDataId}.title`, defaultMessage: resource.title },
+        description: { id: `${mediaDataId}.description`, defaultMessage: serializeSlateToHtml(resource.description) },
+        imageURL: resource.mediaDataImage.url,
+      };
+    });
+  }
+
   return (
     <div className="resources-feature-list">
-      {docs.length > 0 ? (
-        docs.map((resource, index) => (
+      {
+       localMessages
+        && localMessages.map((localMessage, index) => (
           <ResourceFeatureItem
-            key={resource.id}
-            hasRichText
-            titleMsg={{ id: resource.id, defaultMessage: resource.title }}
-            contentMsg={resource.description}
-            imageName={resource.mediaDataImage?.src}
+            key={localMessage.id}
+            titleMsg={localMessage.title}
+            contentMsg={localMessage.description}
+            imageURL={localMessage.imageURL}
             imageOnLeft={index % 2 !== 0}
           />
         ))
-      )
-        : null}
+      }
     </div>
   );
 };
 
 ExplorerMarketingFeatureList.propTypes = {
   getCollections: PropTypes.func,
-  resources: PropTypes.any,
+  mediaData: PropTypes.any,
 };
 
 const mapStateToProps = (state) => ({
-  resources: state.cms.collections.content['media-data'] || {},
+  mediaData: state.cms.collections.content['media-data'] || {},
 });
 
 const mapDispatchToProps = (dispatch) => ({
