@@ -16,16 +16,16 @@ const Homepage = (props) => {
   }, [getPageContent, route?.path]);
 
   let localMessages;
-  if (pageData && pageData?.blocks.hasOwnProperty('webtools-page-header')) {
+  if (pageData && pageData?.blocks.hasOwnProperty('page-header')) {
    localMessages = {
       title: { id: 'media.intro.title', defaultMessage: pageData.fullTitle },
       subtitle: {
         id: 'media.intro.subtitle',
-        defaultMessage: pageData.blocks['webtools-page-header'].title,
+        defaultMessage: pageData.blocks['page-header'].title,
       },
       description: {
         id: 'media.intro.description',
-        defaultMessage: serializeSlateToHtml(pageData.blocks['webtools-page-header'].description, { class: 'intro' }),
+        defaultMessage: serializeSlateToHtml(pageData.blocks['page-header'].subtitle, { class: 'intro' }),
       },
       loginTitle: {
         id: 'media.intro.login.title',
