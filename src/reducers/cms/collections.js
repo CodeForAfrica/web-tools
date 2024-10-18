@@ -10,7 +10,7 @@ const collections = createAsyncReducer({
   handleSuccess: (payload, state, meta) => ({
     content: {
       ...state.content,
-      [meta.args]: payload,
+      [meta.args[1]]: payload,
      },
   }),
 });

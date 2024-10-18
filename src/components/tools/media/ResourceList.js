@@ -4,11 +4,12 @@ import { connect } from 'react-redux';
 import ResourceFeatureItem from '../../common/ResourceFeatureItem';
 import { fetchCollection } from '../../../actions/cmsActions';
 import serializeSlateToHtml from '../../../lib/cmsUtils/slateToHTMLSerializer';
+import { APP_TOOLS } from '../../../config';
 
 
 const ExplorerMarketingFeatureList = ({ getCollections, mediaData }) => {
   useEffect(() => {
-    getCollections('media-data');
+    getCollections(APP_TOOLS, 'media-data');
   }, [getCollections]);
 
   let localMessages;
@@ -53,7 +54,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  getCollections: (collectionName) => { dispatch(fetchCollection(collectionName)); },
+  getCollections: (appName, collectionName) => { dispatch(fetchCollection(appName, collectionName)); },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ExplorerMarketingFeatureList);
