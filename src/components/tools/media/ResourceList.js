@@ -21,7 +21,7 @@ const ExplorerMarketingFeatureList = ({ getCollections, mediaData }) => {
         id: mediaDataId,
         title: { id: `${mediaDataId}.title`, defaultMessage: resource.title },
         description: { id: `${mediaDataId}.description`, defaultMessage: serializeSlateToHtml(resource.description) },
-        imageURL: resource.mediaDataImage.url,
+        imageURL: resource.thumbnail.url,
       };
     });
   }
