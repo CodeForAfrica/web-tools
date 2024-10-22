@@ -2,7 +2,7 @@ import { createApiPromise } from '../apiUtil';
 
 const BASE_URL = process.env.PAYLOAD_API_URL;
 const AUTH_HEADER = { Authorization: `users API-Key ${process.env.PAYLOAD_API_KEY}` };
-const CURRENT_APP_HEADER = 'x-current-app';
+const CURRENT_APP_HEADER = 'CS-app';
 
 export function fetchGlobals(applicationName) {
   return createApiPromise(
