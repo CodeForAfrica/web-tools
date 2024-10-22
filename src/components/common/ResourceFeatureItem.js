@@ -5,7 +5,7 @@ import { Grid, Row, Col } from 'react-flexbox-grid/lib';
 import { assetUrl } from '../../lib/assetUtil';
 
 const ResourceFeatureItem = (props) => {
-  const { titleMsg, contentMsg, imageOnLeft, imageName } = props;
+  const { titleMsg, contentMsg, imageOnLeft, imageName, imageURL } = props;
   const { formatMessage } = props.intl;
   const textContent = (
     <Col className="resource-text" lg={8} xs={12}>
@@ -15,7 +15,7 @@ const ResourceFeatureItem = (props) => {
   );
   const imgContent = (
     <Col lg={3} xs={12}>
-      <img src={assetUrl(`/static/img/resources/${imageName}`)} alt={formatMessage(titleMsg)} height={410} />
+      <img src={imageName ? assetUrl(`/static/img/resources/${imageName}`) : imageURL} alt={formatMessage(titleMsg)} height={410} />
     </Col>
   );
   let content;
@@ -53,6 +53,7 @@ ResourceFeatureItem.propTypes = {
   titleMsg: PropTypes.object.isRequired,
   contentMsg: PropTypes.object.isRequired,
   imageName: PropTypes.string,
+  imageURL: PropTypes.string,
 };
 
 export default

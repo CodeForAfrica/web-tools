@@ -26,15 +26,24 @@ export function generateParamStr(params) {
  * encoded on it already, and this will return a promise to call it with the appropriate headers and
  * such.  It also parses the json response for you.
  */
-export function createApiPromise(url, params, httpMethod = 'get') {
+export function createApiPromise(url, params, httpMethod = 'get', headers) {
   let fullUrl = url;
   if ((params !== undefined) && (params !== null)) {
     fullUrl = `${url}?${generateParamStr(params)}`;
   }
-  return fetch(fullUrl, {
+
+  const fetchOptions = {
     method: httpMethod,
     credentials: 'include',
-  }).then(
+  };
+
+  if (headers) {
+    fetchOptions.headers = {
+      ...headers,
+    };
+  }
+
+  return fetch(fullUrl, fetchOptions).then(
     response => response.json()
   );
 }
