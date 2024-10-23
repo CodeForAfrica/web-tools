@@ -53,8 +53,10 @@ function makePercentage(value) { return value * 100; }
 export function dataAsSeries(data, fieldName = 'count') {
   // clean up the data
   const dates = data.map(d => d.date);
-  // turning variable time unit into days
-  const intervalMs = (dates[1] - dates[0]);
+  // Get all the time intervals between the dates we have in our data
+  const timeIntervalsMs = dates.slice(1).map((date, index) => date - dates[index]);
+  // Use average of the interval as the regular interval we want to use, this can give a good estimate the no. of stories per day
+  const intervalMs = timeIntervalsMs.reduce((acc, interval) => acc + interval, 0) / timeIntervalsMs.length;
   const intervalDays = intervalMs / SECS_PER_DAY;
   const values = data.map(d => d[fieldName] / intervalDays);
   return { data: values, pointInterval: intervalMs, pointStart: dates[0] };
@@ -257,6 +259,7 @@ class AttentionOverTimeChart extends React.Component {
         } else {
           values = Object.values(groupedData).map(d => (d.sum !== undefined ? d.sum : d.count));
         }
+
         return {
           ...thisSeries,
           data: values,
