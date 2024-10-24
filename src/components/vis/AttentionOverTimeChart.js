@@ -50,16 +50,6 @@ function yAxisTitleByInterval(interval) {
 
 function makePercentage(value) { return value * 100; }
 
-export function dataAsSeries(data, fieldName = 'count') {
-  // clean up the data
-  const dates = data.map(d => d.date);
-  // turning variable time unit into days
-  const intervalMs = (dates[1] - dates[0]);
-  const intervalDays = intervalMs / SECS_PER_DAY;
-  const values = data.map(d => d[fieldName] / intervalDays);
-  return { data: values, pointInterval: intervalMs, pointStart: dates[0] };
-}
-
 /**
  * Fill gaps between days.
  */
@@ -85,6 +75,17 @@ export function fillDayGaps(data) {
     mostRecent = d;
   });
   return filledData;
+}
+
+export function dataAsSeries(data, fieldName = 'count') {
+  // clean up the data
+  const filledData = fillDayGaps(data);
+  const dates = filledData.map(d => d.date);
+  // turning variable time unit into days
+  const intervalMs = (dates[1] - dates[0]);
+  const intervalDays = intervalMs / SECS_PER_DAY;
+  const values = filledData.map(d => d[fieldName] / intervalDays);
+  return { data: values, pointInterval: intervalMs, pointStart: dates[0] };
 }
 
 
@@ -257,6 +258,7 @@ class AttentionOverTimeChart extends React.Component {
         } else {
           values = Object.values(groupedData).map(d => (d.sum !== undefined ? d.sum : d.count));
         }
+
         return {
           ...thisSeries,
           data: values,
