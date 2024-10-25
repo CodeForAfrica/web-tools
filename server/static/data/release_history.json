@@ -1,6 +1,17 @@
 {
   "releases": [
     {
+      "date": "2024-10-25",
+      "version": "v3.19.8",
+      "notes":[
+        {
+          "apps": ["sources"],
+          "type": "Fix",
+          "note": "fix incorrect years shown on collected stories chart "
+        }
+      ]
+    },
+    {
       "date": "2024-06-04",
       "version": "v3.19.7",
       "notes":[
