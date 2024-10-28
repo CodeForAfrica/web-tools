@@ -138,6 +138,5 @@
     "webpack-md5-hash": "^0.0.6",
     "webpack-merge": "^4.2.2",
     "webpackbar": "^4.0.0"
-  },
-  "packageManager": "pnpm@9.9.0+sha512.60c18acd138bff695d339be6ad13f7e936eea6745660d4cc4a776d5247c540d0edee1a563695c183a66eb917ef88f2b4feb1fc25f32a7adcadc7aaf3438e99c1"
+  }
 }
