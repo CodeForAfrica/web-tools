@@ -65,7 +65,7 @@ export function createAsyncAction(type, fetcher) {
 
 /**
  * Helper to create a generic reducer.  Pass in an object with the following properties:
- * - `intialState`: the intial state to use for this recuder (default to empty object)
+ * - `intialState`: the intial state to use for this reducer (default to empty object)
  * - `[OTHER_CONSTANTS]`: any other constants will be added as extra checks (this lets you include other actions in this reducer)
  */
 export function createReducer(handlers) {
