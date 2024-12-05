@@ -13,13 +13,12 @@ API_KEY = app.config['PAYLOAD_API_KEY']
 @app.route('/api/cms/fetch-page-content', methods=['GET'])
 @api_error_handler
 def api_fetch_page_content():
-    application_name = request.headers.get('cs-app')
+    application_name = request.headers.get('cs-app') or ''
     url = f"{BASE_URL}/{application_name}-pages"
     headers = dict(request.headers)
     headers['Authorization'] = f"users API-Key {API_KEY}"
-    response = requests.get(url, request.args, headers=headers)
-    
     try:
+        response = requests.get(url, request.args, headers=headers)
         if response.status_code == 200:
             return response.json()
         else:
@@ -35,9 +34,9 @@ def api_fetch_collections():
     url = f"{BASE_URL}/{collection}"
     headers = dict(request.headers)
     headers['Authorization'] = f"users API-Key {API_KEY}"
-    response = requests.get(url, request.args, headers=headers)
 
     try:
+        response = requests.get(url, request.args, headers=headers)
         if response.status_code == 200:
             return response.json()
         else:
@@ -53,9 +52,9 @@ def api_fetch_globals():
     url = f"{BASE_URL}/globals/settings-{application_name}-site"
     headers = dict(request.headers)
     headers['Authorization'] = f"users API-Key {API_KEY}"
-    response = requests.get(url, request.args, headers=headers)
     
     try:
+        response = requests.get(url, request.args, headers=headers)
         if response.status_code == 200:
             return response.json()
         else:

@@ -13,7 +13,7 @@ export function fetchGlobals(applicationName) {
 
 export function fetchPageContent(applicationName, pageName) {
   return createApiPromise(
-    `/api/cms/${applicationName}-pages`, { 'where[slug][equals]': pageName },
+    '/api/cms/fetch-page-content', { 'where[slug][equals]': pageName },
     'get',
     { ...AUTH_HEADER, [CURRENT_APP_HEADER]: applicationName }
   );
