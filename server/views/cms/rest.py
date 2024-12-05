@@ -1,0 +1,64 @@
+import logging
+from flask import jsonify, request
+import requests
+
+from server import app
+from server.util.request import api_error_handler
+
+logger = logging.getLogger(__name__)
+BASE_URL = app.config['PAYLOAD_API_URL']
+API_KEY = app.config['PAYLOAD_API_KEY']
+
+
+@app.route('/api/cms/fetch-page-content', methods=['GET'])
+@api_error_handler
+def api_fetch_page_content():
+    application_name = request.headers.get('cs-app')
+    url = f"{BASE_URL}/{application_name}-pages"
+    headers = dict(request.headers)
+    headers['Authorization'] = f"users API-Key {API_KEY}"
+    response = requests.get(url, request.args, headers=headers)
+    
+    try:
+        if response.status_code == 200:
+            return response.json()
+        else:
+            return response.json(), response.status_code
+    except:
+        return jsonify({'message': 'Received an invalid or malformed response'}), 500
+
+
+@app.route('/api/cms/fetch-collections', methods=['GET'])
+@api_error_handler
+def api_fetch_collections():
+    collection = request.args.get('collection')
+    url = f"{BASE_URL}/{collection}"
+    headers = dict(request.headers)
+    headers['Authorization'] = f"users API-Key {API_KEY}"
+    response = requests.get(url, request.args, headers=headers)
+
+    try:
+        if response.status_code == 200:
+            return response.json()
+        else:
+            return response.json(), response.status_code
+    except:
+        return jsonify({'message': 'Received an invalid or malformed response'}), 500
+
+
+@app.route('/api/cms/fetch-globals', methods=['GET'])
+@api_error_handler
+def api_fetch_globals():
+    application_name = request.headers.get('cs-app')
+    url = f"{BASE_URL}/globals/settings-{application_name}-site"
+    headers = dict(request.headers)
+    headers['Authorization'] = f"users API-Key {API_KEY}"
+    response = requests.get(url, request.args, headers=headers)
+    
+    try:
+        if response.status_code == 200:
+            return response.json()
+        else:
+            return response.json(), response.status_code
+    except:
+        return jsonify({'message': 'Received an invalid or malformed response'}), 500
