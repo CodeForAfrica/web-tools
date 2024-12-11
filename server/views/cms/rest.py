@@ -1,6 +1,7 @@
 import logging
 from flask import jsonify, request
 import requests
+import html
 
 from server import app
 from server.util.request import api_error_handler
@@ -13,7 +14,7 @@ API_KEY = app.config['PAYLOAD_API_KEY']
 @app.route('/api/cms/fetch-page-content', methods=['GET'])
 @api_error_handler
 def api_fetch_page_content():
-    application_name = request.headers.get('cs-app') or ''
+    application_name = html.escape(request.headers.get('cs-app') or '')
     url = f"{BASE_URL}/{application_name}-pages"
     headers = dict(request.headers)
     headers['Authorization'] = f"users API-Key {API_KEY}"
@@ -30,7 +31,7 @@ def api_fetch_page_content():
 @app.route('/api/cms/fetch-collections', methods=['GET'])
 @api_error_handler
 def api_fetch_collections():
-    collection = request.args.get('collection')
+    collection = html.escape(request.args.get('collection'))
     url = f"{BASE_URL}/{collection}"
     headers = dict(request.headers)
     headers['Authorization'] = f"users API-Key {API_KEY}"
@@ -48,7 +49,7 @@ def api_fetch_collections():
 @app.route('/api/cms/fetch-globals', methods=['GET'])
 @api_error_handler
 def api_fetch_globals():
-    application_name = request.headers.get('cs-app')
+    application_name = html.escape(request.headers.get('cs-app'))
     url = f"{BASE_URL}/globals/settings-{application_name}-site"
     headers = dict(request.headers)
     headers['Authorization'] = f"users API-Key {API_KEY}"
