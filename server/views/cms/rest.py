@@ -65,3 +65,21 @@ def api_fetch_globals():
             return jsonify(response.json()), response.status_code
     except:
         return jsonify({'message': 'Received an invalid or malformed response'}), 500
+
+@app.route('/api/cms/forms', methods=['GET'])
+@api_error_handler
+def api_fetch_forms():
+    form =  html.escape(request.args.get('form'))
+    url = f"{BASE_URL}/globals/{form}-form"
+    headers = dict(request.headers)
+    headers['Authorization'] = f"users API-Key {API_KEY}"
+    
+    try:
+        escaped_args = {k: html.escape(v) for k, v in request.args.items()}
+        response = requests.get(url, escaped_args, headers=headers)
+        if response.status_code == 200:
+            return response.json()
+        else:
+            return response.json(), response.status_code
+    except:
+        return jsonify({'message': 'Received an invalid or malformed response'}), 500
