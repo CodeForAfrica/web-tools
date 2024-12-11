@@ -19,11 +19,12 @@ def api_fetch_page_content():
     headers = dict(request.headers)
     headers['Authorization'] = f"users API-Key {API_KEY}"
     try:
-        response = requests.get(url, request.args, headers=headers)
+        escaped_args = {k: html.escape(v) for k, v in request.args.items()}
+        response = requests.get(url, escaped_args, headers=headers)
         if response.status_code == 200:
-            return response.json()
+            return jsonify(response.json())
         else:
-            return response.json(), response.status_code
+            return jsonify(response.json()), response.status_code
     except:
         return jsonify({'message': 'Received an invalid or malformed response'}), 500
 
@@ -37,11 +38,12 @@ def api_fetch_collections():
     headers['Authorization'] = f"users API-Key {API_KEY}"
 
     try:
-        response = requests.get(url, request.args, headers=headers)
+        escaped_args = {k: html.escape(v) for k, v in request.args.items()}
+        response = requests.get(url, escaped_args, headers=headers)
         if response.status_code == 200:
-            return response.json()
+            return jsonify(response.json())
         else:
-            return response.json(), response.status_code
+            return jsonify(response.json()), response.status_code
     except:
         return jsonify({'message': 'Received an invalid or malformed response'}), 500
 
@@ -55,10 +57,11 @@ def api_fetch_globals():
     headers['Authorization'] = f"users API-Key {API_KEY}"
     
     try:
-        response = requests.get(url, request.args, headers=headers)
+        escaped_args = {k: html.escape(v) for k, v in request.args.items()}
+        response = requests.get(url, escaped_args, headers=headers)
         if response.status_code == 200:
-            return response.json()
+            return jsonify(response.json())
         else:
-            return response.json(), response.status_code
+            return jsonify(response.json()), response.status_code
     except:
         return jsonify({'message': 'Received an invalid or malformed response'}), 500
