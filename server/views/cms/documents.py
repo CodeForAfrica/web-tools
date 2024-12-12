@@ -1,3 +1,8 @@
+"""
+This module contains methods that directly return responses from another API (Payload CMS).
+While this approach is generally discouraged due to potential security risks,
+it is considered acceptable in this case because the Payload CMS backend is trusted.
+"""
 import logging
 from flask import jsonify, request
 import requests
@@ -36,14 +41,7 @@ def api_fetch_page_content():
     try:
         escaped_args = {k: html.escape(v) for k, v in request.args.items()}
         response = requests.get(url, escaped_args, headers=headers)
-        if response.status_code == 200:
-            # Directly returning responses from another API is generally not advisable. 
-            # However, in this case, we can confidently trust the backend (Payload CMS).
-            return response.json()
-        else:
-            # Directly returning responses from another API is generally not advisable. 
-            # However, in this case, we can confidently trust the backend (Payload CMS).
-            return response.json(), response.status_code
+        return response.json(), response.status_code
     except:
         error_message = {'message': 'Received an invalid or malformed response'}
         logger.error(error_message)
@@ -62,14 +60,7 @@ def api_fetch_collections():
     try:
         escaped_args = {k: html.escape(v) for k, v in request.args.items()}
         response = requests.get(url, escaped_args, headers=headers)
-        if response.status_code == 200:
-            # Directly returning responses from another API is generally not advisable. 
-            # However, in this case, we can confidently trust the backend (Payload CMS).
-            return response.json()
-        else:
-            # Directly returning responses from another API is generally not advisable. 
-            # However, in this case, we can confidently trust the backend (Payload CMS).
-            return response.json(), response.status_code
+        return response.json(), response.status_code
     except:
         error_message = {'message': 'Received an invalid or malformed response'}
         logger.error(error_message)
@@ -88,15 +79,7 @@ def api_fetch_globals():
     try:
         escaped_args = {k: html.escape(v) for k, v in request.args.items()}
         response = requests.get(url, escaped_args, headers=headers)
-        if response.status_code == 200:
-            # Directly returning responses from another API is generally not advisable. 
-            # However, in this case, we can confidently trust the backend (Payload CMS).
-            return response.json()
-        else:
-            logger.error(response.json())
-            # Directly returning responses from another API is generally not advisable. 
-            # However, in this case, we can confidently trust the backend (Payload CMS).
-            return response.json(), response.status_code
+        return response.json(), response.status_code
     except:
         error_message = {'message': 'Received an invalid or malformed response'}
         logger.error(error_message)
