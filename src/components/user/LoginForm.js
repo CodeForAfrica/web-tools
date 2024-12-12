@@ -8,7 +8,6 @@ import { push } from 'react-router-redux';
 import { loginWithPassword } from '../../actions/userActions';
 import AppButton from '../common/AppButton';
 import * as fetchConstants from '../../lib/fetchConstants';
-import messages from '../../resources/messages';
 import { emptyString, invalidEmail } from '../../lib/formValidators';
 import withIntlForm from '../common/hocs/IntlForm';
 import { addNotice, updateFeedback } from '../../actions/appActions';
@@ -18,17 +17,17 @@ import serializeSlateToHtml from '../../lib/cmsUtils/slateToHTMLSerializer';
 
 
 const LoginForm = (props) => {
-  const { handleSubmit, onSubmitLoginForm, fetchStatus, renderTextField, fetchContent, content } = props;
+  const { handleSubmit, onSubmitLoginForm, fetchStatus, renderTextField, fetchContent, content, initialContent } = props;
   const { formatMessage } = props.intl;
-  let localMessages;
 
-    useEffect(() => {
-    fetchContent();
+   useEffect(() => {
+    if (!content) {
+      fetchContent();
+    }
   }, [fetchContent]);
 
-
-  if (content) {
-    localMessages = {
+  const localMessages = content
+  ? {
       userEmail: {
         id: 'user.email',
         defaultMessage: content.emailLabel,
@@ -69,8 +68,8 @@ const LoginForm = (props) => {
         id: 'user.needsToActivate',
         defaultMessage: serializeSlateToHtml(content.needsToActivate),
       },
-     };
-  }
+    }
+  : null;
 
   return (
     localMessages ? (
@@ -121,7 +120,7 @@ const LoginForm = (props) => {
           </Col>
         </Row>
       </form>
-    ) : <h1>Nothing</h1>
+    ) : null
   );
 };
 
@@ -165,12 +164,12 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
           if (redirectTo) {
             dispatch(push(redirectTo));
           }
-          dispatch(updateFeedback({ classes: 'info-notice', open: true, message: ownProps.intl.formatMessage('localMessages.loginSucceeded') }));
+          dispatch(updateFeedback({ classes: 'info-notice', open: true, message: ownProps.initialContent.loginSucceeded }));
         } else if ((response.message) && (response.message.includes('is not active'))) {
           // user has signed up, but not activated their account
-          dispatch(addNotice({ htmlMessage: ownProps.intl.formatMessage('localMessages.needsToActivate'), level: LEVEL_ERROR }));
+          dispatch(addNotice({ htmlMessage: serializeSlateToHtml(ownProps.initialContent.needsToActivate), level: LEVEL_ERROR }));
         } else if (response.statusCode) {
-          dispatch(addNotice({ message: 'localMessages.loginFailed', level: LEVEL_ERROR }));
+          dispatch(addNotice({ message: ownProps.initialContent.loginFailed, level: LEVEL_ERROR }));
         }
       });
   },
@@ -180,13 +179,13 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 });
 
 // in-browser validation callback
-function validate(values) {
+function validate(values, props) {
   const errors = {};
   if (invalidEmail(values.email)) {
-    errors.email = 'localMessages.missingEmail';
+    errors.email = props.initialContent?.emailErrorMessage;
   }
   if (emptyString(values.password)) {
-    errors.password = 'localMessages.missingPassword';
+    errors.password = props.initialContent?.passwordErrorMessage;
   }
   return errors;
 }
