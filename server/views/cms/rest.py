@@ -11,7 +11,7 @@ BASE_URL = app.config['PAYLOAD_API_URL']
 API_KEY = app.config['PAYLOAD_API_KEY']
 
 
-@app.route('/api/cms/fetch-page-content', methods=['GET'])
+@app.route('/api/cms/pages', methods=['GET'])
 @api_error_handler
 def api_fetch_page_content():
     application_name = html.escape(request.headers.get('cs-app') or '')
