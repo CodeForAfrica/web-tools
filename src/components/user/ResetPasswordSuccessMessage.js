@@ -8,7 +8,9 @@ import { fetchFormContent } from '../../actions/cmsActions';
 
 const ResetPasswordSuccessMessage = ({ fetchContent, content }) => {
   useEffect(() => {
-    fetchContent();
+    if (!content) {
+      fetchContent();
+    }
   }, [fetchContent]);
 
   const localMessages = content ? {
