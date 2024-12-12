@@ -43,7 +43,7 @@ class LoginContainer extends React.Component {
             <Col lg={4} className={className}>
               <LoginForm
                 location={this.props.location}
-                initialContent={content}
+                content={content}
               />
             </Col>
           </Row>

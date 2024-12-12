@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { Row, Col } from 'react-flexbox-grid/lib';
 import { connect } from 'react-redux';
@@ -12,19 +12,12 @@ import { emptyString, invalidEmail } from '../../lib/formValidators';
 import withIntlForm from '../common/hocs/IntlForm';
 import { addNotice, updateFeedback } from '../../actions/appActions';
 import { LEVEL_ERROR } from '../common/Notice';
-import { fetchFormContent } from '../../actions/cmsActions';
 import serializeSlateToHtml from '../../lib/cmsUtils/slateToHTMLSerializer';
 
 
 const LoginForm = (props) => {
-  const { handleSubmit, onSubmitLoginForm, fetchStatus, renderTextField, fetchContent, content, initialContent } = props;
+  const { handleSubmit, onSubmitLoginForm, fetchStatus, renderTextField, content } = props;
   const { formatMessage } = props.intl;
-
-   useEffect(() => {
-    if (!content) {
-      fetchContent();
-    }
-  }, [fetchContent]);
 
   const localMessages = content
   ? {
@@ -135,13 +128,11 @@ LoginForm.propTypes = {
   fetchStatus: PropTypes.string.isRequired,
   // from dispatch
   onSubmitLoginForm: PropTypes.func.isRequired,
-  fetchContent: PropTypes.func,
   content: PropTypes.object,
 };
 
 const mapStateToProps = state => ({
   fetchStatus: state.user.fetchStatus,
-  content: state.cms.forms.content.labels,
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
@@ -164,17 +155,14 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
           if (redirectTo) {
             dispatch(push(redirectTo));
           }
-          dispatch(updateFeedback({ classes: 'info-notice', open: true, message: ownProps.initialContent.loginSucceeded }));
+          dispatch(updateFeedback({ classes: 'info-notice', open: true, message: ownProps.content.loginSucceeded }));
         } else if ((response.message) && (response.message.includes('is not active'))) {
           // user has signed up, but not activated their account
-          dispatch(addNotice({ htmlMessage: serializeSlateToHtml(ownProps.initialContent.needsToActivate), level: LEVEL_ERROR }));
+          dispatch(addNotice({ htmlMessage: serializeSlateToHtml(ownProps.content.needsToActivate), level: LEVEL_ERROR }));
         } else if (response.statusCode) {
-          dispatch(addNotice({ message: ownProps.initialContent.loginFailed, level: LEVEL_ERROR }));
+          dispatch(addNotice({ message: ownProps.content.loginFailed, level: LEVEL_ERROR }));
         }
       });
-  },
-  fetchContent: () => {
-    dispatch(fetchFormContent('login'));
   },
 });
 
@@ -182,10 +170,10 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 function validate(values, props) {
   const errors = {};
   if (invalidEmail(values.email)) {
-    errors.email = props.initialContent?.emailErrorMessage;
+    errors.email = props.content?.emailErrorMessage;
   }
   if (emptyString(values.password)) {
-    errors.password = props.initialContent?.passwordErrorMessage;
+    errors.password = props.content?.passwordErrorMessage;
   }
   return errors;
 }
