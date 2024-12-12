@@ -15,6 +15,7 @@ if not BASE_URL or not API_KEY:
     logger.error(error_message)
     raise RuntimeError(error_message)
 
+BASE_URL = BASE_URL.rstrip('/')
 
 @app.route('/api/cms/pages', methods=['GET'])
 @api_error_handler
