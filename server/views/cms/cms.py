@@ -10,9 +10,14 @@ logger = logging.getLogger(__name__)
 BASE_URL = app.config['PAYLOAD_API_URL']
 API_KEY = app.config['PAYLOAD_API_KEY']
 
+if not BASE_URL or not API_KEY:
+    error_message = "Configuration error: PAYLOAD_API_URL and/or PAYLOAD_API_KEY are missing."
+    logger.error(error_message)
+    raise RuntimeError(error_message)
+
+
 @app.route('/api/cms/pages', methods=['GET'])
 @api_error_handler
-@api_require_payload_config(app.config)
 def api_fetch_page_content():
     application_name = html.escape(request.headers.get('cs-app') or '')
     url = f"{BASE_URL}/{application_name}-pages"
@@ -31,7 +36,6 @@ def api_fetch_page_content():
 
 @app.route('/api/cms/collections', methods=['GET'])
 @api_error_handler
-@api_require_payload_config(app.config)
 def api_fetch_collections():
     collection = html.escape(request.args.get('collection'))
     url = f"{BASE_URL}/{collection}"
@@ -51,7 +55,6 @@ def api_fetch_collections():
 
 @app.route('/api/cms/globals', methods=['GET'])
 @api_error_handler
-@api_require_payload_config(app.config)
 def api_fetch_globals():
     application_name = html.escape(request.headers.get('cs-app'))
     url = f"{BASE_URL}/globals/settings-{application_name}-site"
