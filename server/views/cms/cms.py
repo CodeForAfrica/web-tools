@@ -10,6 +10,11 @@ logger = logging.getLogger(__name__)
 BASE_URL = app.config['PAYLOAD_API_URL']
 API_KEY = app.config['PAYLOAD_API_KEY']
 
+if not BASE_URL:
+    logger.error("Missing PAYLOAD_API_URL")
+
+if not API_KEY:
+    logger.error("Missing PAYLOAD_API_KEY")
 
 @app.route('/api/cms/fetch-page-content', methods=['GET'])
 @api_error_handler
