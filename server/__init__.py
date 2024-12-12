@@ -242,6 +242,7 @@ import server.views.sources.search
 import server.views.metadata
 import server.views.platforms
 import server.views.cms.cms
+
 if (server_app == SERVER_APP_SOURCES) or is_dev_mode():
     import server.views.sources.collection
     import server.views.sources.collectionedit
