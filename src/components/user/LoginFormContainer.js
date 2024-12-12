@@ -10,17 +10,13 @@ import { fetchFormContent } from '../../actions/cmsActions';
 
 class LoginContainer extends React.Component {
   componentDidMount() {
-    this.fetchContent();
+    this.props.fetchContent();
   }
 
   UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps.isLoggedIn) {
       this.context.router.push('/home');
     }
-  }
-
-  fetchContent() {
-    this.props.fetchContent();
   }
 
   render() {

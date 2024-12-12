@@ -15,6 +15,9 @@ import withIntlForm from '../common/hocs/IntlForm';
 import { addNotice } from '../../actions/appActions';
 import { LEVEL_ERROR } from '../common/Notice';
 import PageTitle from '../common/PageTitle';
+import { fetchFormContent } from '../../actions/cmsActions';
+import serializeSlateToHtml from '../../lib/cmsUtils/slateToHTMLSerializer';
+
 
 const localMessages = {
   intro: { id: 'user.signup.intro', defaultMessage: 'Create an account to use all our tools for free.' },
@@ -37,6 +40,10 @@ class SignupContainer extends React.Component {
     passedCaptcha: false,
   }
 
+  componentDidMount() {
+    this.props.fetchContent();
+  }
+
   passedCaptcha() {
     this.setState({ passedCaptcha: true });
   }
@@ -44,14 +51,29 @@ class SignupContainer extends React.Component {
   render() {
     const { handleSubmit, handleSignupSubmission, pristine, submitting, renderTextField, renderCheckbox } = this.props;
     const { formatMessage } = this.props.intl;
-    return (
+    const { content } = this.props;
+    const localMessagex = content?.title ? {
+      title: { id: 'user.signup.title', defaultMessage: content.title },
+      intro: { id: 'user.signup.intro', defaultMessage: content.description },
+      userEmail: { id: 'email.label', defaultMessage: content.emailLabel },
+      userFullName: { id: 'user.fullName.label', defaultMessage: content.fullNameLabel },
+      userPassword: { id: 'user.password.label', defaultMessage: content.passwordLabel },
+      userConfirmPassword: { id: 'user.confirm.password.label', defaultMessage: content.confirmPasswordLabel },
+      userNotes: { id: 'user.notes.label', defaultMessage: content.notesLabel },
+      notesHint: { id: 'notes.hint.label', defaultMessage: content.notesHint },
+      userSignup: { id: 'user.signup.label', defaultMessage: content.signUpButton },
+      userConsent: { id: 'user.consent.label', defaultMessage: serializeSlateToHtml(content.consentLabel) },
+
+    } : null;
+
+    return (localMessagex ? (
       <Grid>
         <PageTitle value={messages.userSignup} />
         <form onSubmit={handleSubmit(handleSignupSubmission.bind(this))} className="app-form signup-form">
           <Row>
             <Col lg={12}>
-              <h1><FormattedMessage {...messages.userSignup} /></h1>
-              <p><FormattedMessage {...localMessages.intro} /></p>
+              <h1><FormattedMessage {...localMessagex.title} /></h1>
+              <p><FormattedMessage {...localMessagex.intro} /></p>
             </Col>
           </Row>
           <Row>
@@ -60,7 +82,7 @@ class SignupContainer extends React.Component {
                 name="email"
                 fullWidth
                 component={renderTextField}
-                label={messages.userEmail}
+                label={localMessagex.userEmail}
               />
             </Col>
           </Row>
@@ -71,7 +93,7 @@ class SignupContainer extends React.Component {
                 type="text"
                 fullWidth
                 component={renderTextField}
-                label={messages.userFullName}
+                label={localMessagex.userFullName}
               />
             </Col>
           </Row>
@@ -82,7 +104,7 @@ class SignupContainer extends React.Component {
                 type="password"
                 fullWidth
                 component={renderTextField}
-                label={messages.userPassword}
+                label={localMessagex.userPassword}
               />
             </Col>
           </Row>
@@ -93,7 +115,7 @@ class SignupContainer extends React.Component {
                 type="password"
                 fullWidth
                 component={renderTextField}
-                label={messages.userConfirmPassword}
+                label={localMessagex.userConfirmPassword}
               />
             </Col>
           </Row>
@@ -106,8 +128,8 @@ class SignupContainer extends React.Component {
                 rows={2}
                 rowsMax={4}
                 component={renderTextField}
-                placeholder={formatMessage(localMessages.notesHint)}
-                label={messages.userNotes}
+                placeholder={formatMessage(localMessagex.notesHint)}
+                label={localMessagex.userNotes}
               />
             </Col>
           </Row>
@@ -117,7 +139,7 @@ class SignupContainer extends React.Component {
                 name="has_consented"
                 component={renderCheckbox}
                 fullWidth
-                label={messages.userConsent}
+                label={localMessagex.userConsent}
               />
             </Col>
           </Row>
@@ -128,7 +150,7 @@ class SignupContainer extends React.Component {
             <Col lg={12}>
               <AppButton
                 type="submit"
-                label={formatMessage(messages.userSignup)}
+                label={formatMessage(localMessagex.userSignup)}
                 primary
                 disabled={!this.state.passedCaptcha || pristine || submitting}
               />
@@ -136,7 +158,7 @@ class SignupContainer extends React.Component {
           </Row>
         </form>
       </Grid>
-    );
+    ) : null);
   }
 }
 
@@ -154,10 +176,13 @@ SignupContainer.propTypes = {
   fetchStatus: PropTypes.string.isRequired,
   // from dispatch
   handleSignupSubmission: PropTypes.func.isRequired,
+  fetchContent: PropTypes.func,
+  content: PropTypes.object,
 };
 
 const mapStateToProps = state => ({
   fetchStatus: state.user.fetchStatus,
+  content: state.cms.forms.content?.registration,
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
@@ -173,11 +198,15 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
         dispatch(replace('/user/signup-success'));
       }
     }),
+    fetchContent: () => {
+      dispatch(fetchFormContent('registration'));
+    },
 });
 
 // in-browser validation callback
-function validate(values) {
+function validate(values, props) {
   const errors = {};
+  console.log('DEBUG_PROPS_VALIDATE', props.content);
   if (invalidEmail(values.email)) {
     errors.email = localMessages.missingEmail;
   }
