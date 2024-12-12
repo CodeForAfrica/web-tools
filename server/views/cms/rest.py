@@ -48,7 +48,7 @@ def api_fetch_collections():
         return jsonify({'message': 'Received an invalid or malformed response'}), 500
 
 
-@app.route('/api/cms/fetch-globals', methods=['GET'])
+@app.route('/api/cms/globals', methods=['GET'])
 @api_error_handler
 def api_fetch_globals():
     application_name = html.escape(request.headers.get('cs-app'))
