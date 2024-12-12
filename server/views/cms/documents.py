@@ -10,8 +10,15 @@ logger = logging.getLogger(__name__)
 BASE_URL = app.config['PAYLOAD_API_URL']
 API_KEY = app.config['PAYLOAD_API_KEY']
 
-if not BASE_URL or not API_KEY:
-    error_message = 'Configuration error: PAYLOAD_API_URL and/or PAYLOAD_API_KEY are missing.'
+missing_configs = []
+if not BASE_URL:
+    missing_configs.append("PAYLOAD_API_URL")
+if not API_KEY:
+    missing_configs.append("PAYLOAD_API_KEY")
+
+if missing_configs:
+    missing_configs_str = ', '.join(missing_configs)
+    error_message = f'Configuration error missing: {missing_configs_str}'
     logger.error(error_message)
     raise RuntimeError(error_message)
 
