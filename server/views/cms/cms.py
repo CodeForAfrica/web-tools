@@ -21,7 +21,6 @@ BASE_URL = BASE_URL.rstrip('/')
 @api_error_handler
 def api_fetch_page_content():
     application_name = html.escape(request.headers.get('cs-app') or '')
-
     if not application_name:
         error_message = 'Missing required \'cs-app\' header in the request.'
         logger.error(error_message)
