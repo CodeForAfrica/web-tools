@@ -23,3 +23,9 @@ export function fetchCollections(applicationName, collectionName) {
     'get',
   );
 }
+
+export function fetchFormContent(form) {
+  return createApiPromise(
+    '/api/cms/forms', { form }, 'get',
+  );
+}
