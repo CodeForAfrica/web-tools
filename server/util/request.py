@@ -130,36 +130,3 @@ def csv_required(func):
 
 def safely_read_arg(arg_name, default=None):
     return request.args[arg_name] if arg_name in request.args else default
-
-
-def api_require_payload_config(config):
-    """
-    Validates Payload API configuration before executing a controller method.
-    """
-    def decorator(func):
-        @wraps(func)
-        def wrapper(*args, **kwargs):
-            # Check if config is passed and is a dictionary
-            if not config:
-                errorMessage = "No configuration provided"
-                logger.error(errorMessage)
-                return json_error_response(errorMessage)
-            
-            base_url = config.get("PAYLOAD_API_URL")
-            api_key = config.get("PAYLOAD_API_KEY")
-
-            if not base_url:
-                errorMessage = "Missing PAYLOAD_API_URL in configuration"
-                logger.error(errorMessage)
-                return json_error_response(errorMessage)
-            
-            if not api_key:
-                errorMessage = "Missing PAYLOAD_API_KEY in configuration"
-                logger.error(errorMessage)
-                return json_error_response(errorMessage)
-            
-            return func(*args, **kwargs)
-
-        return wrapper
-    
-    return decorator

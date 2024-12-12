@@ -20,6 +20,10 @@ if not BASE_URL or not API_KEY:
 @api_error_handler
 def api_fetch_page_content():
     application_name = html.escape(request.headers.get('cs-app') or '')
+
+    if not application_name:
+        raise RuntimeError(error_message)
+
     url = f"{BASE_URL}/{application_name}-pages"
     headers = dict(request.headers)
     headers['Authorization'] = f"users API-Key {API_KEY}"
