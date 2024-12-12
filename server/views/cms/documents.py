@@ -37,9 +37,13 @@ def api_fetch_page_content():
         escaped_args = {k: html.escape(v) for k, v in request.args.items()}
         response = requests.get(url, escaped_args, headers=headers)
         if response.status_code == 200:
-            return jsonify(response.json())
+            # Directly returning responses from another API is generally not advisable. 
+            # However, in this case, we can confidently trust the backend (Payload CMS).
+            return response.json()
         else:
-            return jsonify(response.json()), response.status_code
+            # Directly returning responses from another API is generally not advisable. 
+            # However, in this case, we can confidently trust the backend (Payload CMS).
+            return response.json(), response.status_code
     except:
         error_message = {'message': 'Received an invalid or malformed response'}
         logger.error(error_message)
@@ -59,9 +63,13 @@ def api_fetch_collections():
         escaped_args = {k: html.escape(v) for k, v in request.args.items()}
         response = requests.get(url, escaped_args, headers=headers)
         if response.status_code == 200:
-            return jsonify(response.json())
+            # Directly returning responses from another API is generally not advisable. 
+            # However, in this case, we can confidently trust the backend (Payload CMS).
+            return response.json()
         else:
-            return jsonify(response.json()), response.status_code
+            # Directly returning responses from another API is generally not advisable. 
+            # However, in this case, we can confidently trust the backend (Payload CMS).
+            return response.json(), response.status_code
     except:
         error_message = {'message': 'Received an invalid or malformed response'}
         logger.error(error_message)
@@ -81,10 +89,14 @@ def api_fetch_globals():
         escaped_args = {k: html.escape(v) for k, v in request.args.items()}
         response = requests.get(url, escaped_args, headers=headers)
         if response.status_code == 200:
-            return jsonify(response.json())
+            # Directly returning responses from another API is generally not advisable. 
+            # However, in this case, we can confidently trust the backend (Payload CMS).
+            return response.json()
         else:
             logger.error(response.json())
-            return jsonify(response.json()), response.status_code
+            # Directly returning responses from another API is generally not advisable. 
+            # However, in this case, we can confidently trust the backend (Payload CMS).
+            return response.json(), response.status_code
     except:
         error_message = {'message': 'Received an invalid or malformed response'}
         logger.error(error_message)
