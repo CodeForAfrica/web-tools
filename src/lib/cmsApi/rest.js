@@ -4,7 +4,7 @@ const CURRENT_APP_HEADER = 'CS-app';
 
 export function fetchGlobals(applicationName) {
   return createApiPromise(
-    `/api/cms/globals/settings-${applicationName}-site`, { draft: false, depth: 1 },
+    '/api/cms/globals', { draft: false, depth: 1 },
     'get',
     { [CURRENT_APP_HEADER]: applicationName }
   );
@@ -18,7 +18,7 @@ export function fetchFormContent(form) {
 
 export function fetchPageContent(applicationName, pageName) {
   return createApiPromise(
-    '/api/cms/fetch-page-content', { 'where[slug][equals]': pageName },
+    '/api/cms/pages', { 'where[slug][equals]': pageName },
     'get',
     { [CURRENT_APP_HEADER]: applicationName }
   );
@@ -26,7 +26,7 @@ export function fetchPageContent(applicationName, pageName) {
 
 export function fetchCollections(applicationName, collectionName) {
   return createApiPromise(
-    '/api/cms/fetch-collections',
+    '/api/cms/collections',
     { collection: collectionName },
     'get',
     { [CURRENT_APP_HEADER]: applicationName }
