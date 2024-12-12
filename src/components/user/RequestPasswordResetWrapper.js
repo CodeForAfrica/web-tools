@@ -18,6 +18,7 @@ class RequestPasswordResetWrapper extends React.Component {
     );
   }
 }
+
 const mapStateToProps = state => ({
   content: state.cms.forms.content?.['reset-password'],
 });
