@@ -7,10 +7,10 @@ const forms = createAsyncReducer({
     content: {},
   },
   action: FETCH_FORMS,
-  handleSuccess: (payload, state) => ({
+  handleSuccess: (payload, state, meta) => ({
     content: {
       ...state.content,
-      labels: payload,
+      [meta.args[0]]: payload,
     },
   }),
 });

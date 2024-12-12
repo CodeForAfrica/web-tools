@@ -67,7 +67,7 @@ LoginContainer.contextTypes = {
 
 const mapStateToProps = state => ({
   isLoggedIn: state.user.isLoggedIn,
-  content: state.cms.forms.content.labels,
+  content: state.cms.forms.content?.login,
 });
 
 const mapDispatchToProps = (dispatch) => ({
