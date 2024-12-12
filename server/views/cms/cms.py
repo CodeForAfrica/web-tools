@@ -16,7 +16,7 @@ if not BASE_URL:
 if not API_KEY:
     logger.error("Missing PAYLOAD_API_KEY")
 
-@app.route('/api/cms/fetch-page-content', methods=['GET'])
+@app.route('/api/cms/pages', methods=['GET'])
 @api_error_handler
 def api_fetch_page_content():
     application_name = html.escape(request.headers.get('cs-app') or '')
@@ -34,7 +34,7 @@ def api_fetch_page_content():
         return jsonify({'message': 'Received an invalid or malformed response'}), 500
 
 
-@app.route('/api/cms/fetch-collections', methods=['GET'])
+@app.route('/api/cms/collections', methods=['GET'])
 @api_error_handler
 def api_fetch_collections():
     collection = html.escape(request.args.get('collection'))
@@ -53,7 +53,7 @@ def api_fetch_collections():
         return jsonify({'message': 'Received an invalid or malformed response'}), 500
 
 
-@app.route('/api/cms/fetch-globals', methods=['GET'])
+@app.route('/api/cms/globals', methods=['GET'])
 @api_error_handler
 def api_fetch_globals():
     application_name = html.escape(request.headers.get('cs-app'))
