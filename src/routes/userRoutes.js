@@ -8,7 +8,6 @@ import RequestPasswordResetSuccessMessage from '../components/user/RequestPasswo
 import ResendActivationSuccess from '../components/user/ResendActivationSuccess';
 import Activated from '../components/user/Activated';
 import ChangePasswordContainer from '../components/user/ChangePasswordContainer';
-import RequestPasswordReset from '../components/user/RequestPasswordReset';
 import ResetPasswordContainer from '../components/user/ResetPasswordContainer';
 import ResetPasswordSuccessMessage from '../components/user/ResetPasswordSuccessMessage';
 import UserProfileContainer from '../components/user/UserProfileContainer';
@@ -16,6 +15,7 @@ import ResendActivationForm from '../components/user/ResendActivationForm';
 import UserEditProfileContainer from '../components/user/UserEditProfileContainer';
 import UserConsentContainer from '../components/user/UserConsentContainer';
 import SignupContainerWrapper from '../components/user/SignupContainerWrapper';
+import RequestPasswordResetWrapper from '../components/user/RequestPasswordResetWrapper';
 
 const userRoutes = (
   <Route path="/user">
@@ -30,7 +30,7 @@ const userRoutes = (
     <Route path="resend-activation-success" component={ResendActivationSuccess} onEnter={redirectHomeIfLoggedIn} />
     <Route path="activated" component={Activated} onEnter={redirectHomeIfLoggedIn} />
 
-    <Route path="request-password-reset" component={RequestPasswordReset} />
+    <Route path="request-password-reset" component={RequestPasswordResetWrapper} />
     <Route path="request-password-reset-success" component={RequestPasswordResetSuccessMessage} />
     <Route path="reset-password" component={ResetPasswordContainer} onEnter={requiresUrlParams('email', 'password_reset_token')} />
     <Route path="reset-password-success" component={ResetPasswordSuccessMessage} />

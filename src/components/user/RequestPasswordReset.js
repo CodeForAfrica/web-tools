@@ -15,17 +15,17 @@ import withIntlForm from '../common/hocs/IntlForm';
 import PageTitle from '../common/PageTitle';
 import withAsyncData from '../common/hocs/AsyncDataContainer';
 
-const localMessages = {
-  title: { id: 'user.forgotPassword.title', defaultMessage: 'Forgot Your Password?' },
-  intro: { id: 'user.forgotPassword.intro', defaultMessage: 'Enter your email address and we will send you a link to reset your password.' },
-  missingEmail: { id: 'user.missingEmail', defaultMessage: 'You need to enter a valid email address.' },
-  mailMeALink: { id: 'user.forgotPassword.mailMeALink', defaultMessage: 'Send Password Reset Email' },
-  failed: { id: 'user.recoverPassword.failed', defaultMessage: 'Sorry, something went wrong.' },
-};
 
 const RequestPasswordReset = (props) => {
-  const { handleSubmit, onSubmitRecovery, pristine, renderTextField } = props;
+  const { handleSubmit, onSubmitRecovery, pristine, renderTextField, content } = props;
   const { formatMessage } = props.intl;
+  const localMessages = content?.title ? {
+    title: { id: 'user.forgotPassword.title', defaultMessage: content.title },
+    intro: { id: 'user.forgotPassword.intro', defaultMessage: content.description },
+    userEmail: { id: 'email.label', defaultMessage: content.emailLabel },
+    mailMeALink: { id: 'user.forgotPassword.mailMeALink', defaultMessage: content.passwordResetButton },
+  } : null;
+
   return (
     <Grid>
       <PageTitle value={localMessages.title} />
@@ -73,6 +73,7 @@ RequestPasswordReset.propTypes = {
   pristine: PropTypes.bool.isRequired,
   // from dispatch
   onSubmitRecovery: PropTypes.func.isRequired,
+  content: PropTypes.object,
 };
 
 const mapStateToProps = state => ({
@@ -80,7 +81,7 @@ const mapStateToProps = state => ({
   errorMessage: state.user.errorMessage,
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch, ownProps) => ({
   onSubmitRecovery: (values) => {
     dispatch(sendRecoverPasswordRequest(values))
       .then((response) => {
@@ -88,7 +89,7 @@ const mapDispatchToProps = dispatch => ({
           if (response.success === 1) {
             dispatch(push('/user/request-password-reset-success'));
           } else {
-            dispatch(addNotice({ message: localMessages.failed, level: LEVEL_ERROR }));
+            dispatch(addNotice({ message: ownProps.content?.passwordResetFailed, level: LEVEL_ERROR }));
           }
         }
       });
@@ -96,10 +97,10 @@ const mapDispatchToProps = dispatch => ({
 });
 
 // in-browser validation callback
-function validate(values) {
+function validate(values, props) {
   const errors = {};
   if (invalidEmail(values.email)) {
-    errors.email = localMessages.missingEmail;
+    errors.email = props.content?.emailErrorMessage;
   }
   return errors;
 }
