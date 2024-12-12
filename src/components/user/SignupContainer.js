@@ -15,33 +15,12 @@ import withIntlForm from '../common/hocs/IntlForm';
 import { addNotice } from '../../actions/appActions';
 import { LEVEL_ERROR } from '../common/Notice';
 import PageTitle from '../common/PageTitle';
-import { fetchFormContent } from '../../actions/cmsActions';
 import serializeSlateToHtml from '../../lib/cmsUtils/slateToHTMLSerializer';
 
-
-const localMessages = {
-  intro: { id: 'user.signup.intro', defaultMessage: 'Create an account to use all our tools for free.' },
-  missingEmail: { id: 'user.missingEmail', defaultMessage: 'You need to enter a valid email address.' },
-  missingFullname: { id: 'user.missingName', defaultMessage: 'You need to enter your full name.' },
-  missingPassword: { id: 'user.missingPassword', defaultMessage: 'You need to enter your password.' },
-  missingNotes: { id: 'user.missingNotes', defaultMessage: 'You have to tell us a little about why you want to use Media Cloud.' },
-  missingConsent: { id: 'user.missingConsent', defaultMessage: 'You must agree to our Terms and Policies' },
-  feedback: { id: 'user.signUp.feedback', defaultMessage: 'Successfully signed up.' },
-  notesHint: { id: 'user.notes.hint', defaultMessage: 'Tell us a little about what you want to use Media Cloud for' },
-  userAlreadyExists: { id: 'user.signUp.error.alreadyExists', defaultMessage: 'Sorry, but a user with that email already exists! Did you <a href="/#/request-password-reset">need to reset your password</a>?' },
-  signupSuccess: { id: 'user.signUp.success',
-    defaultMessage: '<h1>Click the link we just emailed you</h1>'
-    + '<p>To make sure your email is valid, we have sent you a message with a magic link for you to click.  Click the link in the email to confirm that we got your email right.<p>'
-    + '<p><a href="post-to-recover-password">Click here to send the email again</a>.</p>.' },
-};
 
 class SignupContainer extends React.Component {
   state = {
     passedCaptcha: false,
-  }
-
-  componentDidMount() {
-    this.props.fetchContent();
   }
 
   passedCaptcha() {
@@ -49,10 +28,9 @@ class SignupContainer extends React.Component {
   }
 
   render() {
-    const { handleSubmit, handleSignupSubmission, pristine, submitting, renderTextField, renderCheckbox } = this.props;
+    const { handleSubmit, handleSignupSubmission, pristine, submitting, renderTextField, renderCheckbox, content } = this.props;
     const { formatMessage } = this.props.intl;
-    const { content } = this.props;
-    const localMessagex = content?.title ? {
+    const localMessages = content?.title ? {
       title: { id: 'user.signup.title', defaultMessage: content.title },
       intro: { id: 'user.signup.intro', defaultMessage: content.description },
       userEmail: { id: 'email.label', defaultMessage: content.emailLabel },
@@ -66,14 +44,14 @@ class SignupContainer extends React.Component {
 
     } : null;
 
-    return (localMessagex ? (
+    return (localMessages ? (
       <Grid>
         <PageTitle value={messages.userSignup} />
         <form onSubmit={handleSubmit(handleSignupSubmission.bind(this))} className="app-form signup-form">
           <Row>
             <Col lg={12}>
-              <h1><FormattedMessage {...localMessagex.title} /></h1>
-              <p><FormattedMessage {...localMessagex.intro} /></p>
+              <h1><FormattedMessage {...localMessages.title} /></h1>
+              <p><FormattedMessage {...localMessages.intro} /></p>
             </Col>
           </Row>
           <Row>
@@ -82,7 +60,7 @@ class SignupContainer extends React.Component {
                 name="email"
                 fullWidth
                 component={renderTextField}
-                label={localMessagex.userEmail}
+                label={localMessages.userEmail}
               />
             </Col>
           </Row>
@@ -93,7 +71,7 @@ class SignupContainer extends React.Component {
                 type="text"
                 fullWidth
                 component={renderTextField}
-                label={localMessagex.userFullName}
+                label={localMessages.userFullName}
               />
             </Col>
           </Row>
@@ -104,7 +82,7 @@ class SignupContainer extends React.Component {
                 type="password"
                 fullWidth
                 component={renderTextField}
-                label={localMessagex.userPassword}
+                label={localMessages.userPassword}
               />
             </Col>
           </Row>
@@ -115,7 +93,7 @@ class SignupContainer extends React.Component {
                 type="password"
                 fullWidth
                 component={renderTextField}
-                label={localMessagex.userConfirmPassword}
+                label={localMessages.userConfirmPassword}
               />
             </Col>
           </Row>
@@ -128,8 +106,8 @@ class SignupContainer extends React.Component {
                 rows={2}
                 rowsMax={4}
                 component={renderTextField}
-                placeholder={formatMessage(localMessagex.notesHint)}
-                label={localMessagex.userNotes}
+                placeholder={formatMessage(localMessages.notesHint)}
+                label={localMessages.userNotes}
               />
             </Col>
           </Row>
@@ -139,7 +117,7 @@ class SignupContainer extends React.Component {
                 name="has_consented"
                 component={renderCheckbox}
                 fullWidth
-                label={localMessagex.userConsent}
+                label={localMessages.userConsent}
               />
             </Col>
           </Row>
@@ -150,7 +128,7 @@ class SignupContainer extends React.Component {
             <Col lg={12}>
               <AppButton
                 type="submit"
-                label={formatMessage(localMessagex.userSignup)}
+                label={formatMessage(localMessages.userSignup)}
                 primary
                 disabled={!this.state.passedCaptcha || pristine || submitting}
               />
@@ -176,13 +154,11 @@ SignupContainer.propTypes = {
   fetchStatus: PropTypes.string.isRequired,
   // from dispatch
   handleSignupSubmission: PropTypes.func.isRequired,
-  fetchContent: PropTypes.func,
   content: PropTypes.object,
 };
 
 const mapStateToProps = state => ({
   fetchStatus: state.user.fetchStatus,
-  content: state.cms.forms.content?.registration,
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
@@ -190,7 +166,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     .then((response) => {
       if (response.success !== 1) {
         if (response.message.includes('already exists')) {
-          dispatch(addNotice({ level: LEVEL_ERROR, htmlMessage: ownProps.intl.formatMessage(localMessages.userAlreadyExists) }));
+          dispatch(addNotice({ level: LEVEL_ERROR, htmlMessage: serializeSlateToHtml(ownProps.content?.userAlreadyExists) }));
         } else {
           dispatch(addNotice({ level: LEVEL_ERROR, message: response.message }));
         }
@@ -198,38 +174,34 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
         dispatch(replace('/user/signup-success'));
       }
     }),
-    fetchContent: () => {
-      dispatch(fetchFormContent('registration'));
-    },
 });
 
 // in-browser validation callback
 function validate(values, props) {
   const errors = {};
-  console.log('DEBUG_PROPS_VALIDATE', props.content);
   if (invalidEmail(values.email)) {
-    errors.email = localMessages.missingEmail;
+    errors.email = props.content?.emailErrorMessage;
   }
   if (emptyString(values.fullName)) {
-    errors.fullName = localMessages.missingName;
+    errors.fullName = props.content?.fullNameErrorMessage;
   }
   if (emptyString(values.password)) {
-    errors.password = localMessages.missingPassword;
+    errors.password = props.content?.passwordErrorMessage;
   }
   if (passwordTooShort(values.password)) {
-    errors.password = messages.passwordTooShort;
+    errors.password = props.content?.passwordTooShort;
   }
   if (passwordTooShort(values.confirmPassword)) {
-    errors.confirmPassword = messages.passwordTooShort;
+    errors.confirmPassword = props.content?.passwordTooShort;
   }
   if (stringsDoNotMatch(values.password, values.confirmPassword)) {
-    errors.password = messages.passwordsMismatch;
+    errors.password = props.content?.passwordsMismatch;
   }
   if (!values.has_consented) {
-    errors.has_consented = localMessages.missingConsent;
+    errors.has_consented = props.content?.consentError;
   }
   if (emptyString(values.notes)) {
-    errors.notes = localMessages.missingNotes;
+    errors.notes = props.content?.notesErrorMessage;
   }
   return errors;
 }

@@ -2,7 +2,6 @@ import React from 'react';
 import Route from 'react-router/lib/Route';
 import { requireAuth, redirectHomeIfLoggedIn, requiresUrlParams } from './routes';
 import LoginFormContainer from '../components/user/LoginFormContainer';
-import SignupContainer from '../components/user/SignupContainer';
 import SignupSuccessMessage from '../components/user/SignupSuccessMessage';
 import ChangePasswordSuccessMessage from '../components/user/ChangePasswordSuccessMessage';
 import RequestPasswordResetSuccessMessage from '../components/user/RequestPasswordResetSuccessMessage';
@@ -16,6 +15,7 @@ import UserProfileContainer from '../components/user/UserProfileContainer';
 import ResendActivationForm from '../components/user/ResendActivationForm';
 import UserEditProfileContainer from '../components/user/UserEditProfileContainer';
 import UserConsentContainer from '../components/user/UserConsentContainer';
+import SignupContainerWrapper from '../components/user/SignupContainerWrapper';
 
 const userRoutes = (
   <Route path="/user">
@@ -24,7 +24,7 @@ const userRoutes = (
 
     <Route path="profile" component={UserProfileContainer} onEnter={requireAuth} />
 
-    <Route path="signup" component={SignupContainer} onEnter={redirectHomeIfLoggedIn} />
+    <Route path="signup" component={SignupContainerWrapper} onEnter={redirectHomeIfLoggedIn} />
     <Route path="signup-success" component={SignupSuccessMessage} onEnter={redirectHomeIfLoggedIn} />
     <Route path="resend-activation" component={ResendActivationForm} onEnter={redirectHomeIfLoggedIn} />
     <Route path="resend-activation-success" component={ResendActivationSuccess} onEnter={redirectHomeIfLoggedIn} />
