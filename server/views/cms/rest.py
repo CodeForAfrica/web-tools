@@ -29,7 +29,7 @@ def api_fetch_page_content():
         return jsonify({'message': 'Received an invalid or malformed response'}), 500
 
 
-@app.route('/api/cms/fetch-collections', methods=['GET'])
+@app.route('/api/cms/collections', methods=['GET'])
 @api_error_handler
 def api_fetch_collections():
     collection = html.escape(request.args.get('collection'))
