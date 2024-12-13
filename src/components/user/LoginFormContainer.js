@@ -5,10 +5,8 @@ import { Grid, Row, Col } from 'react-flexbox-grid/lib';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import LoginForm from './LoginForm';
 import PageTitle from '../common/PageTitle';
+import createFormContentWrapper from '../common/hocs/FormContentWrapper';
 
-const localMessages = {
-  loginTitle: { id: 'login.title', defaultMessage: 'Login' },
-};
 
 class LoginContainer extends React.Component {
   UNSAFE_componentWillReceiveProps(nextProps) {
@@ -19,8 +17,12 @@ class LoginContainer extends React.Component {
 
   render() {
     const { isLoggedIn } = this.props.intl;
+    const { content } = this.props;
+    const localMessages = content?.title
+    ? { loginTitle: { id: 'login.title', defaultMessage: content.title } }
+    : null;
     const className = `logged-in-${isLoggedIn}`;
-    return (
+    return (localMessages ? (
       <>
         <Grid>
           <PageTitle value={localMessages.loginTitle} />
@@ -31,12 +33,15 @@ class LoginContainer extends React.Component {
           </Row>
           <Row>
             <Col lg={4} className={className}>
-              <LoginForm location={this.props.location} />
+              <LoginForm
+                location={this.props.location}
+                content={content}
+              />
             </Col>
           </Row>
         </Grid>
       </>
-    );
+    ) : null);
   }
 }
 
@@ -44,6 +49,7 @@ LoginContainer.propTypes = {
   isLoggedIn: PropTypes.bool.isRequired,
   intl: PropTypes.object.isRequired,
   location: PropTypes.object,
+  content: PropTypes.object,
 };
 
 LoginContainer.contextTypes = {
@@ -52,11 +58,14 @@ LoginContainer.contextTypes = {
 
 const mapStateToProps = state => ({
   isLoggedIn: state.user.isLoggedIn,
+  content: state.cms.forms.content?.login,
 });
 
-export default
+
+export default createFormContentWrapper(
 injectIntl(
   connect(mapStateToProps)(
     LoginContainer
   )
+), 'login'
 );

@@ -2,20 +2,20 @@ import React from 'react';
 import Route from 'react-router/lib/Route';
 import { requireAuth, redirectHomeIfLoggedIn, requiresUrlParams } from './routes';
 import LoginFormContainer from '../components/user/LoginFormContainer';
-import SignupContainer from '../components/user/SignupContainer';
 import SignupSuccessMessage from '../components/user/SignupSuccessMessage';
 import ChangePasswordSuccessMessage from '../components/user/ChangePasswordSuccessMessage';
 import RequestPasswordResetSuccessMessage from '../components/user/RequestPasswordResetSuccessMessage';
 import ResendActivationSuccess from '../components/user/ResendActivationSuccess';
 import Activated from '../components/user/Activated';
 import ChangePasswordContainer from '../components/user/ChangePasswordContainer';
-import RequestPasswordReset from '../components/user/RequestPasswordReset';
 import ResetPasswordContainer from '../components/user/ResetPasswordContainer';
 import ResetPasswordSuccessMessage from '../components/user/ResetPasswordSuccessMessage';
 import UserProfileContainer from '../components/user/UserProfileContainer';
 import ResendActivationForm from '../components/user/ResendActivationForm';
 import UserEditProfileContainer from '../components/user/UserEditProfileContainer';
 import UserConsentContainer from '../components/user/UserConsentContainer';
+import RequestPasswordReset from '../components/user/RequestPasswordReset';
+import SignupContainer from '../components/user/SignupContainer';
 
 const userRoutes = (
   <Route path="/user">
