@@ -2,6 +2,17 @@
   "releases": [
     {
       "date": "2024-06-04",
+      "version": "v3.19.9",
+      "notes":[
+        {
+          "apps": ["topics","sources","explorer","tools"],
+          "type": "New",
+          "note": "integrate payload cms with all apps"
+        }
+      ]
+    },
+    {
+      "date": "2024-06-04",
       "version": "v3.19.7",
       "notes":[
         {
