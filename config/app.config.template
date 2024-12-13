@@ -67,3 +67,7 @@ CORENLP_URL = http://stanford-corenlp-server:9000
 
 # API Key for use in communication with YouTube API
 YOUTUBE_API_KEY = 0
+
+# Payload CMS environment variables
+PAYLOAD_API_URL = http://localhost:3000/api
+PAYLOAD_API_KEY = 

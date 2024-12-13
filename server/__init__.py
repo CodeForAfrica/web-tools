@@ -188,6 +188,11 @@ def create_app():
 
     my_app.cli.add_command(sync_frontend_db)
 
+    # add Payload CMS configurations
+    my_app.config['PAYLOAD_API_URL'] = config.get('PAYLOAD_API_URL')
+    my_app.config['PAYLOAD_API_KEY'] = config.get('PAYLOAD_API_KEY')
+
+
     return my_app
 
 
@@ -236,6 +241,8 @@ import server.views.media_picker
 import server.views.sources.search
 import server.views.metadata
 import server.views.platforms
+import server.views.cms.documents
+
 if (server_app == SERVER_APP_SOURCES) or is_dev_mode():
     import server.views.sources.collection
     import server.views.sources.collectionedit
