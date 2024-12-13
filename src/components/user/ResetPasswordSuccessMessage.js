@@ -1,24 +1,16 @@
 import PropTypes from 'prop-types';
-import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
+import React from 'react';
 import { Grid, Row, Col } from 'react-flexbox-grid/lib';
 import { FormattedMessage, injectIntl } from 'react-intl';
-import { fetchFormContent } from '../../actions/cmsActions';
+import createFormContentWrapper from '../common/hocs/FormContentWrapper';
 
-
-const ResetPasswordSuccessMessage = ({ fetchContent, content }) => {
-  useEffect(() => {
-    if (!content) {
-      fetchContent();
-    }
-  }, [fetchContent]);
-
-  const localMessages = content ? {
+const ResetPasswordSuccessMessage = ({ content }) => {
+  const localMessages = {
     title: { id: 'success.email', defaultMessage: content.passwordResetSuccessTitle },
     intro: { id: 'success.emailInfo', defaultMessage: content.passwordResetSuccessDescription },
-  } : null;
+  };
 
-  return (localMessages ? (
+  return (
     <div className="change-password-success">
       <Grid>
         <Row>
@@ -29,28 +21,15 @@ const ResetPasswordSuccessMessage = ({ fetchContent, content }) => {
         </Row>
       </Grid>
     </div>
-  ) : null);
+  );
 };
 
 ResetPasswordSuccessMessage.propTypes = {
   intl: PropTypes.object.isRequired,
-  content: PropTypes.object,
-  fetchContent: PropTypes.func,
+  content: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = state => ({
-  content: state.cms.forms.content?.['reset-password'],
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  fetchContent: () => {
-    dispatch(fetchFormContent('reset-password'));
-  },
-});
-
-export default
-injectIntl(
-  connect(mapStateToProps, mapDispatchToProps)(
-    ResetPasswordSuccessMessage
-  )
+export default createFormContentWrapper(
+  injectIntl(ResetPasswordSuccessMessage),
+  'reset-password'
 );

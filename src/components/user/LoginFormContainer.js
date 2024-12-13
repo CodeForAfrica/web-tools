@@ -5,14 +5,10 @@ import { Grid, Row, Col } from 'react-flexbox-grid/lib';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import LoginForm from './LoginForm';
 import PageTitle from '../common/PageTitle';
-import { fetchFormContent } from '../../actions/cmsActions';
+import createFormContentWrapper from '../common/hocs/FormContentWrapper';
 
 
 class LoginContainer extends React.Component {
-  componentDidMount() {
-    this.props.fetchContent();
-  }
-
   UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps.isLoggedIn) {
       this.context.router.push('/home');
@@ -53,7 +49,6 @@ LoginContainer.propTypes = {
   isLoggedIn: PropTypes.bool.isRequired,
   intl: PropTypes.object.isRequired,
   location: PropTypes.object,
-  fetchContent: PropTypes.func,
   content: PropTypes.object,
 };
 
@@ -66,16 +61,11 @@ const mapStateToProps = state => ({
   content: state.cms.forms.content?.login,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  fetchContent: () => {
-    dispatch(fetchFormContent('login'));
-  },
-});
 
-
-export default
+export default createFormContentWrapper(
 injectIntl(
-  connect(mapStateToProps, mapDispatchToProps)(
+  connect(mapStateToProps)(
     LoginContainer
   )
+), 'login'
 );
