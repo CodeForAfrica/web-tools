@@ -16,6 +16,7 @@ import { addNotice } from '../../actions/appActions';
 import { LEVEL_ERROR } from '../common/Notice';
 import PageTitle from '../common/PageTitle';
 import serializeSlateToHtml from '../../lib/cmsUtils/slateToHTMLSerializer';
+import createFormContentWrapper from '../common/hocs/FormContentWrapper';
 
 
 class SignupContainer extends React.Component {
@@ -211,11 +212,13 @@ const reduxFormConfig = {
   validate,
 };
 
-export default
+export default createFormContentWrapper(
 withIntlForm(
   reduxForm(reduxFormConfig)(
     connect(mapStateToProps, mapDispatchToProps)(
       SignupContainer
     )
   )
+),
+'registration'
 );

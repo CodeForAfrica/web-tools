@@ -14,6 +14,7 @@ import { invalidEmail } from '../../lib/formValidators';
 import withIntlForm from '../common/hocs/IntlForm';
 import PageTitle from '../common/PageTitle';
 import withAsyncData from '../common/hocs/AsyncDataContainer';
+import createFormContentWrapper from '../common/hocs/FormContentWrapper';
 
 
 const RequestPasswordReset = (props) => {
@@ -115,7 +116,7 @@ const fetchAsyncData = (dispatch) => {
   return dispatch(logout);
 };
 
-export default
+export default createFormContentWrapper(
 injectIntl(
   withIntlForm(
     reduxForm(reduxFormConfig)(
@@ -125,5 +126,7 @@ injectIntl(
         )
       )
     )
-  )
+  ),
+),
+  'reset-password'
 );
