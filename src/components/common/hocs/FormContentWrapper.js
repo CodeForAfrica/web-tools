@@ -4,14 +4,14 @@ import { connect } from 'react-redux';
 import { injectIntl } from 'react-intl';
 import { fetchFormContent } from '../../../actions/cmsActions';
 
-const FormContentWrapper = ({ content, fetchContent, WrappedComponent, ...rest }) => {
+const FormContentWrapper = ({ content, fetchContent, WrappedComponent, ...props }) => {
   useEffect(() => {
     if (!content) {
       fetchContent();
     }
   }, [content, fetchContent]);
 
-  return content ? <WrappedComponent content={content} {...rest} /> : null;
+  return content ? <WrappedComponent content={content} {...props} /> : null;
 };
 
 const makeMapStateToProps = (formKey) => (state) => ({
