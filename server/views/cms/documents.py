@@ -88,13 +88,10 @@ def api_fetch_globals():
 
 @app.route('/api/cms/forms', methods=['GET'])
 @api_error_handler
+@arguments_required('form')
 def api_fetch_forms():
     form =  html.escape(request.args.get('form'))
-    if not form:
-        error_message = 'Missing required parameter (form) in the request.'
-        logger.error(error_message)
-        raise RuntimeError(error_message)
-
+ 
     url = f'{BASE_URL}/globals/{form}-form'
     headers = dict(request.headers)
     headers['Authorization'] = f'users API-Key {API_KEY}'
@@ -102,10 +99,7 @@ def api_fetch_forms():
     try:
         escaped_args = {k: html.escape(v) for k, v in request.args.items()}
         response = requests.get(url, escaped_args, headers=headers)
-        if response.status_code == 200:
-            return response.json()
-        else:
-            return response.json(), response.status_code
+        return response.json(), response.status_code
     except:
         error_message = {'message': 'Received an invalid or malformed response'}
         logger.error(error_message)

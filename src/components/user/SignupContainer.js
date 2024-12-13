@@ -9,7 +9,6 @@ import { signupUser } from '../../actions/userActions';
 // import { updateFeedback } from '../../actions/appActions';
 import AppButton from '../common/AppButton';
 import Captcha from '../common/form/Captcha';
-import messages from '../../resources/messages';
 import { emptyString, invalidEmail, passwordTooShort, stringsDoNotMatch } from '../../lib/formValidators';
 import withIntlForm from '../common/hocs/IntlForm';
 import { addNotice } from '../../actions/appActions';
@@ -31,7 +30,7 @@ class SignupContainer extends React.Component {
   render() {
     const { handleSubmit, handleSignupSubmission, pristine, submitting, renderTextField, renderCheckbox, content } = this.props;
     const { formatMessage } = this.props.intl;
-    const localMessages = content?.title ? {
+    const messages = content?.title ? {
       title: { id: 'user.signup.title', defaultMessage: content.title },
       intro: { id: 'user.signup.intro', defaultMessage: content.description },
       userEmail: { id: 'email.label', defaultMessage: content.emailLabel },
@@ -45,14 +44,14 @@ class SignupContainer extends React.Component {
 
     } : null;
 
-    return (localMessages ? (
+    return (messages ? (
       <Grid>
-        <PageTitle value={messages.userSignup} />
+        <PageTitle value={messages.title} />
         <form onSubmit={handleSubmit(handleSignupSubmission.bind(this))} className="app-form signup-form">
           <Row>
             <Col lg={12}>
-              <h1><FormattedMessage {...localMessages.title} /></h1>
-              <p><FormattedMessage {...localMessages.intro} /></p>
+              <h1><FormattedMessage {...messages.title} /></h1>
+              <p><FormattedMessage {...messages.intro} /></p>
             </Col>
           </Row>
           <Row>
@@ -61,7 +60,7 @@ class SignupContainer extends React.Component {
                 name="email"
                 fullWidth
                 component={renderTextField}
-                label={localMessages.userEmail}
+                label={messages.userEmail}
               />
             </Col>
           </Row>
@@ -72,7 +71,7 @@ class SignupContainer extends React.Component {
                 type="text"
                 fullWidth
                 component={renderTextField}
-                label={localMessages.userFullName}
+                label={messages.userFullName}
               />
             </Col>
           </Row>
@@ -83,7 +82,7 @@ class SignupContainer extends React.Component {
                 type="password"
                 fullWidth
                 component={renderTextField}
-                label={localMessages.userPassword}
+                label={messages.userPassword}
               />
             </Col>
           </Row>
@@ -94,7 +93,7 @@ class SignupContainer extends React.Component {
                 type="password"
                 fullWidth
                 component={renderTextField}
-                label={localMessages.userConfirmPassword}
+                label={messages.userConfirmPassword}
               />
             </Col>
           </Row>
@@ -107,8 +106,8 @@ class SignupContainer extends React.Component {
                 rows={2}
                 rowsMax={4}
                 component={renderTextField}
-                placeholder={formatMessage(localMessages.notesHint)}
-                label={localMessages.userNotes}
+                placeholder={formatMessage(messages.notesHint)}
+                label={messages.userNotes}
               />
             </Col>
           </Row>
@@ -118,7 +117,7 @@ class SignupContainer extends React.Component {
                 name="has_consented"
                 component={renderCheckbox}
                 fullWidth
-                label={localMessages.userConsent}
+                label={messages.userConsent}
               />
             </Col>
           </Row>
@@ -129,7 +128,7 @@ class SignupContainer extends React.Component {
             <Col lg={12}>
               <AppButton
                 type="submit"
-                label={formatMessage(localMessages.userSignup)}
+                label={formatMessage(messages.userSignup)}
                 primary
                 disabled={!this.state.passedCaptcha || pristine || submitting}
               />

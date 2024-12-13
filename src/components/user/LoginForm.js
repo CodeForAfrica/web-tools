@@ -20,7 +20,7 @@ const LoginForm = (props) => {
   const { handleSubmit, onSubmitLoginForm, fetchStatus, renderTextField, content } = props;
   const { formatMessage } = props.intl;
 
-  const localMessages = content
+  const messages = content
   ? {
       userEmail: {
         id: 'user.email',
@@ -66,14 +66,14 @@ const LoginForm = (props) => {
   : null;
 
   return (
-    localMessages ? (
+    messages ? (
       <form onSubmit={handleSubmit(onSubmitLoginForm.bind(this))} className="app-form login-form">
         <Row>
           <Col lg={12}>
             <Field
               name="email"
               component={renderTextField}
-              label={localMessages.userEmail}
+              label={messages.userEmail}
               fullWidth
             />
           </Col>
@@ -84,7 +84,7 @@ const LoginForm = (props) => {
               name="password"
               type="password"
               component={renderTextField}
-              label={localMessages.userPassword}
+              label={messages.userPassword}
               fullWidth
             />
           </Col>
@@ -93,7 +93,7 @@ const LoginForm = (props) => {
           <Col lg={12}>
             <AppButton
               type="submit"
-              label={formatMessage(localMessages.login)}
+              label={formatMessage(messages.login)}
               primary
               disabled={fetchStatus === fetchConstants.FETCH_ONGOING}
             />
@@ -102,14 +102,14 @@ const LoginForm = (props) => {
         <Row>
           <Col lg={12}>
             <Link to="/user/signup">
-              <AppButton label={formatMessage(localMessages.signUpNow)} />
+              <AppButton label={formatMessage(messages.signUpNow)} />
             </Link>
           </Col>
         </Row>
         <Row>
           <Col lg={12}>
             <Link to="/user/request-password-reset">
-              <AppButton label={formatMessage(localMessages.forgotPassword)} />
+              <AppButton label={formatMessage(messages.forgotPassword)} />
             </Link>
           </Col>
         </Row>
