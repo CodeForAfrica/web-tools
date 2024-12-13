@@ -7,7 +7,9 @@ import { fetchFormContent } from '../../../actions/cmsActions';
 
 class FormContentWrapper extends React.Component {
   componentDidMount() {
-    this.props.fetchContent();
+    if (!this.props.content) {
+        this.props.fetchContent();
+    }
   }
 
   render() {

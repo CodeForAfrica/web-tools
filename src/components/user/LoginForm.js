@@ -13,6 +13,7 @@ import withIntlForm from '../common/hocs/IntlForm';
 import { addNotice, updateFeedback } from '../../actions/appActions';
 import { LEVEL_ERROR } from '../common/Notice';
 import serializeSlateToHtml from '../../lib/cmsUtils/slateToHTMLSerializer';
+import createFormContentWrapper from '../common/hocs/FormContentWrapper';
 
 
 const LoginForm = (props) => {
@@ -183,11 +184,13 @@ const reduxFormConfig = {
   validate,
 };
 
-export default
+export default createFormContentWrapper(
 withIntlForm(
   reduxForm(reduxFormConfig)(
     connect(mapStateToProps, mapDispatchToProps)(
       LoginForm
     )
   )
+),
+'login'
 );
