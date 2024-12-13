@@ -1,22 +1,18 @@
-// src/components/common/FormContentWrapper.js
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { injectIntl } from 'react-intl';
 import { fetchFormContent } from '../../../actions/cmsActions';
 
-class FormContentWrapper extends React.Component {
-  componentDidMount() {
-    if (!this.props.content) {
-        this.props.fetchContent();
+const FormContentWrapper = ({ content, fetchContent, WrappedComponent, ...rest }) => {
+  useEffect(() => {
+    if (!content) {
+      fetchContent();
     }
-  }
+  }, [content, fetchContent]);
 
-  render() {
-    const { content, WrappedComponent, ...rest } = this.props;
-    return content ? <WrappedComponent content={content} {...rest} /> : null;
-  }
-}
+  return content ? <WrappedComponent content={content} {...rest} /> : null;
+};
 
 const makeMapStateToProps = (formKey) => (state) => ({
   content: state.cms.forms.content?.[formKey],
@@ -35,10 +31,10 @@ FormContentWrapper.propTypes = {
 };
 
 const createFormContentWrapper = (WrappedComponent, formKey) => injectIntl(
-    connect(
-      makeMapStateToProps(formKey),
-      makeMapDispatchToProps(formKey)
-    )(props => <FormContentWrapper {...props} WrappedComponent={WrappedComponent} />)
+  connect(
+    makeMapStateToProps(formKey),
+    makeMapDispatchToProps(formKey)
+  )((props) => <FormContentWrapper {...props} WrappedComponent={WrappedComponent} />)
 );
 
 export default createFormContentWrapper;
