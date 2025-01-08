@@ -33,32 +33,23 @@ BASE_URL = BASE_URL.rstrip('/')
 
 def fetch_cms_content(url, application_name=None, params=None):
     """Helper function to make API requests with consistent headers"""
+    headers = {
+        'Authorization': f'users API-Key {API_KEY}',
+        'Content-Type': 'application/json'
+    }
+    if application_name:
+       headers['Cs-App'] = application_name
     try:
-        headers = {
-            'Authorization': f'users API-Key {API_KEY}',
-            'Content-Type': 'application/json'
-        }
-        
-        if application_name:
-            headers['Cs-App'] = application_name
-    
         escaped_args = {k: html.escape(v) for k, v in (params or {}).items()}
-
         response = requests.get(url, params=escaped_args, headers=headers)
-        response.raise_for_status()
         return response.json(), response.status_code
-
-    except requests.RequestException as e:
-        logger.error(f'Request failed: {str(e)}')
-        return jsonify({'message': 'An internal error has occurred.'}), 500
-    
-    except ValueError as e:
-        logger.error(f'Invalid JSON response: {str(e)}')
-        return jsonify({'message': 'An internal error has occurred.'}), 500
-    
-    except Exception as e:
-        logger.error(f'Unexpected error: {str(e)}')
-        return jsonify({'message': 'An internal error has occurred.'}), 500
+    except requests.RequestException:
+        logger.exception('Request failed')
+    except ValueError:
+        logger.exception('Invalid JSON response')    
+    except Exception:
+        logger.exception('Unexpected error')
+    return jsonify({'message': 'An internal error has occurred.'}), 500
 
 
 @app.route('/api/cms/pages', methods=['GET'])
