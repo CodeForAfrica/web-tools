@@ -49,19 +49,16 @@ def fetch_cms_content(url, application_name=None, params=None):
         return response.json(), response.status_code
 
     except requests.RequestException as e:
-        error_message = {'message': f'Request failed: {str(e)}'}
-        logger.error(error_message)
-        return jsonify(error_message), 500
+        logger.error(f'Request failed: {str(e)}')
+        return jsonify({'message': 'An internal error has occurred.'}), 500
     
     except ValueError as e:
-        error_message = {'message': f'Invalid JSON response: {str(e)}'}
-        logger.error(error_message)
-        return jsonify(error_message), 500
+        logger.error(f'Invalid JSON response: {str(e)}')
+        return jsonify({'message': 'An internal error has occurred.'}), 500
     
     except Exception as e:
-        error_message = {'message': f'Unexpected error: {str(e)}'}
-        logger.error(error_message)
-        return jsonify(error_message), 500
+        logger.error(f'Unexpected error: {str(e)}')
+        return jsonify({'message': 'An internal error has occurred.'}), 500
 
 
 @app.route('/api/cms/pages', methods=['GET'])
