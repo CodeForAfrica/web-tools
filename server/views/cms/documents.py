@@ -8,6 +8,7 @@ from flask import jsonify, request
 import requests
 import html
 
+from functools import wraps
 from server import app
 from server.util.request import api_error_handler, arguments_required
 
@@ -29,24 +30,35 @@ if missing_configs:
 
 BASE_URL = BASE_URL.rstrip('/')
 
+
+def fetch_cms_content(url, application_name=None, params=None):
+    """Helper function to make API requests with consistent headers"""
+    headers = dict(request.headers)
+    headers.pop('Host', None)
+    headers['Authorization'] = f'users API-Key {API_KEY}'
+    if application_name:
+       headers['Cs-App'] = application_name
+    try:
+        escaped_args = {k: html.escape(v) for k, v in (params or {}).items()}
+        response = requests.get(url, params=escaped_args, headers=headers)
+        return response.json(), response.status_code
+    except requests.RequestException:
+        logger.exception('Request failed')
+    except ValueError:
+        logger.exception('Invalid JSON response')    
+    except Exception:
+        logger.exception('Unexpected error')
+    return jsonify({'message': 'An internal error has occurred.'}), 500
+
+
 @app.route('/api/cms/pages', methods=['GET'])
 @api_error_handler
 @arguments_required('cs-app')
 def api_fetch_page_content():
     application_name = html.escape(request.args.get('cs-app'))
     url = f"{BASE_URL}/{application_name}-pages"
-    headers = dict(request.headers)
-    headers['Authorization'] = f'users API-Key {API_KEY}'
-    headers['Cs-App'] = application_name
-    try:
-        escaped_args = {k: html.escape(v) for k, v in request.args.items()}
-        response = requests.get(url, escaped_args, headers=headers)
-        return response.json(), response.status_code
-    except:
-        error_message = {'message': 'Received an invalid or malformed response'}
-        logger.error(error_message)
-        return jsonify(error_message), 500
-
+    return fetch_cms_content(url, application_name, request.args)
+  
 
 @app.route('/api/cms/collections', methods=['GET'])
 @api_error_handler
@@ -54,17 +66,7 @@ def api_fetch_page_content():
 def api_fetch_collections():
     collection = html.escape(request.args.get('collection'))
     url = f'{BASE_URL}/{collection}'
-    headers = dict(request.headers)
-    headers['Authorization'] = f'users API-Key {API_KEY}'
-
-    try:
-        escaped_args = {k: html.escape(v) for k, v in request.args.items()}
-        response = requests.get(url, escaped_args, headers=headers)
-        return response.json(), response.status_code
-    except:
-        error_message = {'message': 'Received an invalid or malformed response'}
-        logger.error(error_message)
-        return jsonify(error_message), 500
+    return fetch_cms_content(url, params=request.args)
 
 
 @app.route('/api/cms/globals', methods=['GET'])
@@ -73,34 +75,13 @@ def api_fetch_collections():
 def api_fetch_globals():
     application_name = html.escape(request.args.get('cs-app'))
     url = f'{BASE_URL}/globals/settings-{application_name}-site'
-    headers = dict(request.headers)
-    headers['Authorization'] = f'users API-Key {API_KEY}'
-    
-    try:
-        escaped_args = {k: html.escape(v) for k, v in request.args.items()}
-        response = requests.get(url, escaped_args, headers=headers)
-        return response.json(), response.status_code
-    except:
-        error_message = {'message': 'Received an invalid or malformed response'}
-        logger.error(error_message)
-        return jsonify(error_message), 500
+    return fetch_cms_content(url, application_name, request.args)
 
 
 @app.route('/api/cms/forms', methods=['GET'])
 @api_error_handler
 @arguments_required('form')
 def api_fetch_forms():
-    form =  html.escape(request.args.get('form'))
- 
+    form = html.escape(request.args.get('form'))
     url = f'{BASE_URL}/globals/{form}-form'
-    headers = dict(request.headers)
-    headers['Authorization'] = f'users API-Key {API_KEY}'
-    
-    try:
-        escaped_args = {k: html.escape(v) for k, v in request.args.items()}
-        response = requests.get(url, escaped_args, headers=headers)
-        return response.json(), response.status_code
-    except:
-        error_message = {'message': 'Received an invalid or malformed response'}
-        logger.error(error_message)
-        return jsonify(error_message), 500
+    return fetch_cms_content(url, params=request.args)
