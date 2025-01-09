@@ -1,6 +1,22 @@
 {
   "releases": [
     {
+      "date": "2025-01-09",
+      "version": "v3.20.0",
+      "notes":[
+        {
+          "apps": ["topics","sources","explorer","tools"],
+          "type": "Fix",
+          "note": "add quote to apple favicon"
+        },
+        {
+          "apps": ["tools"],
+          "type": "Fix",
+          "note": "make civic signal email visible"
+        }
+      ]
+    },
+    {
       "date": "2024-06-04",
       "version": "v3.19.7",
       "notes":[
