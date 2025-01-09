@@ -33,10 +33,9 @@ BASE_URL = BASE_URL.rstrip('/')
 
 def fetch_cms_content(url, application_name=None, params=None):
     """Helper function to make API requests with consistent headers"""
-    headers = {
-        'Authorization': f'users API-Key {API_KEY}',
-        'Content-Type': 'application/json'
-    }
+    headers = dict(request.headers)
+    headers.pop('Host', None)
+    headers['Authorization'] = f'users API-Key {API_KEY}'
     if application_name:
        headers['Cs-App'] = application_name
     try:
