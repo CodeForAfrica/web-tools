@@ -2,7 +2,7 @@ FROM python:3.8.18 AS python_builder
 WORKDIR /usr/src/app
 COPY requirements.txt ./
 COPY requirements/ ./requirements/
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt --progress-bar off
 
 
 FROM node:10.24.1 AS node_base_builder
