@@ -119,7 +119,7 @@ export function jobStatusDateToMoment(statusDate, strict = true) {
 }
 
 export function healthStartDateToMoment(healthStartDate, strict = true) {
-  return moment(healthStartDate.substring(0, DB_DATE_FORMAT.length), DB_DATE_FORMAT, strict);
+  return moment(healthStartDate.substring(0, SHORT_SOLR_DATE_FORMAT.length), SHORT_SOLR_DATE_FORMAT, strict);
 }
 
 export function sourceSuggestionDateToMoment(suggestionDate, strict = true) {
