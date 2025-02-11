@@ -48,7 +48,6 @@ class CollectionDetailsContainer extends React.Component {
             </Col>
             <Col lg={6} xs={12}>
               <CollectionSourceRepresentation collection={collection} />
-              <CollectionMetadataCoverageSummaryContainer collection={collection} />
               <CollectionSimilarContainer collectionId={collection.tags_id} filename={filename} />
             </Col>
           </Row>
