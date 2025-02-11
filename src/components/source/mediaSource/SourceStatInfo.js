@@ -26,7 +26,7 @@ const SourceStatInfo = (props) => {
   }
   let formattedDateStr;
   if (sourceInfo.start_date) {
-    const startDate = healthStartDateToMoment(sourceInfo.start_date);
+    const startDate = healthStartDateToMoment(sourceInfo.start_date, false);
     formattedDateStr = formatDate(startDate, { month: 'numeric', year: 'numeric' });
   } else {
     formattedDateStr = formatMessage(messages.unknown);

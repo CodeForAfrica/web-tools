@@ -31,9 +31,11 @@ class Stat extends React.Component {
       );
     }
     return (
-      <DataCard className="stat">
-        {contentToShow}
-      </DataCard>
+      data !== '?' && (
+        <DataCard className="stat">
+          {contentToShow}
+        </DataCard>
+      )
     );
   }
 }
