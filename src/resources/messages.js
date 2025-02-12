@@ -16,6 +16,7 @@ const messages = {
   explorerToolDescription: { id: 'app.explorer.description', defaultMessage: 'Get a quick overview of how your topic of interest is covered by digital news media by exploring attention, language, and entities.' },
   mediaDataToolName: { id: 'app.mediadata.name', defaultMessage: 'Media Data' },
   mediaDataToolDescription: { id: 'app.mediadata.description', defaultMessage: 'MediaData is Code for Africa’s research department, producing data and analyses of the African media ecosystem.' },
+  researchToolName: { id: 'app.research.name', defaultMessage: 'Research' },
   learnMoreButton: { id: 'app.learn.button', defaultMessage: 'Learn More' },
   launchButton: { id: 'app.launch.button', defaultMessage: 'Launch' },
   readGuide: { id: 'app.readGuide', defaultMessage: 'Visit Our Support Page' },
