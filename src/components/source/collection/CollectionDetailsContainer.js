@@ -9,7 +9,6 @@ import CollectionTopWordsContainer from './CollectionTopWordsContainer';
 import CollectionGeographyContainer from './CollectionGeographyContainer';
 import CollectionSourceRepresentation from './CollectionSourceRepresentation';
 import CollectionSimilarContainer from './CollectionSimilarContainer';
-import CollectionMetadataCoverageSummaryContainer from './CollectionMetadataCoverageSummaryContainer';
 import { hasPermissions, getUserRoles, PERMISSION_MEDIA_EDIT } from '../../../lib/auth';
 import { WarningNotice } from '../../common/Notice';
 import TabSelector from '../../common/TabSelector';
@@ -48,7 +47,6 @@ class CollectionDetailsContainer extends React.Component {
             </Col>
             <Col lg={6} xs={12}>
               <CollectionSourceRepresentation collection={collection} />
-              <CollectionMetadataCoverageSummaryContainer collection={collection} />
               <CollectionSimilarContainer collectionId={collection.tags_id} filename={filename} />
             </Col>
           </Row>

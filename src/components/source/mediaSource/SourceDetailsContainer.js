@@ -93,9 +93,6 @@ class SourceDetailsContainer extends React.Component {
             <SourceStatInfo sourceId={source.media_id} />
             <Row>
               <Col lg={6} md={6} sm={12}>
-                <SourceMetadataStatBar source={source} columnWidth={6} />
-              </Col>
-              <Col lg={6} md={6} sm={12}>
                 <CollectionList
                   title={formatMessage(localMessages.sourceDetailsCollectionsTitle)}
                   intro={formatMessage(localMessages.sourceDetailsCollectionsIntro, {
@@ -104,6 +101,9 @@ class SourceDetailsContainer extends React.Component {
                   collections={source.media_source_tags}
                   collectionSets={collectionSets}
                 />
+              </Col>
+              <Col lg={6} md={6} sm={12}>
+                <SourceMetadataStatBar source={source} columnWidth={6} />
               </Col>
             </Row>
           </span>
