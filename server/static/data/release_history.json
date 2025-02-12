@@ -1,6 +1,23 @@
 {
   "releases": [
     {
+      "date": "2024-02-12",
+      "version": "v3.20.2",
+      "notes":[
+        {
+          "apps": ["topics","sources","explorer","tools"],
+          "type": "Fix",
+          "note": "add link to research in main navigation bar"
+        },
+        {
+          "apps": ["sources"],
+          "type": "Fix",
+          "note": "apply numerous UI fixes",
+          "details": "we have removed the to browse geographic collections menu item, rename browse other collections menu item to browse collections and added logic to hide data cards that aren't showing meaningful information "
+        }
+      ]
+    },
+    {
       "date": "2024-06-04",
       "version": "v3.19.7",
       "notes":[
