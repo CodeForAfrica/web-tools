@@ -68,7 +68,7 @@ const SourcesAppMenu = (props) => {
           <FormattedMessage {...localMessages.collections} />
         </MenuItem>
         <MenuItem onClick={() => { props.handleItemClick('search', true); }}>
-          <FormattedMessage {...messages.search} />
+          <FormattedMessage {...localMessages.search} />
         </MenuItem>
         <MenuItem onClick={() => { props.handleItemClick('favorites', true); }}>
           <FormattedMessage {...localMessages.favoritedItems} />
