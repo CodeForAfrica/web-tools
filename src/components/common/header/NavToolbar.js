@@ -64,7 +64,7 @@ const NavToolbar = (props) => {
                 <AppButton
                   variant="text"
                   href={SUPPORT_URL}
-                  target="new"
+                  target="_blank"
                   label={formatMessage(localMessages.support)}
                 />
               </li>
