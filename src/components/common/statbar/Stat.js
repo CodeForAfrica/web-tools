@@ -24,12 +24,17 @@ class Stat extends React.Component {
       contentToShow = content;
     } else {
       contentToShow = (
-        <Box textAlign="center">
+        <Box textAlign="center" height={50}>
           <small><FormattedMessage {...message} /> { helpDisplayContent }</small>
           <em>{data || 'n/a'}</em>
         </Box>
       );
     }
+
+    if (!(data !== '?')) {
+      return null;
+    }
+
     return (
       <DataCard className="stat">
         {contentToShow}

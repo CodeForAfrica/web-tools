@@ -22,7 +22,7 @@ const localMessages = {
   suggestSource: { id: 'sources.menu.items.suggestSource', defaultMessage: 'Suggest a Source' },
   pendingSuggestions: { id: 'sources.menu.items.pendingSuggestions', defaultMessage: 'Pending Suggestions' },
   geographicCollections: { id: 'sources.menu.items.geographicCollections', defaultMessage: 'Browse Geographic Collections' },
-  otherCollections: { id: 'sources.menu.items.otherCollections', defaultMessage: 'Browse Other Collections' },
+  collections: { id: 'sources.menu.items.collections', defaultMessage: 'Browse Collections' },
 };
 
 const SourcesAppMenu = (props) => {
@@ -33,11 +33,8 @@ const SourcesAppMenu = (props) => {
         <MenuItem onClick={() => { props.handleItemClick('home', true); }}>
           <FormattedMessage {...messages.home} />
         </MenuItem>
-        <MenuItem onClick={() => { props.handleItemClick('collections/country-and-state', true); }}>
-          <FormattedMessage {...localMessages.geographicCollections} />
-        </MenuItem>
         <MenuItem onClick={() => { props.handleItemClick('collections/media-cloud', true); }}>
-          <FormattedMessage {...localMessages.otherCollections} />
+          <FormattedMessage {...localMessages.collections} />
         </MenuItem>
         <MenuItem onClick={() => { props.handleItemClick('search', true); }}>
           <FormattedMessage {...localMessages.search} />
@@ -67,11 +64,8 @@ const SourcesAppMenu = (props) => {
         <MenuItem onClick={() => { props.handleItemClick('home', true); }}>
           <FormattedMessage {...messages.home} />
         </MenuItem>
-        <MenuItem onClick={() => { props.handleItemClick('collections/country-and-state', true); }}>
-          <FormattedMessage {...localMessages.geographicCollections} />
-        </MenuItem>
         <MenuItem onClick={() => { props.handleItemClick('collections/media-cloud', true); }}>
-          <FormattedMessage {...localMessages.otherCollections} />
+          <FormattedMessage {...localMessages.collections} />
         </MenuItem>
         <MenuItem onClick={() => { props.handleItemClick('search', true); }}>
           <FormattedMessage {...messages.search} />

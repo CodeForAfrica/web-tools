@@ -8,7 +8,7 @@ import AppButton from '../AppButton';
 import SourcesAppMenu from './SourcesAppMenu';
 import { defaultMenuOriginProps } from '../../util/uiUtil';
 import messages from '../../../resources/messages';
-import { urlToMediaData } from '../../../lib/urlUtil';
+import { urlToMediaData, urlToResearch } from '../../../lib/urlUtil';
 
 
 class SubMenu extends React.Component {
@@ -63,6 +63,14 @@ class SubMenu extends React.Component {
                 target="new"
                 href={urlToMediaData('media')}
                 label={formatMessage(messages.mediaDataToolName)}
+              />
+            </li>
+            <li>
+              <AppButton
+                variant="text"
+                target="new"
+                href={urlToResearch()}
+                label={formatMessage(messages.researchToolName)}
               />
             </li>
           </ul>
