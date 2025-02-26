@@ -23,7 +23,7 @@ RUN pip install --no-cache-dir -r requirements.txt --progress-bar off
 
 ###===========================================================================
 ### React ###
-FROM node:10.24.1 AS react-builder
+FROM node:14.21.3-slim AS react-builder
 
 ARG SUPPORT_URL
 ENV SUPPORT_URL=${SUPPORT_URL}
