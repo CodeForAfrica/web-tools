@@ -1,7 +1,7 @@
 ###===========================================================================
 ### Python ###
 FROM python:3.8.18-slim AS python-builder
-
+RUN apt-get update && apt-get install -y build-essential libxml2-dev libxslt-dev
 # set builder environment variables
 ENV PIP_DEFAULT_TIMEOUT=100 \
     # don’t try to write .pyc files on the import of source modules
@@ -21,9 +21,10 @@ COPY requirements/ ./requirements/
 RUN pip install --no-cache-dir -r requirements.txt --progress-bar off
 
 
+
 ###===========================================================================
 ### React ###
-FROM node:14.21.3-slim AS react-builder
+FROM node:14 AS react-builder
 
 ARG SUPPORT_URL
 ENV SUPPORT_URL=${SUPPORT_URL}
@@ -35,9 +36,20 @@ COPY package*.json ./
 COPY config/webpack*.js ./config/
 RUN npm install --omit=dev && npm cache clean --force
 
-# build react application
+
+
+# Production stage
+FROM react-builder AS react-prod-builder
+
+WORKDIR /usr/src/app
+
 COPY . .
 RUN npm run release-all
+
+# Development stage
+FROM react-builder AS react-dev-builder
+COPY . .
+RUN npm run tools-dev
 
 
 ###===========================================================================
@@ -47,10 +59,27 @@ FROM python:3.8.18-slim AS runner-prod
 WORKDIR /usr/src/app
 
 # copy built artifacts
-COPY --from=react-builder /usr/src/app/ /usr/src/app/
+COPY --from=react-prod-builder /usr/src/app/ /usr/src/app/
 COPY --from=python-builder /usr/local/lib/python3.8/site-packages /usr/local/lib/python3.8/site-packages
 COPY --from=python-builder /usr/local/bin /usr/local/bin
 
 
 RUN chmod +x ./run.sh
 ENTRYPOINT ["./run.sh"]
+
+
+###===========================================================================
+### DEV runner ###
+FROM python:3.8.18-slim AS runner-dev
+
+WORKDIR /usr/src/app
+
+COPY . .
+
+# copy built artifacts
+COPY --from=python-builder /usr/local/lib/python3.8/site-packages /usr/local/lib/python3.8/site-packages
+COPY --from=python-builder /usr/local/bin /usr/local/bin
+
+RUN chmod +x ./run-dev.sh
+ENTRYPOINT ["./run-dev.sh"]
+

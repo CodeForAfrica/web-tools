@@ -1,0 +1,57 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        SUPPORT_URL: ${SUPPORT_URL}
+      target: runner-prod # Change to react-builder for production
+    ports:
+      - "8000:8000"
+      - "5055:5055"
+    depends_on:
+      - mongo
+      - redis
+    volumes:
+      - .:/usr/src/app
+    environment:
+      - MONGO_URL=${MONGO_URL}
+      - CACHE_REDIS_URL=${CACHE_REDIS_URL}
+      - SESSION_REDIS_URL=${SESSION_REDIS_URL}
+      - AUTH_MANAGEMENT_DOMAIN=${AUTH_MANAGEMENT_DOMAIN}
+      - CLIFF_URL=${CLIFF_URL}
+      - COOKIE_DOMAIN=${COOKIE_DOMAIN}
+      - CORENLP_URL=${CORENLP_URL}
+      - MEDIA_CLOUD_API_KEY=${MEDIA_CLOUD_API_KEY}
+      - MEDIA_CLOUD_API_URL=${MEDIA_CLOUD_API_URL}
+      - NYT_THEME_LABELLER_URL=${NYT_THEME_LABELLER_URL}
+      - PAYLOAD_API_KEY=${PAYLOAD_API_KEY}
+      - PAYLOAD_API_URL=${PAYLOAD_API_URL}
+      - SECRET_KEY=${SECRET_KEY}
+      - SENTRY_DSN=${SENTRY_DSN}
+      - SERVER_APP=${SERVER_APP}
+      - SERVER_MODE=${SERVER_MODE}
+      - SMTP_ENABLED=${SMTP_ENABLED}
+      - WORD_EMBEDDINGS_SERVER_URL=${WORD_EMBEDDINGS_SERVER_URL}
+
+  mongo:
+    image: mongo:4.4
+    environment:
+      - MONGO_INITDB_DATABASE=mediacloud
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=pass
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+  redis:
+    image: redis:5.0.6
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+
+volumes:
+  mongo_data:
+  redis_data:
