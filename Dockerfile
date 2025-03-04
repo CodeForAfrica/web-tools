@@ -25,35 +25,40 @@ RUN pip install --no-cache-dir -r requirements.txt --progress-bar off
 ###===========================================================================
 ### React ###
 FROM node:14 AS react-builder
+WORKDIR /usr/src/app
+
+# Copy necessary files for installing node_modules
+COPY package*.json ./
+COPY config/webpack*.js ./config/
+
+
+## React DEV build stage
+FROM react-builder AS react-dev-builder
 
 ARG SUPPORT_URL
 ENV SUPPORT_URL=${SUPPORT_URL}
 
 WORKDIR /usr/src/app
 
-# install React app dependencies
-COPY package*.json ./
-COPY config/webpack*.js ./config/
-
-
-# Development stage
-FROM node:14 AS react-dev-builder
-ARG SUPPORT_URL
-ENV SUPPORT_URL=${SUPPORT_URL}
-
-WORKDIR /usr/src/app
-
-# install React app dependencies
-COPY package*.json ./
-COPY config/webpack*.js ./config/
-RUN npm install
-COPY . .
+# Install dependencies
 RUN npm install --save-dev webpack-dev-server
+COPY . .
+
+# Ge the app name
+ARG SERVER_APP
+ENV SERVER_APP=${SERVER_APP}
+
+ENTRYPOINT npm run ${SERVER_APP}
 
 
-# Production stage
+## React PROD build stage
 FROM react-builder AS react-prod-builder
+
+ARG SUPPORT_URL
+
 WORKDIR /usr/src/app
+
+# Install dependencies
 RUN npm install --omit=dev && npm cache clean --force
 COPY . .
 RUN npm run release-all
@@ -87,5 +92,4 @@ COPY . .
 COPY --from=python-builder /usr/local/lib/python3.8/site-packages /usr/local/lib/python3.8/site-packages
 COPY --from=python-builder /usr/local/bin /usr/local/bin
 
-RUN chmod +x ./run-dev.sh
 ENTRYPOINT ["python", "run.py"]

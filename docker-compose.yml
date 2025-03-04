@@ -3,8 +3,6 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-      args:
-        SUPPORT_URL: ${SUPPORT_URL}
       target: runner-dev
     ports:
       - "8000:8000"
@@ -14,7 +12,6 @@ services:
       - redis
     volumes:
       - .:/usr/src/app
-  
     environment:
       - MONGO_URL=${MONGO_URL}
       - CACHE_REDIS_URL=${CACHE_REDIS_URL}
@@ -40,7 +37,9 @@ services:
       context: .
       dockerfile: Dockerfile
       target: react-dev-builder
-    command: npm run tools-dev
+      args:
+        SUPPORT_URL: ${SUPPORT_URL}
+        SERVER_APP: ${SERVER_APP}
     depends_on:
       - flask
     volumes:
