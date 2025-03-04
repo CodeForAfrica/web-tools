@@ -34,22 +34,29 @@ WORKDIR /usr/src/app
 # install React app dependencies
 COPY package*.json ./
 COPY config/webpack*.js ./config/
-RUN npm install --omit=dev && npm cache clean --force
 
+
+# Development stage
+FROM node:14 AS react-dev-builder
+ARG SUPPORT_URL
+ENV SUPPORT_URL=${SUPPORT_URL}
+
+WORKDIR /usr/src/app
+
+# install React app dependencies
+COPY package*.json ./
+COPY config/webpack*.js ./config/
+RUN npm install
+COPY . .
+RUN npm install --save-dev webpack-dev-server
 
 
 # Production stage
 FROM react-builder AS react-prod-builder
-
 WORKDIR /usr/src/app
-
+RUN npm install --omit=dev && npm cache clean --force
 COPY . .
 RUN npm run release-all
-
-# Development stage
-FROM react-builder AS react-dev-builder
-COPY . .
-RUN npm run tools-dev
 
 
 ###===========================================================================
@@ -81,5 +88,4 @@ COPY --from=python-builder /usr/local/lib/python3.8/site-packages /usr/local/lib
 COPY --from=python-builder /usr/local/bin /usr/local/bin
 
 RUN chmod +x ./run-dev.sh
-ENTRYPOINT ["./run-dev.sh"]
-
+ENTRYPOINT ["python", "run.py"]
