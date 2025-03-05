@@ -100,7 +100,7 @@ Using Docker
 
 You can use Docker for development and building a production image with Make commands. 
 
-To start an application in development, use the following convention: `make <APP_NAME>-dev`. For example, you can run `make tools-dev`, `make sources-dev`, `make explorer-dev`, or `make topics-dev` to start tools, sources, explorer or topics, respectively. 
+To start an application in development, you need to ensure that you have set the needed environment variables in the  `config/app.config` and use the following convention: `make <APP_NAME>-dev`. For example, you can run `make tools-dev`, `make sources-dev`, `make explorer-dev`, or `make topics-dev` to start tools, sources, explorer or topics, respectively. 
 
 To build a production image, run the following command:
 
