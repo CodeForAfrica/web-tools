@@ -96,6 +96,18 @@ WORKDIR ${APP_DOCKER_PATH}
 
 
 ###===========================================================================
+### Flask DEV runner ###
+FROM flask-runner-base AS flask-runner-dev
+
+COPY . .
+
+# copy built artifacts
+COPY --from=flask-builder-base ${VIRTUAL_ENV} ${VIRTUAL_ENV}
+ENV PATH="${VIRTUAL_ENV}/bin:$PATH"
+
+ENTRYPOINT ["python", "run.py"]
+
+###===========================================================================
 ### Flask PROD runner ###
 FROM flask-runner-base AS flask-runner-prod
 
@@ -107,16 +119,3 @@ ENV PATH="${VIRTUAL_ENV}/bin:$PATH"
 
 RUN chmod +x ./run.sh
 ENTRYPOINT ["./run.sh"]
-
-
-###===========================================================================
-### Flask DEV runner ###
-FROM flask-runner-base AS flask-runner-dev
-
-COPY . .
-
-# copy built artifacts
-COPY --from=flask-builder-base ${VIRTUAL_ENV} ${VIRTUAL_ENV}
-ENV PATH="${VIRTUAL_ENV}/bin:$PATH"
-
-ENTRYPOINT ["python", "run.py"]
