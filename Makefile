@@ -17,4 +17,4 @@ topics-dev:
 	SERVER_APP=topics-dev docker compose --env-file config/app.config up --build
 
 release:
-	docker buildx build --target runner-prod --platform=$(PLATFORM) --build-arg SUPPORT_URL=$(SUPPORT_URL) -t $(IMAGE_TAG) .
+	docker buildx build --target flask-runner-prod --platform=$(PLATFORM) --build-arg SUPPORT_URL=$(SUPPORT_URL) -t $(IMAGE_TAG) .

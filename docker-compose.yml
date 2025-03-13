@@ -3,35 +3,24 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-      target: runner-dev
+      target: flask-runner-dev
     ports:
       - "8000:8000"
       - "5055:5055"
     depends_on:
-      - mongo
-      - redis
+      mongo:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
     volumes:
       - .:/usr/src/app
     environment:
-      - MONGO_URL=${MONGO_URL}
-      - CACHE_REDIS_URL=${CACHE_REDIS_URL}
-      - SESSION_REDIS_URL=${SESSION_REDIS_URL}
-      - AUTH_MANAGEMENT_DOMAIN=${AUTH_MANAGEMENT_DOMAIN}
-      - CLIFF_URL=${CLIFF_URL}
-      - COOKIE_DOMAIN=${COOKIE_DOMAIN}
-      - CORENLP_URL=${CORENLP_URL}
-      - MEDIA_CLOUD_API_KEY=${MEDIA_CLOUD_API_KEY}
-      - MEDIA_CLOUD_API_URL=${MEDIA_CLOUD_API_URL}
-      - NYT_THEME_LABELLER_URL=${NYT_THEME_LABELLER_URL}
-      - PAYLOAD_API_KEY=${PAYLOAD_API_KEY}
-      - PAYLOAD_API_URL=${PAYLOAD_API_URL}
-      - SECRET_KEY=${SECRET_KEY}
-      - SENTRY_DSN=${SENTRY_DSN}
-      - SERVER_APP=${SERVER_APP}
-      - SERVER_MODE=${SERVER_MODE}
-      - SMTP_ENABLED=${SMTP_ENABLED}
-      - WORD_EMBEDDINGS_SERVER_URL=${WORD_EMBEDDINGS_SERVER_URL}
-    
+      - MONGO_URL=${MONGO_URL:-mongodb://root:pass@mongo:27017/mediacloud?authSource=admin&directConnection=true}
+      - CACHE_REDIS_URL=${CACHE_REDIS_URL:-redis://redis:6379/0}
+      - SESSION_REDIS_URL=${SESSION_REDIS_URL:-redis://redis:6379/1}
+    env_file:
+      - config/app.config
+
   react:
     build:
       context: .
@@ -56,6 +45,12 @@ services:
       - MONGO_INITDB_ROOT_PASSWORD=pass
     ports:
       - "27017:27017"
+    healthcheck:
+      test: ["CMD", "mongo", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
     volumes:
       - mongo_data:/data/db
 
@@ -63,6 +58,11 @@ services:
     image: redis:5.0.6
     ports:
       - "6379:6379"
+    healthcheck:
+      test: ["CMD-SHELL", "redis-cli ping | grep PONG"]
+      interval: 10s
+      timeout: 5s
+      retries: 2
     volumes:
       - redis_data:/data
 
