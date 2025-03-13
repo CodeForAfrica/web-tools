@@ -25,7 +25,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-      target: react-dev-builder
+      target: react-builder-dev
       args:
         SUPPORT_URL: ${SUPPORT_URL}
         SERVER_APP: ${SERVER_APP}

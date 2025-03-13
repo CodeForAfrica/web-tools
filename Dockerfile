@@ -56,7 +56,7 @@ ENV APP_HOME=/usr/src/app
 
 ###===========================================================================
 ## React DEV build stage
-FROM react AS react-dev-builder
+FROM react AS react-builder-dev
 
 ARG SUPPORT_URL
 ENV SUPPORT_URL=${SUPPORT_URL}
@@ -76,7 +76,7 @@ ENTRYPOINT npm run ${SERVER_APP}
 
 ###===========================================================================
 ## React PROD build stage
-FROM react AS react-prod-builder
+FROM react AS react-builder-prod
 
 ARG SUPPORT_URL
 
@@ -112,7 +112,7 @@ ENTRYPOINT ["python", "run.py"]
 FROM flask-runner-base AS flask-runner-prod
 
 # copy built artifacts
-COPY --from=react-prod-builder /usr/src/app/ /usr/src/app/
+COPY --from=react-builder-prod /usr/src/app/ /usr/src/app/
 COPY --from=flask-builder-base ${VIRTUAL_ENV} ${VIRTUAL_ENV}
 ENV PATH="${VIRTUAL_ENV}/bin:$PATH"
 
