@@ -1,6 +1,6 @@
 openapi: 3.0.0
 servers:
-  - url: 'https://api.mediacloud.org/api/v2'
+  - url: 'http://api.civicsignal.africa/api/v2'
     variables: {}
     description: The Media Cloud API Server
 info:
