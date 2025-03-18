@@ -82,7 +82,7 @@
     "simple-assign": "^0.1.0",
     "slate": "^0.103.0",
     "slugify": "^1.4.0",
-    "swagger-ui-react": "^3.25.4",
+    "swagger-ui-react": "^3.29.0",
     "uuid": "^8.1.0"
   },
   "devDependencies": {
