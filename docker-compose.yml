@@ -1,0 +1,71 @@
+services:
+  flask:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: flask-runner-dev
+    ports:
+      - "8000:8000"
+      - "5055:5055"
+    depends_on:
+      mongo:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    volumes:
+      - .:/usr/src/app
+    environment:
+      - MONGO_URL=${MONGO_URL:-mongodb://root:pass@mongo:27017/mediacloud?authSource=admin&directConnection=true}
+      - CACHE_REDIS_URL=${CACHE_REDIS_URL:-redis://redis:6379/0}
+      - SESSION_REDIS_URL=${SESSION_REDIS_URL:-redis://redis:6379/1}
+    env_file:
+      - config/app.config
+
+  react:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: react-builder-dev
+      args:
+        SUPPORT_URL: ${SUPPORT_URL}
+        SERVER_APP: ${SERVER_APP}
+    depends_on:
+      - flask
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - "2992:2992"
+
+  mongo:
+    image: mongo:4.4
+    environment:
+      - MONGO_INITDB_DATABASE=mediacloud
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=pass
+    ports:
+      - "27017:27017"
+    healthcheck:
+      test: ["CMD", "mongo", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    volumes:
+      - mongo_data:/data/db
+
+  redis:
+    image: redis:5.0.6
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD-SHELL", "redis-cli ping | grep PONG"]
+      interval: 10s
+      timeout: 5s
+      retries: 2
+    volumes:
+      - redis_data:/data
+
+volumes:
+  mongo_data:
+  redis_data:

@@ -38,6 +38,7 @@ const devConfig = {
     // new HardSourceWebpackPlugin(),
   ],
   devServer: {
+    host: '0.0.0.0',
     port: devServerPort, // the server manifest config relies on this port
     contentBase: buildDir, // we build the JS to static files, so server them up as Flask expects them
   },
