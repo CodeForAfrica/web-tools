@@ -3,10 +3,10 @@ Media Cloud Web Tools
 
 This is a shared repository for all the front-facing [Media Cloud](https://mediacloud.org) web tools.
 This includes:
- * [Explorer](https://explorer.mediacloud.org)
- * [Source Manager](https://sources.mediacloud.org)
- * [Topic Mapper](https://topics.mediacloud.org)
- * [Tools](https://tools.mediacloud.org)
+ * [Explorer](https://explorer.civicsignal.africa)
+ * [Source Manager](https://sources.civicsignal.africa)
+ * [Topic Mapper](https://topics.civicsignal.africa)
+ * [Tools](https://tools.civicsignal.africa)
 
 **Check out the `doc` folder for more documentation.**
 
@@ -37,8 +37,6 @@ Redis:
 MemCache:
 On OSX, make sure to run `brew install libmemcached` otherwise you'll get an error about pylibmc failing to install (http://brew.sh)
 
-Multi-platform setup:
-Coming soon
 
 Configuration
 -------------
@@ -96,3 +94,16 @@ $ npm run lint_fix
 ```
 
 Not all errors can be fixed this way and for more details about the linting error see [eslint](https://eslint.org).
+
+Using Docker
+-------------
+
+You can use Docker for development and building a production image with Make commands. 
+
+To start an application in development, you need to ensure that you have set the needed environment variables in the  `config/app.config` and use the following convention: `make <APP_NAME>-dev`. For example, you can run `make tools-dev`, `make sources-dev`, `make explorer-dev`, or `make topics-dev` to start tools, sources, explorer or topics, respectively. 
+
+To build a production image, run the following command:
+
+```
+make release SUPPORT_URL=<SUPPORT_URL> IMAGE_TAG=<TAG> PLATFORM=<PLATFORM> .
+```
