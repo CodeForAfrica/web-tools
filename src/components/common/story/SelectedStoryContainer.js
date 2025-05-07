@@ -18,7 +18,6 @@ import messages from '../../../resources/messages';
 import { urlToSource } from '../../../lib/urlUtil';
 import { trimToMaxLength } from '../../../lib/stringUtil';
 import StatBar from '../statbar/StatBar';
-import StoryRedditAttention from './StoryRedditAttention';
 import StoryImages from './StoryImages';
 import StoryQuoteTable from './StoryQuoteTable';
 import { safeStoryDate } from '../StoryTable';
@@ -26,25 +25,62 @@ import { safeStoryDate } from '../StoryTable';
 const localMessages = {
   options: { id: 'details.story.options', defaultMessage: 'Admin Options' },
   close: { id: 'admin.story.inContext.close', defaultMessage: 'Close' },
-  readThisStory: { id: 'admin.story.readThisStory', defaultMessage: 'Read This Story' },
-  editThisStory: { id: 'admin.story.editThisStory', defaultMessage: 'Edit This Story' },
-  published: { id: 'admin.story.published', defaultMessage: 'Published in {media}' },
-  readCachedCopy: { id: 'admin.story.details.readCached', defaultMessage: 'Read Cached Text (admin only)' },
-  viewCachedHtml: { id: 'admin.story.details.viewCachedHtml', defaultMessage: 'View Cached HTML (admin only)' },
-  downloadAllTagsCsv: { id: 'admin.story.details.downloadTagsCsv', defaultMessage: 'Download all Story Tags' },
-  storyOptions: { id: 'admin.story.details.storyOptions', defaultMessage: 'Story Options' },
-  storyExtrasTitle: { id: 'admin.story.extras.title', defaultMessage: 'Other Custom Story Info' },
-  storyExtrasDetails: { id: 'admin.story.extras.details', defaultMessage: 'Below is some extra info about this story that we\'ve pulled from other services, but isn\'t saved or searchable within our system.' },
+  readThisStory: {
+    id: 'admin.story.readThisStory',
+    defaultMessage: 'Read This Story',
+  },
+  editThisStory: {
+    id: 'admin.story.editThisStory',
+    defaultMessage: 'Edit This Story',
+  },
+  published: {
+    id: 'admin.story.published',
+    defaultMessage: 'Published in {media}',
+  },
+  readCachedCopy: {
+    id: 'admin.story.details.readCached',
+    defaultMessage: 'Read Cached Text (admin only)',
+  },
+  viewCachedHtml: {
+    id: 'admin.story.details.viewCachedHtml',
+    defaultMessage: 'View Cached HTML (admin only)',
+  },
+  downloadAllTagsCsv: {
+    id: 'admin.story.details.downloadTagsCsv',
+    defaultMessage: 'Download all Story Tags',
+  },
+  storyOptions: {
+    id: 'admin.story.details.storyOptions',
+    defaultMessage: 'Story Options',
+  },
+  storyExtrasTitle: {
+    id: 'admin.story.extras.title',
+    defaultMessage: 'Other Custom Story Info',
+  },
+  storyExtrasDetails: {
+    id: 'admin.story.extras.details',
+    defaultMessage:
+      "Below is some extra info about this story that we've pulled from other services, but isn't saved or searchable within our system.",
+  },
 };
 
 class SelectedStoryContainer extends React.Component {
   downloadCsv = (storyId) => {
     window.location = `/api/admin/story/${storyId}/storytags.csv`;
-  }
+  };
 
   render() {
-    const { selectedStory, selectedStoryId, handleStoryEditClick, handleStoryCachedTextClick, intl, nytThemesSet,
-      cliffOrgsSet, cliffPeopleSet, isAdmin } = this.props;
+    const {
+      selectedStory,
+      selectedStoryId,
+      handleStoryEditClick,
+      handleStoryCachedTextClick,
+      intl,
+      nytThemesSet,
+      cliffOrgsSet,
+      cliffPeopleSet,
+      isAdmin,
+    } = this.props;
     const { formatMessage } = this.props.intl;
 
     let content = null;
@@ -53,22 +89,48 @@ class SelectedStoryContainer extends React.Component {
         <>
           <Row>
             <Col lg={12}>
-              {isAdmin
-                && (
+              {isAdmin && (
                 <ActionMenu actionTextMsg={localMessages.options}>
-                  <MenuItem onClick={() => window.open(selectedStory.url, '_blank')}>
-                    <ListItemText><FormattedMessage {...localMessages.readThisStory} /></ListItemText>
-                    <ListItemIcon><ReadItNowButton /></ListItemIcon>
+                  <MenuItem
+                    onClick={() => window.open(selectedStory.url, '_blank')}
+                  >
+                    <ListItemText>
+                      <FormattedMessage {...localMessages.readThisStory} />
+                    </ListItemText>
+                    <ListItemIcon>
+                      <ReadItNowButton />
+                    </ListItemIcon>
                   </MenuItem>
-                  <MenuItem onClick={() => handleStoryCachedTextClick(selectedStoryId)}>
-                    <ListItemText><FormattedMessage {...localMessages.readCachedCopy} /></ListItemText>
+                  <MenuItem
+                    onClick={() => handleStoryCachedTextClick(selectedStoryId)}
+                  >
+                    <ListItemText>
+                      <FormattedMessage {...localMessages.readCachedCopy} />
+                    </ListItemText>
                   </MenuItem>
-                  <MenuItem onClick={() => window.open(`/api/stories/${selectedStoryId}/raw.html`, '_blank')}>
-                    <ListItemText><FormattedMessage {...localMessages.viewCachedHtml} /></ListItemText>
+                  <MenuItem
+                    onClick={() =>
+                      window.open(
+                        `/api/stories/${selectedStoryId}/raw.html`,
+                        '_blank'
+                      )
+                    }
+                  >
+                    <ListItemText>
+                      <FormattedMessage {...localMessages.viewCachedHtml} />
+                    </ListItemText>
                   </MenuItem>
-                  <MenuItem onClick={() => handleStoryEditClick(selectedStoryId)}>
-                    <ListItemText><FormattedMessage {...localMessages.editThisStory} /></ListItemText>
-                    <ListItemIcon><EditButton tooltip={formatMessage(localMessages.editThisStory)} /></ListItemIcon>
+                  <MenuItem
+                    onClick={() => handleStoryEditClick(selectedStoryId)}
+                  >
+                    <ListItemText>
+                      <FormattedMessage {...localMessages.editThisStory} />
+                    </ListItemText>
+                    <ListItemIcon>
+                      <EditButton
+                        tooltip={formatMessage(localMessages.editThisStory)}
+                      />
+                    </ListItemIcon>
                   </MenuItem>
                   <MenuItem onClick={() => this.downloadCsv(selectedStoryId)}>
                     <ListItemText>
@@ -79,9 +141,15 @@ class SelectedStoryContainer extends React.Component {
                     </ListItemIcon>
                   </MenuItem>
                 </ActionMenu>
-)}
+              )}
               <h2>
-                <a href={selectedStory.url} target="_blank" rel="noopener noreferrer">{trimToMaxLength(selectedStory.title, 80)}</a>
+                <a
+                  href={selectedStory.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {trimToMaxLength(selectedStory.title, 80)}
+                </a>
               </h2>
             </Col>
           </Row>
@@ -90,29 +158,46 @@ class SelectedStoryContainer extends React.Component {
               <StatBar
                 columnWidth={2}
                 stats={[
-                  { message: messages.sourceName,
+                  {
+                    message: messages.sourceName,
                     data: (
-                      <a href={urlToSource(selectedStory.media.media_id)} target="_blank" rel="noopener noreferrer">
+                      <a
+                        href={urlToSource(selectedStory.media.media_id)}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
                         {selectedStory.media_name || selectedStory.media.name}
                       </a>
                     ),
                   },
-                  { message: messages.storyDate,
+                  {
+                    message: messages.storyDate,
                     data: safeStoryDate(selectedStory, intl).text,
                   },
-                  { message: messages.language,
+                  {
+                    message: messages.language,
                     data: selectedStory.language ? selectedStory.language : '?',
                   },
-                  { message: messages.mediaType,
-                    data: selectedStory.media.metadata.media_type ? selectedStory.media.metadata.media_type.label : '?',
+                  {
+                    message: messages.mediaType,
+                    data: selectedStory.media.metadata.media_type
+                      ? selectedStory.media.metadata.media_type.label
+                      : '?',
                     helpTitleMsg: messages.mediaTypeHelpTitle,
                     helpContentMsg: messages.mediaTypeHelpContent,
                   },
-                  { message: messages.pubCountry,
-                    data: selectedStory.media.metadata.pub_country ? selectedStory.media.metadata.pub_country.label : '?',
+                  {
+                    message: messages.pubCountry,
+                    data: selectedStory.media.metadata.pub_country
+                      ? selectedStory.media.metadata.pub_country.label
+                      : '?',
                   },
-                  { message: messages.pubState,
-                    data: selectedStory.media.metadata.pub_state ? selectedStory.media.metadata.pub_state.label : '?' },
+                  {
+                    message: messages.pubState,
+                    data: selectedStory.media.metadata.pub_state
+                      ? selectedStory.media.metadata.pub_state.label
+                      : '?',
+                  },
                 ]}
               />
             </Col>
@@ -124,31 +209,39 @@ class SelectedStoryContainer extends React.Component {
             <Col lg={3}>
               <StoryNytThemesContainer
                 storyId={selectedStoryId}
-                tags={selectedStory.story_tags ? selectedStory.story_tags.filter(t => t.tag_sets_id === nytThemesSet) : []}
+                tags={
+                  selectedStory.story_tags
+                    ? selectedStory.story_tags.filter(
+                        (t) => t.tag_sets_id === nytThemesSet
+                      )
+                    : []
+                }
                 hideFullListOption
               />
             </Col>
           </Row>
-          {isAdmin
-            && (
+          {isAdmin && (
             <>
               <Row>
                 <Col lg={6}>
                   <TagListContainer
                     story={selectedStory}
-                    tagToShow={(t) => t.tag_sets_id !== nytThemesSet && t.tag_sets_id !== cliffOrgsSet && t.tag_sets_id !== cliffPeopleSet}
+                    tagToShow={(t) =>
+                      t.tag_sets_id !== nytThemesSet &&
+                      t.tag_sets_id !== cliffOrgsSet &&
+                      t.tag_sets_id !== cliffPeopleSet
+                    }
                   />
                 </Col>
               </Row>
               <Row>
                 <Col lg={6}>
-                  <h1><FormattedMessage {...localMessages.storyExtrasTitle} /></h1>
-                  <p><FormattedMessage {...localMessages.storyExtrasDetails} /></p>
-                </Col>
-              </Row>
-              <Row>
-                <Col lg={12}>
-                  <StoryRedditAttention storyId={selectedStory.stories_id} />
+                  <h1>
+                    <FormattedMessage {...localMessages.storyExtrasTitle} />
+                  </h1>
+                  <p>
+                    <FormattedMessage {...localMessages.storyExtrasDetails} />
+                  </p>
                 </Col>
               </Row>
               <Row>
@@ -162,7 +255,7 @@ class SelectedStoryContainer extends React.Component {
                 </Col>
               </Row>
             </>
-)}
+          )}
         </>
       );
     }
@@ -185,7 +278,7 @@ SelectedStoryContainer.propTypes = {
   isAdmin: PropTypes.bool,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   fetchStatus: state.story.info.fetchStatus,
   selectedStory: state.story.info,
   selectedStoryId: state.story.info.stories_id,
@@ -194,7 +287,7 @@ const mapStateToProps = state => ({
   cliffPeopleSet: state.system.staticTags.tagSets.cliffPeopleSet,
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   handleStoryCachedTextClick: (storiesId) => {
     dispatch(push(`admin/story/${storiesId}/cached`));
   },
@@ -203,13 +296,12 @@ const mapDispatchToProps = dispatch => ({
   },
 });
 
-const fetchAsyncData = (dispatch, { id, isAdmin }) => dispatch(fetchStory(id, { text: isAdmin }));
+const fetchAsyncData = (dispatch, { id, isAdmin }) =>
+  dispatch(fetchStory(id, { text: isAdmin }));
 
-export default
-injectIntl(
-  connect(mapStateToProps, mapDispatchToProps)(
-    withAsyncData(fetchAsyncData, ['id', 'isAdmin'])(
-      SelectedStoryContainer
-    )
-  )
+export default injectIntl(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(withAsyncData(fetchAsyncData, ['id', 'isAdmin'])(SelectedStoryContainer))
 );
