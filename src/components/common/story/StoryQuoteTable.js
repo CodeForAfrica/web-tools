@@ -11,23 +11,36 @@ const localMessages = {
   title: { id: 'story.quotes.title', defaultMessage: 'Quotes in Story' },
   index: { id: 'story.quotes.index', defaultMessage: 'Index' },
   speaker: { id: 'story.quotes.speaker', defaultMessage: 'Speaker' },
-  canonicalSpeaker: { id: 'story.quotes.canonicalSpeaker', defaultMessage: 'Canonical Speaker' },
+  canonicalSpeaker: {
+    id: 'story.quotes.canonicalSpeaker',
+    defaultMessage: 'Canonical Speaker',
+  },
   text: { id: 'story.quotes.quote', defaultMessage: 'Quote' },
   snippet: { id: 'story.quotes.snippet', defaultMessage: 'Quote In Context' },
 };
 
 const StoryQuoteTable = ({ quotes }) => (
   <DataCard className="story-images-container">
-    <h2><FormattedMessage {...localMessages.title} /></h2>
+    <h2>
+      <FormattedMessage {...localMessages.title} />
+    </h2>
     <Row>
       <Col lg={12}>
         <table>
           <thead>
             <tr>
-              <th><FormattedMessage {...localMessages.index} /></th>
-              <th><FormattedMessage {...localMessages.speaker} /></th>
-              <th><FormattedMessage {...localMessages.canonicalSpeaker} /></th>
-              <th><FormattedMessage {...localMessages.text} /></th>
+              <th>
+                <FormattedMessage {...localMessages.index} />
+              </th>
+              <th>
+                <FormattedMessage {...localMessages.speaker} />
+              </th>
+              <th>
+                <FormattedMessage {...localMessages.canonicalSpeaker} />
+              </th>
+              <th>
+                <FormattedMessage {...localMessages.text} />
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -57,18 +70,16 @@ StoryQuoteTable.propTypes = {
   quotes: PropTypes.array,
 };
 
-const mapStateToProps = state => ({
-  fetchStatus: state.story.reddit.fetchStatus,
+const mapStateToProps = (state) => ({
+  fetchStatus: state.story.quotes.fetchStatus,
   quotes: state.story.quotes.all,
 });
 
-const fetchAsyncData = (dispatch, { storyId }) => dispatch(fetchStoryQuotes(storyId));
+const fetchAsyncData = (dispatch, { storyId }) =>
+  dispatch(fetchStoryQuotes(storyId));
 
-export default
-injectIntl(
+export default injectIntl(
   connect(mapStateToProps)(
-    withAsyncData(fetchAsyncData, ['storyId'])(
-      StoryQuoteTable
-    )
+    withAsyncData(fetchAsyncData, ['storyId'])(StoryQuoteTable)
   )
 );
