@@ -26,22 +26,26 @@ def _result_as_quote(q: Dict, text: str) -> Dict:
     snippet_begin = max(0, q['beginIndex'] - SNIPPET_WINDOW_SIZE)
     snippet_end = min(q['endIndex'] + SNIPPET_WINDOW_SIZE, len(text))
     info = {
-        'index': q['id'],
-        'text': q['text'],
-        'begin_char': q['beginIndex'],
-        'end_char': q['endIndex'],
-        'begin_token': q['beginToken'],
-        'end_token': q['endToken'],
-        'begin_sentence': q['beginSentence'],
-        'end_sentence': q['endSentence'],
+        'index': q.get('id'),
+        'text': q.get('text'),
+        'begin_char': q.get('beginIndex'),
+        'end_char': q.get('endIndex'),
+        'begin_token': q.get('beginToken'),
+        'end_token': q.get('endToken'),
+        'begin_sentence': q.get('beginSentence'),
+        'end_sentence': q.get('endSentence'),
         'snippet': text[snippet_begin:snippet_end]
     }
-    if 'mention' in q:
+
+    if all(k in q for k in ['mention', 'tokenBegin', 'mentionBegin', 'mentionType', 'mentionSieve']):
         info['mention'] = q['mention']
         info['mention_token_distance'] = q['tokenBegin'] - q['mentionBegin']
         info['mention_type'] = q['mentionType']
         info['mention_sieve'] = q['mentionSieve']
+
     if 'speaker' in q:
         info['speaker'] = q['speaker']
+    if 'canonicalSpeaker' in q:
         info['canonicalSpeaker'] = q['canonicalSpeaker']
+
     return info
