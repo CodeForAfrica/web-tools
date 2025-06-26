@@ -75,8 +75,7 @@ const mapStateToProps = (state) => ({
   quotes: state.story.quotes.all,
 });
 
-const fetchAsyncData = (dispatch, { storyId }) =>
-  dispatch(fetchStoryQuotes(storyId));
+const fetchAsyncData = (dispatch, { storyId }) => dispatch(fetchStoryQuotes(storyId));
 
 export default injectIntl(
   connect(mapStateToProps)(

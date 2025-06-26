@@ -56,9 +56,9 @@ const Activated = (props) => {
   } else {
     content = (
       <>
-      <ErrorNotice>
-        <FormattedMessage {...localMessages.didNotWork} />
-      </ErrorNotice>
+        <ErrorNotice>
+          <FormattedMessage {...localMessages.didNotWork} />
+        </ErrorNotice>
         <p>{resendContent}</p>
       </>
     );
