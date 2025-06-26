@@ -8,9 +8,9 @@ import { ErrorNotice } from '../common/Notice';
 
 const localMessages = {
   workedTitle: { id: 'user.activated.worked.title', defaultMessage: 'Your Account is Activated' },
-  workedIntro: { id: 'user.activated.worked.intro', defaultMessage: 'Your Media Cloud account is now active!' },
+  workedIntro: { id: 'user.activated.worked.intro', defaultMessage: 'Your CivicSignal account is now active!' },
   failedTitle: { id: 'user.activated.failed.title', defaultMessage: 'Account Activation Failed' },
-  loginNow: { id: 'user.activated.login', defaultMessage: 'Login to Media Cloud' },
+  loginNow: { id: 'user.activated.login', defaultMessage: 'Login to CivicSignal' },
   invalidToken: { id: 'user.activated.invalidToken', defaultMessage: 'That is an invalid token.' },
   invalidTokenActions: { id: 'user.activated.invalidTokenActions', defaultMessage: 'You\'ve probably already activated your account, in which case <a href="/#/login">you can login now</a>.  If that isn\'t working, click the button to resend the account activation link.' },
   didNotWork: { id: 'user.activated.invalidTokenActions', defaultMessage: 'Sorry, but that didn\'t work for some reason.  Try the link again, or click the button below to resend the account activation link.' },
@@ -55,10 +55,12 @@ const Activated = (props) => {
     );
   } else {
     content = (
+      <>
       <ErrorNotice>
         <FormattedMessage {...localMessages.didNotWork} />
-        {resendContent}
       </ErrorNotice>
+        <p>{resendContent}</p>
+      </>
     );
   }
   return (
