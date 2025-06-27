@@ -109,12 +109,10 @@ class SelectedStoryContainer extends React.Component {
                     </ListItemText>
                   </MenuItem>
                   <MenuItem
-                    onClick={() =>
-                      window.open(
+                    onClick={() => window.open(
                         `/api/stories/${selectedStoryId}/raw.html`,
                         '_blank'
-                      )
-                    }
+                      )}
                   >
                     <ListItemText>
                       <FormattedMessage {...localMessages.viewCachedHtml} />
@@ -226,11 +224,9 @@ class SelectedStoryContainer extends React.Component {
                 <Col lg={6}>
                   <TagListContainer
                     story={selectedStory}
-                    tagToShow={(t) =>
-                      t.tag_sets_id !== nytThemesSet &&
-                      t.tag_sets_id !== cliffOrgsSet &&
-                      t.tag_sets_id !== cliffPeopleSet
-                    }
+                    tagToShow={(t) => t.tag_sets_id !== nytThemesSet
+                      && t.tag_sets_id !== cliffOrgsSet
+                      && t.tag_sets_id !== cliffPeopleSet}
                   />
                 </Col>
               </Row>
@@ -296,8 +292,7 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
-const fetchAsyncData = (dispatch, { id, isAdmin }) =>
-  dispatch(fetchStory(id, { text: isAdmin }));
+const fetchAsyncData = (dispatch, { id, isAdmin }) => dispatch(fetchStory(id, { text: isAdmin }));
 
 export default injectIntl(
   connect(
