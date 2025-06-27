@@ -1,5 +1,26 @@
 {
   "releases": [
+     {
+      "date": "2025-06-27",
+      "version": "v3.20.3",
+      "notes":[
+        {
+          "apps": ["topics","sources","explorer","tools"],
+          "type": "Fix",
+          "note": "Account activation form"
+        },
+        {
+          "apps": ["explorer"],
+          "type": "Fix",
+          "note": "Fix story quotes card"
+        },
+        {
+          "apps": ["explorer"],
+          "type": "Fix",
+          "note": "Remove story reddit attention card"
+        }
+      ]
+    },
     {
       "date": "2024-06-04",
       "version": "v3.19.7",
