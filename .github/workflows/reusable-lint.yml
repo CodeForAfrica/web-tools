@@ -19,12 +19,18 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      - name: Checkout and Clone Repository
         uses: actions/checkout@v4
-
+        with:
+          fetch-depth: 0
       - name: Setup Python Environment
         uses: ./.github/actions/setup-python
-
       - name: Setup Node.js Environment
         uses: ./.github/actions/setup-node
+      - name: Node Lint
+        run: make lint.node
+      - name: Python Lint
+        run: make lint.py
+
+
 

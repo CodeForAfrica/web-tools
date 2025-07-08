@@ -7,7 +7,7 @@ inputs:
     required: false
     default: "14"
   package-manager:
-    description: 'Package manager to use (npm or yarn)'
+    description: "Package manager to use (npm or yarn)"
     required: false
     default: "npm"
 
@@ -20,15 +20,15 @@ runs:
         node-version: ${{ inputs.node-version }}
 
     - name: Cache npm dependencies
-      if: inputs.package-manager == "npm"
+      if: inputs.package-manager == 'npm'
       uses: actions/cache@v4
       with:
         path: ~/.npm
-        key: ${{ runner.os }}-node-${{ hashFiles("**/package-lock.json") }}
+        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
         restore-keys: |
           ${{ runner.os }}-node-
 
     - name: Install dependencies with npm
-      if: inputs.package-manager == "npm"
+      if: inputs.package-manager == 'npm'
       shell: bash
       run: npm ci
