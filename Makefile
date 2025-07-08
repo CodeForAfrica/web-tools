@@ -1,11 +1,14 @@
 DOCKER_BUILDKIT=1
 DOCKER_BUILDKIT_PROGRESS=plain
 
+lint.node:
+	npm run lint
+
 lint.py:
 	pylint server
 
 requirements-local.py:
-	pip install -q -r requirements/local.txt --exists-action w
+	pip install --no-cache-dir -r requirements/local.txt --exists-action w
 
 tools-dev:
 	DOCKER_BUILDKIT=$(DOCKER_BUILDKIT) DOCKER_BUILDKIT_PROGRESS=$(DOCKER_BUILDKIT_PROGRESS) SERVER_APP=tools-dev docker compose --env-file config/app.config up --build

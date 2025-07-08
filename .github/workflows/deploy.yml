@@ -1,0 +1,46 @@
+name: Web-tools | Build & Deploy | PROD
+on:
+  push:
+    branches:
+      - main
+env:
+    DOKKU_REMOTE_URL: "ssh://dokku@api-1.dev.codeforafrica.org/trustlist"
+
+concurrency:
+    group: "${{ github.workflow }} @ ${{ github.ref }}"
+    cancel-in-progress: true
+
+jobs:
+    lint-and-test:
+        uses: ./.github/workflows/reusable-lint-test.yml
+        with:
+            python-version: "3.8.18"
+            run-tests: "true"
+            run-lint: "true"
+        secrets:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    build-and-push:
+        uses: ./.github/workflows/reusable-build-push.yml
+        with:
+            image-name: "your-org/your-app-name"
+            version-file: "./package.json"
+            docker-target: "flask-runner-prod"
+            node-version: '14'
+            platforms: "linux/amd64"
+            secrets:
+                DOCKER_HUB_ACCESS_TOKEN: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+                DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
+                SUPPORT_URL: ${{ secrets.SUPPORT_URL }}
+
+    deploy:
+        needs: build-and-push
+        if: needs.build-and-push.outputs.version-changed == 'true'
+        uses: ./.github/workflows/reusable-deploy.yml
+        with:
+            dokku-remote-url: "ssh://dokku@your-server.com/your-app-name"
+            image-name: ${{ needs.build-and-push.outputs.image-name }}
+            image-tag: ${{ needs.build-and-push.outputs.image-tag }}
+            environment: "production"
+            secrets:
+            SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}

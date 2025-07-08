@@ -1,0 +1,28 @@
+name: Pull request workflow
+on:
+    pull_request:
+        types: [opened, synchronize, reopened]
+
+concurrency:
+    group: "pull-request-${{ github.event.pull_request.number }}"
+    cancel-in-progress: true
+
+jobs:
+    setup-node:
+        uses: ./.github/actions/setup-node
+
+    setup-python:
+        uses: ./.github/actions/setup-python
+
+    lint-and-test:
+        runs-on: ubuntu-latest
+        needs: [setup-node, setup-python]
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+              with:
+                  fetch-depth: 0
+
+            - name: Run Lint and test
+              uses: ./.github/workflows/reusable-lint.yml
+
