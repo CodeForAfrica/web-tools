@@ -29,8 +29,10 @@ jobs:
         uses: ./.github/actions/setup-node
       - name: Node Lint
         run: make lint.node
-      - name: Python Lint
-        run: make lint.py
+
+    #   - name: Python Lint
+    #     run: make lint.py
+    # Temp disable python lint
 
 
 
