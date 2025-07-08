@@ -8,14 +8,6 @@ concurrency:
     cancel-in-progress: true
 
 jobs:
-    setup-node:
-        uses: ./.github/actions/setup-node
-
-    setup-python:
-        uses: ./.github/actions/setup-python
-
     lint-and-test:
-        needs: [setup-node, setup-python]
         uses: ./.github/workflows/reusable-lint.yml
-        secrets: inherit
 
