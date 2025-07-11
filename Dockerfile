@@ -20,8 +20,10 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 FROM python AS flask-builder-base
 RUN apt-get install -y \
     build-essential \
+    gcc \
     libxml2-dev \
     libxslt-dev \
+    python3-dev \
     python3-venv
 
 # set builder environment variables
