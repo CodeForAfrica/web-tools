@@ -21,6 +21,7 @@ jobs:
         uses: ./.github/workflows/reusable-build-push.yml
         with:
             image-name: "codeforafrica/civicsignal-web-tools"
+            platforms: "linux/amd64, linux/arm64"
         secrets:
             DOCKER_HUB_ACCESS_TOKEN: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
             DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
@@ -38,7 +39,7 @@ jobs:
           - name: Deploy ${{ matrix.app }} to staging
             uses: dokku/github-action@v1.7.0
             with:
-                deploy_docker_image: "codeforafrica/civicsignal-web-tools:3.20.6-alpha"
+                deploy_docker_image: "${{ needs.build-and-push.outputs.image-name }}:${{ needs.build-and-push.outputs.image-tag }}"
                 deploy_user_name: ${{ github.actor}}
                 deploy_user_email: ${{ github.actor }}@github-workflow.codeforafrica.org
                 git_remote_url: ${{ env.DOKKU_REMOTE_URL }}/${{ matrix.app }}
