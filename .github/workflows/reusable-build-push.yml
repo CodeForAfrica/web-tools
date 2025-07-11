@@ -111,7 +111,6 @@ jobs:
           echo "Tags: ${{ inputs.image-name }}:${{ steps.version-check.outputs.version }}, ${{ inputs.image-name }}:latest"
 
     outputs:
-      image-tag: ${{ steps.version-check.outputs.version }}
-      image-name: ${{ inputs.image-name }}
+      image-name: "${{ inputs.image-name }}:${{ steps.version-check.outputs.version }}"
       version-changed: ${{ steps.version-check.outputs.changed }}
 
