@@ -45,7 +45,7 @@ jobs:
         runs-on: ubuntu-latest
         strategy:
             matrix:
-                app: [civicsignal-sources, civicsignal-tools, civicsignal-topics, civicsignal-explorer]
+                app: [ civicsignal-explorer ]
         if: github.event_name == 'push'
         steps:
           - name: Deploy ${{ matrix.app }} to staging
