@@ -1,0 +1,13 @@
+name: Pull request workflow
+on:
+    pull_request:
+        types: [opened, synchronize, reopened]
+
+concurrency:
+    group: "pull-request-${{ github.event.pull_request.number }}"
+    cancel-in-progress: true
+
+jobs:
+    lint-and-test:
+        uses: ./.github/workflows/reusable-lint.yml
+

@@ -1,0 +1,38 @@
+name: Reusable Test Workflow
+
+on:
+  workflow_call:
+    inputs:
+      python-version:
+        description: "Python version to use"
+        required: false
+        default: "3.8"
+        type: string
+      node-version:
+        description: 'Node.js version to use'
+        required: false
+        default: "14"
+        type: string
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout and Clone Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Setup Python Environment
+        uses: ./.github/actions/setup-python
+      - name: Setup Node.js Environment
+        uses: ./.github/actions/setup-node
+      - name: Node Lint
+        run: make lint.node
+
+    #   - name: Python Lint
+    #     run: make lint.py
+    # Temp disable python lint
+
+
+
