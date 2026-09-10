@@ -1,6 +1,32 @@
 Media Cloud Web Tools
 =====================
 
+## CivicSignal website has moved
+
+As of 9 September 2026, the public website at [civicsignal.africa](https://civicsignal.africa)
+has replaced the older homepage from this repository. Website development and
+deployment now live in these Code for Africa repositories:
+
+* [CodeForAfrica/civicsignal-web](https://github.com/CodeForAfrica/civicsignal-web):
+  the website source and build pipeline used to generate the site and its data.
+* [CodeForAfrica/civicsignal-showcase](https://github.com/CodeForAfrica/civicsignal-showcase):
+  the final rendered HTML, assets and dataset, plus the Dockerfile, Nginx
+  configuration, tests and production deployment workflow.
+
+To release website changes, publish the generated output to `civicsignal-showcase`
+and run **Actions → deploy_to_prod → Run workflow → main** there. The workflow
+tests and publishes the container to Docker Hub, then deploys it through AWS SSM
+and Dokku. See the [deployment guide](https://github.com/CodeForAfrica/civicsignal-showcase/blob/main/deploy/README.md)
+for verification and rollback. Pushing commits alone does not deploy the website.
+
+**This repository still contains the existing Media Cloud portal and tools.**
+The new website's Login button leads to the existing
+[live portal](https://tools.civicsignal.africa/#/login). Explorer, Source Manager
+and Topic Mapper remain separate services. The website migration does not retire
+these applications; the development and Docker instructions below apply to them.
+
+## Existing Media Cloud tools
+
 This is a shared repository for all the front-facing [Media Cloud](https://mediacloud.org) web tools.
 This includes:
  * [Explorer](https://explorer.civicsignal.africa)
