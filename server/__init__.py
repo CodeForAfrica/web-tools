@@ -37,6 +37,13 @@ with open(os.path.join(base_dir, 'config', 'server-logging.json'), 'r') as f:
     logging_config = json.load(f)
     logging_config['handlers']['file']['filename'] = os.path.join(base_dir,
                                                                   logging_config['handlers']['file']['filename'])
+if os.environ.get('WEBTOOLS_LOG_STDOUT') == '1':
+    logging_config['handlers'].pop('file')
+    logging_config['handlers']['console']['level'] = 'INFO'
+    for settings in logging_config['loggers'].values():
+        settings['level'] = 'INFO'
+        if 'handlers' in settings:
+            settings['handlers'] = ['console']
 logging.config.dictConfig(logging_config)
 logger = logging.getLogger(__name__)
 logger.info("---------------------------------------------------------------------------")
@@ -94,11 +101,10 @@ try:
     user_db = UserDatabase(config.get('MONGO_URL'))
     analytics_db = AnalyticsDatabase(config.get('MONGO_URL'))
     user_db.check_connection()
-    logger.info("Connected to DB: {}".format(config.get('MONGO_URL')))
+    logger.info("Connected to frontend database")
 except Exception as err:
-    logger.error("DB error: {0}".format(err))
-    logger.exception(err)
-    sys.exit()
+    logger.error("Frontend database connection failed (%s)", type(err).__name__)
+    sys.exit(1)
 
 
 def is_dev_mode():
@@ -180,6 +186,9 @@ def create_app():
     cookie_domain = config.get('COOKIE_DOMAIN')
     my_app.config['SESSION_COOKIE_NAME'] = "mc_session"
     my_app.config['REMEMBER_COOKIE_NAME'] = "mc_remember_token"
+    secure_cookies = config.get('EXPLORER_URL', 'http://localhost').startswith('https://')
+    my_app.config['SESSION_COOKIE_SECURE'] = secure_cookies
+    my_app.config['REMEMBER_COOKIE_SECURE'] = secure_cookies
     if cookie_domain != 'localhost':    # can't set cookie domain on localhost
         my_app.config['SESSION_COOKIE_DOMAIN'] = cookie_domain
         my_app.config['REMEMBER_COOKIE_DOMAIN'] = cookie_domain
@@ -226,7 +235,19 @@ def index():
                            cookie_domain=config.get('COOKIE_DOMAIN'),
                            maintenance_mode=maintenance_mode,
                            system_warning=system_warning,
+                           tool_urls={name: config.get(name.upper() + '_URL', 'https://' + name + '.civicsignal.africa') for name in ('explorer', 'sources', 'topics', 'tools')},
                            )
+
+
+@app.route('/healthz')
+def healthz():
+    try:
+        user_db.check_connection()
+        app.session_interface.redis.ping()
+        redis.StrictRedis.from_url(config.get('CACHE_REDIS_URL'), socket_timeout=2, socket_connect_timeout=2).ping()
+        return {'status': 'ok', 'app': server_app}, 200
+    except Exception:
+        return {'status': 'unavailable', 'app': server_app}, 503
 
 
 # now load in the appropriate view endpoints, after the app has been initialized

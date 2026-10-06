@@ -1,10 +1,11 @@
 import React from 'react';
+import { urlToSourceManager } from '../../../lib/urlUtil';
 import MarketingFeatureItem from '../../common/MarketingFeatureItem';
 
 const localMessages = {
 
   globalCollectionsTitle: { id: 'marketing.globalCollections.title', defaultMessage: 'Search with Global Coverage' },
-  globalCollectionsDescription: { id: 'marketing.globalCollections.description', defaultMessage: '<p>You can search our growing list of individual or collections of top media sources in Africa with CivicSignal MediaCloud. Our search function offers various levels of support for English, French and Arabic. Get an overview of what content we have in our database with our <a href="https://sources.civicsignal.africa/">Source Manager tool</a></p>' },
+  globalCollectionsDescription: { id: 'marketing.globalCollections.description', defaultMessage: '<p>You can search our growing list of individual or collections of top media sources in Africa with CivicSignal MediaCloud. Our search function offers various levels of support for English, French and Arabic. Get an overview of what content we have in our database with our <a href="{sourcesUrl}">Source Manager tool</a></p>' },
 
   attentionTitle: { id: 'marketing.attention.title', defaultMessage: 'Track Attention Over Time' },
   attentionDescription: { id: 'marketing.attention.description', defaultMessage: '<p>MediaCloud shows you attention to an issue over time to help you understand how much it is covered. Our data can reveal key events that cause spikes in coverage and conversation. Plateaus can reveal stable, "normal", levels of attention to compare against. You can download all our charts and the underlying aggregated data.</p>' },
@@ -21,7 +22,7 @@ const ExplorerMarketingFeatureList = () => (
   <div className="marketing-feature-list">
     <MarketingFeatureItem
       titleMsg={localMessages.globalCollectionsTitle}
-      contentMsg={localMessages.globalCollectionsDescription}
+      contentMsg={{ ...localMessages.globalCollectionsDescription, values: { sourcesUrl: urlToSourceManager('') } }}
       imageName="global-collections-2x.png"
       imageOnLeft
     />

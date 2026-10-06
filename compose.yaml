@@ -1,0 +1,29 @@
+# Default startup runs the tools, their local stores, and the backend together.
+include:
+  - path: ${CIVICSIGNAL_BACKEND_REPO:-../backend}/compose.yaml
+    env_file: ${CIVICSIGNAL_BACKEND_ENV:-../backend/.env}
+
+services:
+  web-tools:
+    extends:
+      file: compose.frontend.yaml
+      service: web-tools
+    environment:
+      MEDIA_CLOUD_API_URL: http://webapp-httpd/api/v2/
+      CLIFF_URL: http://annotators:8082/cliff
+      NYT_THEME_LABELLER_URL: http://annotators:8081/predict.json
+    depends_on:
+      webapp-httpd:
+        condition: service_healthy
+  mongo:
+    extends:
+      file: compose.frontend.yaml
+      service: mongo
+  redis:
+    extends:
+      file: compose.frontend.yaml
+      service: redis
+
+volumes:
+  mongo-data:
+  redis-data:

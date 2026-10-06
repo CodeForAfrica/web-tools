@@ -1,0 +1,64 @@
+services:
+  web-tools:
+    image: civicsignal/web-tools:local
+    platform: linux/amd64
+    build:
+      context: .
+      target: web-tools-runner
+    restart: unless-stopped
+    mem_limit: 1024m
+    ports:
+      - "127.0.0.1:${WEBTOOLS_PORT:-8083}:8080"
+    environment:
+      WEBTOOLS_LOG_STDOUT: "1"
+      MONGO_URL: ${MONGO_URL:-mongodb://mongo:27017/civicsignal}
+      SESSION_REDIS_URL: ${SESSION_REDIS_URL:-redis://redis:6379/0}
+      CACHE_REDIS_URL: ${CACHE_REDIS_URL:-redis://redis:6379/1}
+      MEDIA_CLOUD_API_URL: ${MEDIA_CLOUD_API_URL:-http://host.docker.internal:8082/api/v2/}
+      MEDIA_CLOUD_API_KEY: ${MEDIA_CLOUD_API_KEY:?Supply a backend API key}
+      SECRET_KEY: ${SECRET_KEY:?Supply a shared frontend session secret}
+      COOKIE_DOMAIN: ${COOKIE_DOMAIN:-.civicsignal.localhost}
+      EXPLORER_URL: ${EXPLORER_URL:-http://explorer.civicsignal.localhost:8083}
+      SOURCES_URL: ${SOURCES_URL:-http://sources.civicsignal.localhost:8083}
+      TOPICS_URL: ${TOPICS_URL:-http://topics.civicsignal.localhost:8083}
+      TOOLS_URL: ${TOOLS_URL:-http://tools.civicsignal.localhost:8083}
+      AUTH_MANAGEMENT_DOMAIN: ${TOOLS_URL:-http://tools.civicsignal.localhost:8083}
+      CLIFF_URL: ${CLIFF_URL:-http://host.docker.internal:8082/cliff}
+      NYT_THEME_LABELLER_URL: ${NYT_THEME_LABELLER_URL:-http://host.docker.internal:8081/predict.json}
+      WORD_EMBEDDINGS_SERVER_URL: ${WORD_EMBEDDINGS_SERVER_URL:-http://word-embeddings:5000}
+      CORENLP_URL: ${CORENLP_URL:-http://corenlp:9000}
+      YOUTUBE_API_KEY: ${YOUTUBE_API_KEY:-0}
+      SMTP_ENABLED: "0"
+      PAYLOAD_API_URL: ${PAYLOAD_API_URL:?Supply the existing Payload CMS API URL}
+      PAYLOAD_API_KEY: ${PAYLOAD_API_KEY:?Supply the existing Payload CMS API key}
+    depends_on:
+      mongo:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  mongo:
+    image: mongo:4.4
+    platform: linux/amd64
+    volumes:
+      - mongo-data:/data/db
+    healthcheck:
+      test: ["CMD", "mongo", "--quiet", "--eval", "quit(db.adminCommand('ping').ok ? 0 : 1)"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+
+  redis:
+    image: redis:7-alpine
+    command: ["redis-server", "--appendonly", "yes"]
+    volumes:
+      - redis-data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+
+volumes:
+  mongo-data:
+  redis-data:

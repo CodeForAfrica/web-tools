@@ -1,0 +1,13 @@
+# Test-only CMS labels; real backend, MongoDB and Redis remain in use.
+services:
+  cms-fixture:
+    image: python:3.8.18-slim
+    command: ["python", "/fixture/cms.py"]
+    volumes:
+      - ./dev/e2e/cms.py:/fixture/cms.py:ro
+  web-tools:
+    environment:
+      PAYLOAD_API_URL: http://cms-fixture:18084/api
+      PAYLOAD_API_KEY: local-content-fixture
+    depends_on:
+      - cms-fixture

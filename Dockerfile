@@ -83,9 +83,13 @@ ARG SUPPORT_URL
 WORKDIR /usr/src/app
 
 # Install dependencies
-RUN npm install --omit=dev && npm cache clean --force
-COPY . .
-RUN npm run release-all
+RUN HUSKY_SKIP_INSTALL=1 npm ci --no-audit --no-fund && npm cache clean --force
+COPY src/ ./src/
+COPY config/ ./config/
+COPY server/static/ ./server/static/
+COPY .babelrc .eslintrc .eslintignore ./
+RUN mkdir -p server/static/gen/tools server/static/gen/explorer server/static/gen/topics server/static/gen/sources \
+    && npm run release-all
 
 
 ###===========================================================================
@@ -112,10 +116,26 @@ ENTRYPOINT ["python", "run.py"]
 FROM flask-runner-base AS flask-runner-prod
 
 # copy built artifacts
-COPY --from=react-builder-prod /usr/src/app/ /usr/src/app/
+COPY . .
+COPY --from=react-builder-prod /usr/src/app/server/static/gen/ /usr/src/app/server/static/gen/
 COPY --from=flask-builder-base ${VIRTUAL_ENV} ${VIRTUAL_ENV}
 ENV PATH="${VIRTUAL_ENV}/bin:$PATH"
 
 
 RUN chmod +x ./run.sh
 ENTRYPOINT ["./run.sh"]
+
+# All four tools share this image and external MongoDB/Redis URLs.
+FROM flask-runner-prod AS web-tools-runner
+USER root
+RUN apt-get update && apt-get install -y --no-install-recommends nginx tini curl \
+    && rm -rf /var/lib/apt/lists/* \
+    && groupadd --gid 1000 webtools && useradd --uid 1000 --gid 1000 --create-home webtools \
+    && mkdir -p logs /tmp/webtools \
+    && chown -R 1000:1000 logs /tmp/webtools
+COPY docker/webtools.py /usr/local/bin/webtools.py
+USER 1000:1000
+EXPOSE 8080
+HEALTHCHECK --interval=20s --timeout=10s --start-period=60s --retries=3 \
+    CMD python /usr/local/bin/webtools.py --healthcheck
+ENTRYPOINT ["/usr/bin/tini", "--", "python", "/usr/local/bin/webtools.py"]

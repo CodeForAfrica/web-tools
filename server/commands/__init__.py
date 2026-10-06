@@ -30,15 +30,15 @@ def sync_frontend_db(test):
     backend_emails = _fetch_backend_emails()
     print("'{}' backend users".format(len(backend_emails)))
 
-    users_to_remove = user_db.get_users({
+    users_to_remove = list(user_db.get_users({
         "$and":
             [{"username": {"$ne": email}} for email in backend_emails]
-    })
-    print("'{}' users to remove".format(users_to_remove.count()))
+    }))
+    print("'{}' users to remove".format(len(users_to_remove)))
 
     if test:
         print("Testing only! No users deleted.")
-    elif users_to_remove.count() > 0:
+    elif len(users_to_remove) > 0:
         user_db.delete_users({
             "$or":
                 [{"username": {"$eq": user["username"]}} for user in users_to_remove]

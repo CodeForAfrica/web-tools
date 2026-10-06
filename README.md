@@ -133,3 +133,10 @@ To build a production image, run the following command:
 ```
 make release SUPPORT_URL=<SUPPORT_URL> IMAGE_TAG=<TAG> PLATFORM=<PLATFORM> .
 ```
+
+## Container development and ECS dev releases
+
+Explorer, Source Manager, Topic Mapper and Tools run together in one production
+container. See [the container and deployment guide](docker/README.md) for the
+local Compose stack, external MongoDB/Redis configuration, and the manual
+`deploy_to_dev` workflow. Backend and frontend releases are independent.

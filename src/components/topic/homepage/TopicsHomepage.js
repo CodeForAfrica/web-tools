@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import Link from 'react-router/lib/Link';
 import { FormattedMessage, injectIntl, FormattedHTMLMessage } from 'react-intl';
 import { Grid, Row, Col } from 'react-flexbox-grid/lib';
+import { urlToExplorer } from '../../../lib/urlUtil';
 // import TopicQuickSearchContainer from '../search/TopicQuickSearchContainer';
 import TopicListContainer from '../list/TopicListContainer';
 import LoginForm from '../../user/LoginForm';
@@ -18,7 +19,7 @@ import TopicQuickSearchContainer from '../search/TopicQuickSearchContainer';
 const localMessages = {
   homeTitle: { id: 'home.title', defaultMessage: 'Home' },
   title: { id: 'home.intro', defaultMessage: 'Create a Topic to Dive In Deep' },
-  about: { id: 'home.intro', defaultMessage: '<p>Use Topic Mapper to dive in deeper on an issue you are investigating.  Once you\'ve used <a href="https://explorer.civicsignal.africa">the Explorer</a> to narrow in on a query, media sources, and time period you want to investigate, then you can create a Topic to collect more stories, analyze influence, and slice and dice the content.  This lets you research the media conversation about your topic with more rigour.</p>' },
+  about: { id: 'home.intro', defaultMessage: '<p>Use Topic Mapper to dive in deeper on an issue you are investigating.  Once you\'ve used <a href="{explorerUrl}">the Explorer</a> to narrow in on a query, media sources, and time period you want to investigate, then you can create a Topic to collect more stories, analyze influence, and slice and dice the content.  This lets you research the media conversation about your topic with more rigour.</p>' },
   loginTitle: { id: 'sources.intro.login.title', defaultMessage: 'Have an Account? Login Now' },
 };
 
@@ -62,7 +63,7 @@ const TopicsHomepage = (props) => {
             <Col lg={1} xs={0} />
             <Col lg={5} xs={12}>
               <h1><TopicIcon height={32} /><FormattedMessage {...localMessages.title} /></h1>
-              <p><FormattedHTMLMessage {...localMessages.about} /></p>
+              <p><FormattedHTMLMessage {...localMessages.about} values={{ explorerUrl: urlToExplorer('') }} /></p>
             </Col>
             <Col lg={1} xs={0} />
             <Col lg={5} xs={12}>

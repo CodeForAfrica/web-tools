@@ -1,5 +1,6 @@
 import datetime
 import logging
+from urllib.parse import urlsplit
 from pymongo import MongoClient, DESCENDING
 
 logger = logging.getLogger(__name__)
@@ -13,11 +14,13 @@ class AppDatabase:
         self.uri = db_uri
         self.created = datetime.datetime.now()
         # pull db name off the end of the URI
-        self._db_name = db_uri.split('/')[-1]
+        self._db_name = urlsplit(db_uri).path.lstrip('/')
+        if not self._db_name or '/' in self._db_name:
+            raise ValueError('MONGO_URL must include one database name')
         self._conn = MongoClient(db_uri)[self._db_name]
 
     def check_connection(self):
-        return self._conn.test.insert_one({'dummy': 'test'})
+        return self._conn.command('ping')
 
 
 class UserDatabase(AppDatabase):
@@ -27,7 +30,7 @@ class UserDatabase(AppDatabase):
         return self.find_by_username(username) is not None
 
     def add_user(self, username, api_key, profile):
-        return self._conn.users.insert({
+        return self._conn.users.insert_one({
             'username': username,
             'api_key': api_key,
             'profile': profile,
@@ -36,7 +39,7 @@ class UserDatabase(AppDatabase):
             'favoriteCollections': [],
             'savedQueries': [],  # holdover from Dashboard
             'searches': [],
-        })
+        }).inserted_id
 
     def delete_user(self, username):
         return self._conn.users.delete_one({'username': username})
