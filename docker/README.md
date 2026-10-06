@@ -118,7 +118,8 @@ image, build-cache, scan and attestation artifacts. Disable release execution
 by removing the `workflow_dispatch` trigger.
 
 Hosted dev configuration uses a database-scoped MongoDB Atlas URL and the
-private `civicsignal-dev` Valkey tenant URL stored in AWS Secrets Manager.
+public HTTPS gateway for the `civicsignal-dev` Valkey tenant. Both connection
+URLs are encrypted in Pulumi and injected through AWS Secrets Manager.
 `CFA_REDIS_URL`, `SESSION_REDIS_URL` and `CACHE_REDIS_URL` refer to the same
 tenant; session and cache keys have separate prefixes. Redis URLs support
 username/password authentication. Credentials are injected at runtime and
