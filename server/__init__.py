@@ -12,7 +12,7 @@ from raven.contrib.flask import Sentry
 from raven.handlers.logging import SentryHandler
 import mediacloud.api
 from cliff.api import Cliff
-import redis
+from server.redis_http import redis_from_url
 import jinja2
 from flask_executor import Executor
 
@@ -193,7 +193,7 @@ def create_app():
         my_app.config['SESSION_COOKIE_DOMAIN'] = cookie_domain
         my_app.config['REMEMBER_COOKIE_DOMAIN'] = cookie_domain
     # connect to the shared session storage
-    my_app.session_interface = RedisSessionInterface(redis.StrictRedis.from_url(config.get('SESSION_REDIS_URL')))
+    my_app.session_interface = RedisSessionInterface(redis_from_url(config.get('SESSION_REDIS_URL')))
 
     my_app.cli.add_command(sync_frontend_db)
 
@@ -244,7 +244,7 @@ def healthz():
     try:
         user_db.check_connection()
         app.session_interface.redis.ping()
-        redis.StrictRedis.from_url(config.get('CACHE_REDIS_URL'), socket_timeout=2, socket_connect_timeout=2).ping()
+        redis_from_url(config.get('CACHE_REDIS_URL'), socket_timeout=2, socket_connect_timeout=2).ping()
         return {'status': 'ok', 'app': server_app}, 200
     except Exception:
         return {'status': 'unavailable', 'app': server_app}, 503

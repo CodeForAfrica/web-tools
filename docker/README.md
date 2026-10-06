@@ -123,3 +123,11 @@ private `civicsignal-dev` Valkey tenant URL stored in AWS Secrets Manager.
 tenant; session and cache keys have separate prefixes. Redis URLs support
 username/password authentication. Credentials are injected at runtime and
 never included in frontend bundles.
+
+For hosted dev, `CFA_REDIS_URL` may be an HTTPS gateway URL such as
+`https://civicsignal:TOKEN@civicsignal-dev-redis.codeforafrica.org` (placeholder
+only). The session/cache adapter sends the token as a Bearer header, verifies TLS,
+and uses the same Redis commands through the gateway. Binary cached values are
+encoded for the JSON transport. Raw `redis://` URLs continue to work for Compose.
+This HTTPS URL is an encrypted runtime secret; never put the token in repository
+variables, public logs, or frontend JavaScript.

@@ -1,4 +1,4 @@
-from dogpile.cache import make_region
+from dogpile.cache import make_region, register_backend
 from dogpile.cache.util import compat
 
 from server import config
@@ -25,8 +25,10 @@ def _keyword_safe_key_generator(namespace, fn):
     return generate_key
 
 
+register_backend('civicsignal.redis', 'server.redis_http', 'GatewayRedisBackend')
+
 cache = make_region(function_key_generator=_keyword_safe_key_generator).configure(
-    'dogpile.cache.redis',
+    'civicsignal.redis',
     arguments={
         'url': config.get('CACHE_REDIS_URL'),
         'port': 6379,
