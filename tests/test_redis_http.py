@@ -43,6 +43,13 @@ class GatewayTest(unittest.TestCase):
         self.assertEqual(client.evalsha(sha, 1, 'lock-key', b'token'), 1)
         self.assertEqual(client.http.post.call_args.kwargs['json'][0], 'EVAL')
 
+    def test_gateway_noscript_http_400_preserves_lock_fallback(self):
+        client = self.client()
+        client.http.post.return_value.status_code = 400
+        client.http.post.return_value.json.return_value = {'error': 'NOSCRIPT No matching script'}
+        with self.assertRaises(module.NoScriptError):
+            client.evalsha('missing-script', 0)
+
     def test_failure_messages_do_not_include_credentials(self):
         client = self.client()
         client.http.post.return_value.status_code = 403

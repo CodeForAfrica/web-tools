@@ -4,6 +4,7 @@ import hashlib
 from urllib.parse import unquote, urlsplit, urlunsplit
 
 import redis
+from redis.exceptions import NoScriptError
 import requests
 from dogpile.cache.backends.redis import RedisBackend
 
@@ -49,7 +50,7 @@ class GatewayRedis(redis.Redis):
         body = command.split() + [self._argument(value) for value in args[1:]]
         try:
             response = self.http.post(self.endpoint, json=body, timeout=(5, 10), allow_redirects=False)
-            if response.status_code != 200:
+            if response.status_code not in (200, 400):
                 raise redis.ConnectionError('Redis HTTPS gateway returned HTTP {}'.format(response.status_code))
             payload = response.json()
         except requests.RequestException:
@@ -57,8 +58,8 @@ class GatewayRedis(redis.Redis):
         if 'error' in payload:
             error = payload['error']
             if error.startswith('NOSCRIPT'):
-                raise redis.NoScriptError(error)
-            raise redis.ResponseError(error)
+                raise NoScriptError(error)
+            raise redis.ResponseError('Redis gateway rejected command ' + command)
         result = self._result(payload['result'])
         callback = self.response_callbacks.get(command)
         return callback(result, **options) if callback else result
