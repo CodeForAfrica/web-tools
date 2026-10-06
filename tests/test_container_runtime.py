@@ -1,5 +1,9 @@
 import importlib.util
 import unittest
+import io
+import json
+import threading
+from unittest.mock import patch
 
 spec = importlib.util.spec_from_file_location('webtools_runtime', 'docker/webtools.py')
 runtime = importlib.util.module_from_spec(spec)
@@ -24,6 +28,21 @@ class RuntimeTest(unittest.TestCase):
             environment['TOOLS_URL'] = invalid
             with self.assertRaises(ValueError):
                 runtime.hostnames(environment)
+
+    def test_dependency_checks_overlap_and_validate_every_tool(self):
+        ready = threading.Barrier(4)
+
+        def response(url, timeout):
+            port = int(url.split(':')[2].split('/')[0])
+            name = next(name for name, value in runtime.PORTS.items() if value == port)
+            ready.wait(timeout=1)
+            body = io.BytesIO(json.dumps({'app': name}).encode())
+            body.status = 200
+            return body
+
+        with patch.object(runtime, 'urlopen', side_effect=response) as requests:
+            runtime.healthy(include_proxy=False)
+        self.assertEqual(requests.call_count, 4)
 
 
 if __name__ == '__main__':

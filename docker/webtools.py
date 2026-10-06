@@ -8,7 +8,8 @@ import subprocess
 import sys
 import time
 import threading
-from http.server import BaseHTTPRequestHandler, HTTPServer
+from concurrent.futures import ThreadPoolExecutor
+from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import urlsplit
 from urllib.request import urlopen
@@ -66,14 +67,21 @@ http {
 
 
 def healthy(include_proxy=True):
-    for name, port in PORTS.items():
+    if include_proxy:
+        with urlopen('http://127.0.0.1:8080/healthz', timeout=8) as response:
+            if response.status != 200:
+                raise RuntimeError('Frontend proxy health check failed')
+        return
+
+    def check_app(item):
+        name, port = item
         with urlopen('http://127.0.0.1:{}/healthz'.format(port), timeout=5) as response:
             if response.status != 200 or json.load(response).get('app') != name:
                 raise RuntimeError('Frontend health check failed')
-    if include_proxy:
-        with urlopen('http://127.0.0.1:8080/healthz', timeout=5) as response:
-            if response.status != 200:
-                raise RuntimeError('Frontend proxy health check failed')
+
+    # Independent dependency checks must fit within the container health timeout.
+    with ThreadPoolExecutor(max_workers=len(PORTS)) as checks:
+        list(checks.map(check_app, PORTS.items()))
 
 
 def run():
@@ -102,7 +110,7 @@ def run():
             self.wfile.write(body)
         def log_message(self, *_args):
             pass
-    health_server = HTTPServer(('127.0.0.1', 8100), HealthHandler)
+    health_server = ThreadingHTTPServer(('127.0.0.1', 8100), HealthHandler)
     threading.Thread(target=health_server.serve_forever, daemon=True).start()
     Path('/tmp/webtools').mkdir(exist_ok=True)
     Path('/tmp/webtools/nginx.conf').write_text(nginx_config(hosts))

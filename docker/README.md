@@ -131,3 +131,9 @@ and uses the same Redis commands through the gateway. Binary cached values are
 encoded for the JSON transport. Raw `redis://` URLs continue to work for Compose.
 This HTTPS URL is an encrypted runtime secret; never put the token in repository
 variables, public logs, or frontend JavaScript.
+
+The image uses Python 3.11 and Flask 3.1 with patched runtime dependencies. Legacy
+Python 3.7/3.8 environments must be recreated before installing these requirements.
+Python build tooling is removed from the production runtime; application packages
+are installed during the image build. Session-cookie handling and account ZIP
+downloads use the current Flask APIs.

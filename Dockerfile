@@ -1,6 +1,6 @@
 ###===========================================================================
 ### Python ###
-FROM python:3.8.18-slim AS python
+FROM python:3.11.17-slim-bookworm AS python
 
 # upgrade system
 RUN apt-get update \
@@ -40,7 +40,9 @@ WORKDIR ${APP_DOCKER_PATH}
 # Install Python dependencies
 COPY requirements.txt ./
 COPY requirements/ ./requirements/
-RUN pip install --no-cache-dir -r requirements.txt --progress-bar off
+RUN pip install --no-cache-dir --upgrade pip setuptools==80.10.2 wheel==0.48.0 \
+    && pip install --no-cache-dir --no-build-isolation -r requirements.txt --progress-bar off \
+    && pip uninstall -y pip wheel
 
 
 
@@ -95,6 +97,9 @@ RUN mkdir -p server/static/gen/tools server/static/gen/explorer server/static/ge
 ###===========================================================================
 ### Python Base runner ###
 FROM python AS flask-runner-base
+
+# Packaging tools are only needed during the build; keep the runtime small.
+RUN python -m pip uninstall -y pip setuptools wheel
 
 WORKDIR ${APP_DOCKER_PATH}
 
