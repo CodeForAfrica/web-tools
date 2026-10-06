@@ -65,6 +65,7 @@ class GatewayRedis(redis.Redis):
 
     def script_load(self, script):
         raw = script.encode('utf-8') if isinstance(script, str) else script
+        # Redis identifies Lua scripts by SHA-1; this is not a credential hash.
         digest = hashlib.sha1(raw).hexdigest()
         self.scripts[digest] = raw.decode('utf-8')
         return digest
