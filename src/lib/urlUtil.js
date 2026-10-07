@@ -23,8 +23,13 @@ export function storyDomainName(story) {
   return domain;
 }
 
+function toolBaseUrl(name) {
+  const configured = document.appConfig && document.appConfig.toolUrls;
+  return ((configured && configured[name]) || `https://${name}.civicsignal.africa`).replace(/\/$/, '');
+}
+
 export function urlToSourceManager(param) {
-  return `https://sources.civicsignal.africa/#/${param}`;
+  return `${toolBaseUrl('sources')}/#/${param}`;
 }
 
 export function urlToCollection(param) {
@@ -36,15 +41,15 @@ export function urlToSource(param) {
 }
 
 export function urlToTopicMapper(param) {
-  return `https://topics.civicsignal.africa/#/${param}`;
+  return `${toolBaseUrl('topics')}/#/${param}`;
 }
 
 export function urlToExplorer(param) {
-  return `https://explorer.civicsignal.africa/#/${param}`;
+  return `${toolBaseUrl('explorer')}/#/${param}`;
 }
 
 export function urlToTools(param) {
-  return `https://tools.civicsignal.africa/#/${param}`;
+  return `${toolBaseUrl('tools')}/#/${param}`;
 }
 
 export function urlToMediaData(param) {
@@ -69,5 +74,5 @@ export function urlToExplorerQuery(name, keywords, sourceIds, collectionIds, sta
     sources,
     collections,
   };
-  return `https://explorer.civicsignal.africa/#/queries/search?qs=${serializeQueriesForUrl([query])}`;
+  return urlToExplorer(`queries/search?qs=${serializeQueriesForUrl([query])}`);
 }

@@ -16,3 +16,5 @@ node_modules
 build
 server/static/gen
 config/app.config
+.env
+.env.*

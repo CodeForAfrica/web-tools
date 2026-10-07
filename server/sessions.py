@@ -41,7 +41,7 @@ class RedisSessionInterface(SessionInterface):
         return td.days * 60 * 60 * 24 + td.seconds
 
     def open_session(self, app, request):
-        sid = request.cookies.get(app.session_cookie_name)
+        sid = request.cookies.get(self.get_cookie_name(app))
         if not sid:
             sid = self.generate_sid()
             return self.session_class(sid=sid, new=True)
@@ -56,17 +56,14 @@ class RedisSessionInterface(SessionInterface):
         if not session:
             self.redis.delete(self.prefix + session.sid)
             if session.modified:
-                response.delete_cookie(app.session_cookie_name,
+                response.delete_cookie(self.get_cookie_name(app),
                                        domain=domain)
             return
         redis_exp = self.get_redis_expiration_time(app, session)
         cookie_exp = self.get_expiration_time(app, session)
         val = self.serializer.dumps(dict(session))
-        if isinstance(self.redis, Redis):
-            self.redis.setex(self.prefix + session.sid, val, int(self._total_seconds(redis_exp)))
-        else:
-            # StrictRedis has a different arg order than Redis
-            self.redis.setex(self.prefix + session.sid, int(self._total_seconds(redis_exp)), val)
-        response.set_cookie(app.session_cookie_name, session.sid,
+        self.redis.setex(self.prefix + session.sid, int(self._total_seconds(redis_exp)), val)
+        response.set_cookie(self.get_cookie_name(app), session.sid,
                             expires=cookie_exp, httponly=True,
-                            domain=domain)
+                            domain=domain, secure=self.get_cookie_secure(app),
+                            samesite=self.get_cookie_samesite(app))

@@ -230,7 +230,7 @@ def api_user_data_download():
     user_mc = user_mediacloud_client()
     temp_user_data_dir = _save_user_data_dir(flask_login.current_user, user_mc)
     data = _zip_in_memory(temp_user_data_dir)  # do this in memory to be extra safe on security
-    return send_file(data, mimetype='application/zip', as_attachment=True, attachment_filename='mediacloud-data.zip')
+    return send_file(data, mimetype='application/zip', as_attachment=True, download_name='mediacloud-data.zip')
 
 
 def _zip_in_memory(dir_to_zip):

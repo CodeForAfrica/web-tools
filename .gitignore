@@ -2,6 +2,8 @@
 node_modules
 venv
 .env
+.env.*
+!.env.example
 flask_env
 *.pyc
 build/*.css

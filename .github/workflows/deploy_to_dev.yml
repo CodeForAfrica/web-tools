@@ -1,0 +1,89 @@
+name: deploy_to_dev
+
+# High-cost workflow: manual only, one linux/amd64 production image.
+on:
+  workflow_dispatch:
+
+concurrency:
+  group: civicsignal-frontend-deploy-dev
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
+
+jobs:
+  resolve_infra:
+    environment: dev
+    runs-on: ${{ fromJSON(vars.CFA_RUNNER_LABELS || '["ubuntu-24.04"]') }}
+    outputs:
+      app-url: ${{ steps.resolve.outputs.app-url }}
+      aws-region: ${{ steps.resolve.outputs.aws-region }}
+      aws-role-to-assume: ${{ steps.resolve.outputs.aws-role-to-assume }}
+      ecs-cluster-name: ${{ steps.resolve.outputs.ecs-cluster-name }}
+      ecs-service-name: ${{ steps.resolve.outputs.ecs-service-name }}
+      task-family: ${{ steps.resolve.outputs.task-family }}
+      container-name: ${{ steps.resolve.outputs.container-name }}
+      ecr-repository: ${{ steps.resolve.outputs.ecr-repository }}
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+        with:
+          persist-credentials: false
+      - uses: actions/setup-go@924ae3a1cded613372ab5595356fb5720e22ba16
+        with:
+          go-version: '1.26.x'
+          cache: false
+      - name: Install Pulumi CLI
+        run: |
+          set -euo pipefail
+          curl -fsSL https://get.pulumi.com | sh
+          echo "$HOME/.pulumi/bin" >> "$GITHUB_PATH"
+      - name: Resolve frontend infrastructure
+        id: resolve
+        env:
+          PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
+          PULUMI_STACK: ${{ vars.CIVICSIGNAL_PULUMI_STACK }}
+        run: |
+          set -euo pipefail
+          : "${PULUMI_STACK:?Set CIVICSIGNAL_PULUMI_STACK to org/project/dev}"
+          : "${PULUMI_ACCESS_TOKEN:?Set PULUMI_ACCESS_TOKEN}"
+          pulumi login >/dev/null
+          pulumi stack output --json --stack "$PULUMI_STACK" > /tmp/civicsignal-frontend-outputs.json
+          go run dev/runtime-contract/main.go /tmp/civicsignal-frontend-outputs.json
+
+  deploy_frontend:
+    needs: resolve_infra
+    permissions:
+      contents: read
+      id-token: write
+      packages: read
+    uses: CodeForAfrica/iac-cfa-pulumi/.github/workflows/deploy-fargate-service.yml@main # zizmor: ignore[unpinned-uses] trusted central workflow
+    with:
+      aws-region: ${{ needs.resolve_infra.outputs.aws-region }}
+      aws-role-to-assume: ${{ needs.resolve_infra.outputs.aws-role-to-assume }}
+      build-context: .
+      dockerfile-path: Dockerfile
+      docker-platform: linux/amd64
+      container-name: ${{ needs.resolve_infra.outputs.container-name }}
+      ecr-repository: ${{ needs.resolve_infra.outputs.ecr-repository }}
+      ecs-cluster-name: ${{ needs.resolve_infra.outputs.ecs-cluster-name }}
+      ecs-service-name: ${{ needs.resolve_infra.outputs.ecs-service-name }}
+      task-family: ${{ needs.resolve_infra.outputs.task-family }}
+      startup-validation-command: python -c "import pymongo, redis; import importlib.util; spec = importlib.util.spec_from_file_location('runtime', '/usr/local/bin/webtools.py'); module = importlib.util.module_from_spec(spec); spec.loader.exec_module(module)"
+
+  verify_health:
+    needs: [resolve_infra, deploy_frontend]
+    runs-on: ${{ fromJSON(vars.CFA_RUNNER_LABELS || '["ubuntu-24.04"]') }}
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+        with:
+          persist-credentials: false
+      - uses: actions/setup-go@924ae3a1cded613372ab5595356fb5720e22ba16
+        with:
+          go-version: '1.26.x'
+          cache: false
+      - name: Verify all four tools and external dependencies
+        run: go run dev/verify-health/main.go

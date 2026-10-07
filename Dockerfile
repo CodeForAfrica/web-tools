@@ -1,6 +1,6 @@
 ###===========================================================================
 ### Python ###
-FROM python:3.8.18-slim AS python
+FROM python:3.11.17-slim-bookworm AS python
 
 # upgrade system
 RUN apt-get update \
@@ -40,7 +40,9 @@ WORKDIR ${APP_DOCKER_PATH}
 # Install Python dependencies
 COPY requirements.txt ./
 COPY requirements/ ./requirements/
-RUN pip install --no-cache-dir -r requirements.txt --progress-bar off
+RUN pip install --no-cache-dir --upgrade pip setuptools==80.10.2 wheel==0.48.0 \
+    && pip install --no-cache-dir --no-build-isolation -r requirements.txt --progress-bar off \
+    && pip uninstall -y pip wheel
 
 
 
@@ -83,14 +85,21 @@ ARG SUPPORT_URL
 WORKDIR /usr/src/app
 
 # Install dependencies
-RUN npm install --omit=dev && npm cache clean --force
-COPY . .
-RUN npm run release-all
+RUN HUSKY_SKIP_INSTALL=1 npm ci --no-audit --no-fund && npm cache clean --force
+COPY src/ ./src/
+COPY config/ ./config/
+COPY server/static/ ./server/static/
+COPY .babelrc .eslintrc .eslintignore ./
+RUN mkdir -p server/static/gen/tools server/static/gen/explorer server/static/gen/topics server/static/gen/sources \
+    && npm run release-all
 
 
 ###===========================================================================
 ### Python Base runner ###
 FROM python AS flask-runner-base
+
+# Packaging tools are only needed during the build; keep the runtime small.
+RUN python -m pip uninstall -y pip setuptools wheel
 
 WORKDIR ${APP_DOCKER_PATH}
 
@@ -112,10 +121,26 @@ ENTRYPOINT ["python", "run.py"]
 FROM flask-runner-base AS flask-runner-prod
 
 # copy built artifacts
-COPY --from=react-builder-prod /usr/src/app/ /usr/src/app/
+COPY . .
+COPY --from=react-builder-prod /usr/src/app/server/static/gen/ /usr/src/app/server/static/gen/
 COPY --from=flask-builder-base ${VIRTUAL_ENV} ${VIRTUAL_ENV}
 ENV PATH="${VIRTUAL_ENV}/bin:$PATH"
 
 
 RUN chmod +x ./run.sh
 ENTRYPOINT ["./run.sh"]
+
+# All four tools share this image and external MongoDB/Redis URLs.
+FROM flask-runner-prod AS web-tools-runner
+USER root
+RUN apt-get update && apt-get install -y --no-install-recommends nginx tini curl \
+    && rm -rf /var/lib/apt/lists/* \
+    && groupadd --gid 1000 webtools && useradd --uid 1000 --gid 1000 --create-home webtools \
+    && mkdir -p logs /tmp/webtools \
+    && chown -R 1000:1000 logs /tmp/webtools
+COPY docker/webtools.py /usr/local/bin/webtools.py
+USER 1000:1000
+EXPOSE 8080
+HEALTHCHECK --interval=20s --timeout=10s --start-period=60s --retries=3 \
+    CMD python /usr/local/bin/webtools.py --healthcheck
+ENTRYPOINT ["/usr/bin/tini", "--", "python", "/usr/local/bin/webtools.py"]
