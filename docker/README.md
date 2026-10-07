@@ -138,3 +138,24 @@ Python 3.7/3.8 environments must be recreated before installing these requiremen
 Python build tooling is removed from the production runtime; application packages
 are installed during the image build. Session-cookie handling and account ZIP
 downloads use the current Flask APIs.
+
+### Local dev release before merging the workflow
+
+From this repository, resolve the applied frontend outputs, build/scan/publish one
+image and deploy only the frontend service:
+
+```sh
+go run dev/deploy-local/main.go --infra-repo ../iac-cfa-pulumi --profile cfa-bootstrap
+```
+
+Use `--check` to validate live inputs without a release. `--local-image IMAGE`
+uses an explicitly selected already-built linux/amd64 image; startup validation
+and the security scan still run. The tool checks the account, frontend hostname,
+container and task-family binding, uses the central ECS image-patching helper,
+waits for service stability and restores a verified previous healthy task
+revision on deployment failure. It then runs the same four-host public health
+checks as the dev workflow. A later public-route failure fails the command for
+diagnosis. This manual local path uses your AWS profile; OIDC, signing and
+attestation are supplied by the shared GitHub workflow after merging, rather
+than claimed as verified by a local release. It never creates or migrates the
+backend database. High-cost execution remains manual, one image and one platform.
